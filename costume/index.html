@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>RO-Project Costume Simulator</title>
+<style>
+  /* Ragnarok Online Client White Theme */
+  :root {
+    --bg: #eef2f7;
+    --panel: #ffffff;
+    --line: #cbd5e1;
+    --line-subtle: #e2e8f0;
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-light: #eff6ff;
+    --tile: #ffffff;
+    --slot-bg: #f8fafc;
+    --slot-border: #b8c5d6;
+  }
+  * { box-sizing:border-box; }
+  html, body { margin:0; background:var(--bg); color:var(--text); font-family:"Segoe UI",Tahoma,-apple-system,BlinkMacSystemFont,sans-serif; }
+  
+  /* 30:70 Proportion Layout */
+  .app {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 16px;
+    padding: 16px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+  }
+
+  /* Desktop: the whole page always fits in one screen (no page scroll).
+     Each panel scrolls on its own if its content is taller than the screen,
+     so the copyright footer is always visible at the bottom. */
+  @media (min-width: 901px) {
+    html, body { height: 100%; overflow: hidden; }
+    body { display: flex; flex-direction: column; }
+    .app { flex: 1 1 0; min-height: 0; padding-bottom: 6px; grid-template-rows: minmax(0, 1fr); }
+    .app > .panel { min-height: 0; overflow-y: auto; }
+    .app > .panel:last-child { display: flex; flex-direction: column; overflow: hidden; }
+    .app > .panel:last-child .grid { flex: 1 1 0; min-height: 0; max-height: none; }
+    .site-note { flex: 0 0 auto; margin: 0 auto; padding: 0 16px 6px; }
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid #c9d5e4;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 4px 18px rgba(70, 90, 120, 0.08);
+  }
+  .title { font-size:17px; font-weight:700; margin:0 0 12px; color:#0f172a; }
+  .muted { color:var(--muted); font-size:12px; }
+  label.h { display:block; font-size:12.5px; font-weight:600; color:#334155; margin:12px 0 6px; }
+
+  /* Job dropdown */
+  .dd { position:relative; }
+  .dd-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #ffffff;
+    color: var(--text);
+    border: 1.5px solid #b8c7d9;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14.5px;
+    text-align: left;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .dd-btn:hover { border-color:var(--accent); }
+  .dd-btn::after { content:'▾'; margin-left:auto; color:var(--muted); font-size:12px; }
+  .ico { width:26px; height:26px; image-rendering:pixelated; flex:none; }
+  .ico.blank { display:inline-block; background:#e2e8f0; border-radius:4px; }
+  .dd-pop {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+    background: #ffffff;
+    border: 1.5px solid #b8c7d9;
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(30, 45, 70, 0.16);
+  }
+  .dd.open .dd-pop { display:block; }
+  .dd-pop input {
+    width: calc(100% - 16px);
+    margin: 8px;
+    padding: 7px 10px;
+    background: #f8fafc;
+    color: var(--text);
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13.5px;
+    outline: none;
+  }
+  .dd-pop input:focus { border-color:var(--accent); background:#ffffff; }
+  .dd-list { max-height:360px; overflow:auto; padding:0 4px 6px; }
+  .dd-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: #1e293b;
+    transition: background .12s;
+  }
+  .dd-item:hover, .dd-item.on { background:#eff6ff; color:#1d4ed8; }
+  .dd-item .tag { margin-left:auto; font-size:10.5px; color:var(--muted); }
+
+  /* Preview Box Layout (White Ragnarok Theme) */
+  .preview-box {
+    margin-top: 12px;
+    background: #f8fafc;
+    border: 1.5px solid #b8c7d9;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 2px 10px rgba(50, 70, 100, 0.06);
+  }
+  .pv-main {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  /* 1:1 Aspect Ratio Equipment Slots */
+  .pv-main .slots {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 64px;
+    flex: none;
+    justify-content: flex-start;
+  }
+  .pv-main .slot {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #ffffff 0%, #edf2f7 100%);
+    border: 1.5px solid #b8c5d6;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
+    transition: border-color .15s, box-shadow .15s, transform .1s;
+  }
+  .pv-main .slot:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 0 6px rgba(59,130,246,0.3);
+  }
+  .pv-main .slot.full {
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px #93c5fd, 0 1px 5px rgba(37,99,235,0.2);
+  }
+  .pv-main .slot.link {
+    box-shadow: inset 0 0 0 1px #60a5fa, 0 0 8px rgba(37,99,235,0.25);
+  }
+  .pv-main .slot img { max-width: 56px; max-height: 48px; image-rendering: pixelated; }
+  .pv-main .slot img.x2 { width: calc(var(--w) * 2px); }
+  .pv-main .slot .lb { font-size: 11px; font-weight: 600; color: #64748b; text-align: center; }
+  .pv-main .slot .x {
+    position: absolute; top: -6px; right: -6px; width: 18px; height: 18px;
+    border-radius: 50%; border: 1.5px solid #ffffff; background: #ef4444; color: #ffffff;
+    font-size: 10px; line-height: 15px; text-align: center; cursor: pointer; padding: 0;
+    box-shadow: 0 2px 5px rgba(239,68,68,0.4);
+    transition: transform .1s, background .12s;
+  }
+  .pv-main .slot .x:hover { background: #dc2626; transform: scale(1.1); }
+
+  /* Stage Wrap & Canvas (Clean White Checkerboard) */
+  .pv-stage-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background: repeating-conic-gradient(#ffffff 0% 25%, #e9eef5 0% 50%) 50% / 20px 20px;
+    border: 1.5px solid #b8c5d6;
+    min-height: 280px;
+    height: 280px;
+    touch-action: none;
+    user-select: none;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+  }
+  .stage {
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 0;
+    background: transparent;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-24px);
+  }
+  .stage img, .stage canvas {
+    image-rendering: pixelated;
+    width: 90%;
+    height: auto;
+  }
+  .pv-note {
+    position: absolute; left: 6px; right: 6px; top: 50%; z-index: 3;
+    background: rgba(17,24,39,.78); color: #fff; font-size: 11.5px; line-height: 1.35;
+    padding: 6px 8px; border-radius: 6px; text-align: center; pointer-events: none;
+  }
+  .pv-note[hidden] { display: none; }
+  .site-note { margin: 14px auto 4px; max-width: 1240px; padding: 0 16px; font-size: 11.5px; color: #6b7280; text-align: center; line-height: 1.5; }
+  .stage .err { color: #dc2626; font-size: 13px; padding: 16px; text-align: center; }
+  #pv { transform-origin: 50% 81.8%; transition: filter .2s, transform .2s, opacity .2s; }
+
+  /* In-Preview Overlays (Head at top; Body + Gender at bottom) */
+  .pv-overlay-head {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    right: 8px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 5;
+    transition: opacity 0.15s ease;
+  }
+  .pv-overlay-bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 8px;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Hide Turn Head and Turn Body buttons on mobile / touch devices */
+  @media (max-width: 900px), (hover: none), (pointer: coarse) {
+    .pv-overlay-head,
+    #overlayHead,
+    .pv-turn-btn {
+      display: none !important;
+    }
+    .pv-overlay-bottom {
+      justify-content: center !important;
+    }
+  }
+  body.is-mobile .pv-overlay-head,
+  body.is-mobile #overlayHead,
+  body.is-mobile .pv-turn-btn {
+    display: none !important;
+  }
+  body.is-mobile .pv-overlay-bottom {
+    justify-content: center !important;
+  }
+
+  /* Turn Buttons */
+  .pv-turn-btn {
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #b0c0d4;
+    backdrop-filter: blur(4px);
+    color: #1e293b;
+    border-radius: 7px;
+    padding: 4px 8px;
+    font-size: 11.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: background .12s, border-color .12s, transform .1s, color .12s;
+    box-shadow: 0 2px 6px rgba(50, 70, 100, 0.12);
+    user-select: none;
+  }
+  .pv-turn-btn:hover {
+    background: #ffffff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    transform: scale(1.04);
+  }
+  .pv-turn-btn:active {
+    transform: scale(0.96);
+  }
+  .pv-turn-btn.on {
+    background: #2563eb;
+    color: #ffffff;
+    font-weight: 600;
+    border-color: #1d4ed8;
+    box-shadow: 0 0 8px rgba(37,99,235,0.4);
+  }
+  .pv-arrow {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  .pv-txt {
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  /* Gender Toggle */
+  .pv-gender-toggle {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 2px solid #8ba3c7;
+    border-radius: 20px;
+    padding: 2px 4px;
+    box-shadow: 0 2px 8px rgba(50, 70, 100, 0.15);
+    backdrop-filter: blur(4px);
+  }
+  .pv-gender-btn {
+    border: 2px solid transparent;
+    background: transparent;
+    font-size: 17px;
+    line-height: 1;
+    font-weight: 800;
+    -webkit-text-stroke: 1px currentColor;
+    cursor: pointer;
+    padding: 3px 10px;
+    border-radius: 14px;
+    transition: all .15s ease;
+  }
+  .pv-gender-btn.female {
+    color: #db2777;
+  }
+  .pv-gender-btn.female:hover {
+    background: #fdf2f8;
+    border-color: #fbcfe8;
+  }
+  .pv-gender-btn.female.on {
+    background: #db2777;
+    color: #ffffff;
+    border-color: #db2777;
+    box-shadow: 0 0 8px rgba(219, 39, 119, 0.5);
+  }
+  .pv-gender-btn.male {
+    color: #0284c7;
+  }
+  .pv-gender-btn.male:hover {
+    background: #f0f9ff;
+    border-color: #bae6fd;
+  }
+  .pv-gender-btn.male.on {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #0284c7;
+    box-shadow: 0 0 8px rgba(2, 132, 199, 0.5);
+  }
+  .pv-gender-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* Right Action Column */
+  .pv-actions {
+    width: 78px;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: space-between;
+  }
+  .pv-act-btn {
+    width: 100%;
+    padding: 5px 3px;
+    background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    color: #1e293b;
+    border: 1px solid #b8c7d9;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11.5px;
+    text-align: center;
+    transition: background .12s, border-color .12s, color .12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .pv-act-btn:hover {
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    background: #ffffff;
+  }
+  .pv-act-btn.on {
+    background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+    border-color: #1d4ed8;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(37,99,235,0.3);
+  }
+  .pv-act-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #94a3b8;
+  }
+  .pv-sep {
+    height: 1px;
+    background: #cbd5e1;
+    margin: 2px 0;
+  }
+  .pv-opt-btn {
+    font-size: 10px;
+    padding: 5px 2px;
+    background: #ffffff;
+    border-color: #94a3b8;
+  }
+  .pv-opt-btn.on {
+    background: #2563eb;
+    border-color: #1d4ed8;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Bottom Bar: Frame Scrubber & Play/Pause */
+  .pv-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 6px;
+    border-top: 1px solid #cbd5e1;
+  }
+  .pv-frameno {
+    font-size: 11.5px;
+    font-family: monospace;
+    font-weight: 600;
+    color: #475569;
+    min-width: 70px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .pv-scrubber {
+    flex: 1;
+    accent-color: var(--accent);
+    height: 6px;
+    cursor: pointer;
+  }
+  .pv-play-btn {
+    width: 30px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid #b8c7d9;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .15s;
+    line-height: 1;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .pv-play-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .pv-play-btn.playing {
+    background: #eff6ff;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Speed Buttons Row Under Frame Scrubber */
+  .pv-speed-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 5px;
+    border-top: 1px dashed #cbd5e1;
+  }
+  .pv-speed-lbl {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    line-height: 1;
+    flex: none;
+  }
+  .pv-speed-btns {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+    justify-content: flex-end;
+  }
+  .pv-spd-btn {
+    padding: 3px 8px;
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-size: 10.5px;
+    font-family: monospace;
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .pv-spd-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .pv-spd-btn.on {
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 600;
+    border-color: var(--accent-hover);
+  }
+
+  /* Color Swatches, Chips, Pickers */
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .chip {
+    font-size: 11.5px;
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 3px 9px;
+  }
+  a.dl {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  a.dl:hover { color:var(--accent-hover); }
+
+  /* Right Catalog Tabs */
+  .tabs { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:12px; }
+  .tabs button {
+    padding: 8px 13px;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all .12s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .tabs button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .tabs button.on {
+    background: var(--accent);
+    border-color: var(--accent-hover);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(37,99,235,0.25);
+  }
+
+  /* Search Tools */
+  .tools { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+  .tools input {
+    flex: 1;
+    padding: 8px 12px;
+    background: #f8fafc;
+    color: var(--text);
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color .15s, background .15s;
+  }
+  .tools input:focus { border-color:var(--accent); background:#ffffff; }
+
+  /* Equipment Tiles Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 7px;
+    max-height: 80vh;
+    overflow: auto;
+    padding-right: 4px;
+  }
+  .tile {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 6px 4px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: border-color .15s, box-shadow .15s, transform .1s;
+  }
+  .tile:hover {
+    border-color: #60a5fa;
+    box-shadow: 0 3px 10px rgba(59,130,246,0.15);
+    transform: translateY(-1px);
+  }
+  .tile.on {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1.5px var(--accent) inset, 0 2px 8px rgba(37,99,235,0.2);
+  }
+  .tile .pic {
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tile .pic img { max-width:68px; max-height:68px; image-rendering:pixelated; }
+  .tile .pic img.x2 { width:calc(var(--w) * 2px); }
+  .tile .n {
+    font-size: 11px;
+    color: #334155;
+    line-height: 1.25;
+    height: 2.5em;
+    overflow: hidden;
+    margin-top: 3px;
+  }
+  .tile.none .pic { font-size:12.5px; color:var(--muted); font-weight:600; }
+  .tile .fxbadge {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #0b1020;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .tile .pos { font-size:10px; color:var(--accent); font-weight:600; }
+
+  /* Swatches */
+  .sw { display:flex; flex-wrap:wrap; gap:6px; }
+  .sw button {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 2px solid #ffffff;
+    outline: 1.5px solid #cbd5e1;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform .1s, outline-color .15s;
+  }
+  .sw button:hover { transform:scale(1.1); outline-color:var(--accent); }
+  .sw button.on { outline:2.5px solid var(--accent); outline-offset:1px; transform:scale(1.12); }
+  .sw button.def { background:repeating-linear-gradient(45deg,#cbd5e1 0 4px,#e2e8f0 4px 8px); }
+
+  /* Clean Light Scrollbars */
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-track { background:#f1f5f9; }
+  ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:9999px; }
+  ::-webkit-scrollbar-thumb:hover { background:#94a3b8; }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Left Panel (30% Width): RO Costume Simulator -->
+  <div class="panel">
+    <p class="title">RO-Project Costume Simulator</p>
+
+    <label class="h">Job Class</label>
+    <div class="dd" id="jobDD">
+      <button class="dd-btn" id="jobBtn" type="button"></button>
+      <div class="dd-pop"><input type="text" id="jobQ" placeholder="Search Job..."><div class="dd-list" id="jobList"></div></div>
+    </div>
+
+    <!-- Preview Box (Ragnarok Online White Theme) -->
+    <div class="preview-box" id="previewBox">
+      <div class="pv-main">
+        <!-- 1. Equipment Slots (1:1 Aspect Ratio Square Slots) -->
+        <div class="slots" id="slots"></div>
+
+        <!-- 2. Character Canvas & In-Preview Controls (Center Column) -->
+        <div class="pv-stage-wrap" id="stageWrap">
+          <div class="stage" id="stage"><canvas id="pv" width="220" height="220"></canvas></div>
+          <div class="pv-note" id="gmNote" hidden>This garment has no sprite for this job.</div>
+
+          <!-- Head Rotation Overlay (Head level - visible ONLY when Sitting or Standing) -->
+          <div class="pv-overlay-head" id="overlayHead">
+            <button type="button" class="pv-turn-btn" id="btnHeadLeft" title="Turn Head Left">
+              <span class="pv-arrow">↶</span><span class="pv-txt">Turn Head</span>
+            </button>
+            <button type="button" class="pv-turn-btn" id="btnHeadRight" title="Turn Head Right">
+              <span class="pv-txt">Turn Head</span><span class="pv-arrow">↷</span>
+            </button>
+          </div>
+
+          <!-- Bottom Overlay: Body Turn Left + Gender Toggle + Body Turn Right -->
+          <div class="pv-overlay-bottom">
+            <button type="button" class="pv-turn-btn" id="btnBodyLeft" title="Turn Body Left">
+              <span class="pv-arrow">↶</span><span class="pv-txt">Turn Body</span>
+            </button>
+            <div class="pv-gender-toggle" id="pvGender">
+              <button type="button" class="pv-gender-btn female" id="btnGenderF" data-v="0" title="Female">♀</button>
+              <button type="button" class="pv-gender-btn male" id="btnGenderM" data-v="1" title="Male">♂</button>
+            </div>
+            <button type="button" class="pv-turn-btn" id="btnBodyRight" title="Turn Body Right">
+              <span class="pv-txt">Turn Body</span><span class="pv-arrow">↷</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Actions & Outfit/Mount (Right Column: 1.Stand 2.Sit 3.Walk 4.Ready 5.Attack 1..3) -->
+        <div class="pv-actions" id="pvActions">
+          <button type="button" class="pv-act-btn on" data-v="0">Stand</button>
+          <button type="button" class="pv-act-btn" data-v="2">Sit</button>
+          <button type="button" class="pv-act-btn" data-v="1">Walk</button>
+          <button type="button" class="pv-act-btn" data-v="4">Ready</button>
+          <button type="button" class="pv-act-btn" data-v="5" data-atk="0">Attack 1</button>
+          <button type="button" class="pv-act-btn" data-v="10" data-atk="1">Attack 2</button>
+          <button type="button" class="pv-act-btn" data-v="11" data-atk="2">Attack 3</button>
+          <div class="pv-sep"></div>
+          <button type="button" class="pv-act-btn pv-opt-btn" id="btnOutfit">Second Costume</button>
+          <button type="button" class="pv-act-btn pv-opt-btn" id="btnMount">Mount</button>
+        </div>
+      </div>
+
+      <!-- 4. Play/Pause & Frame Scrubber (Bottom Bar) -->
+      <div class="pv-bottom">
+        <span class="pv-frameno" id="frameNo">Frame 1/1</span>
+        <input type="range" class="pv-scrubber" id="frame" min="0" max="0" value="0">
+        <button type="button" class="pv-play-btn" id="btnPlayPause" title="Play / Pause">⏸</button>
+      </div>
+
+      <!-- 5. Speed Row (Under Frame Scrubber) -->
+      <div class="pv-speed-row" id="speed">
+        <span class="pv-speed-lbl">Speed</span>
+        <div class="pv-speed-btns">
+          <button type="button" class="pv-spd-btn" data-v="0.5">0.5x</button>
+          <button type="button" class="pv-spd-btn" data-v="0.75">0.75x</button>
+          <button type="button" class="pv-spd-btn on" data-v="1">1x</button>
+          <button type="button" class="pv-spd-btn" data-v="1.25">1.25x</button>
+          <button type="button" class="pv-spd-btn" data-v="1.5">1.5x</button>
+        </div>
+      </div>
+    </div>
+
+    <label class="h">Hair Color</label>
+    <div class="sw" id="hairColors"></div>
+    <label class="h">Cloth Dye</label>
+    <div class="sw" id="bodyColors"></div>
+    <div class="chips" id="chips"></div>
+    <div style="margin-top:12px; display:flex; align-items:center; gap:8px;">
+      <a class="dl" id="dl" download="character.png" href="#">Save Image</a>
+    </div>
+  </div>
+
+  <!-- Right Panel (70% Width): Equipment Catalog -->
+  <div class="panel">
+    <div class="tabs" id="tabs"></div>
+    <div class="tools"><input type="text" id="q" placeholder="Search name or ID..."><span class="muted" id="count"></span></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<p class="site-note">Ragnarok Online is a trademark of Gravity Co., Ltd. All game sprites and artwork &copy; Gravity Co., Ltd. and their licensors.<br>
+This is a non-commercial fan project and is not affiliated with, endorsed by or sponsored by Gravity Co., Ltd.</p>
+
+<script type="module">
+import { ResourceResolver } from './src/resolver.js';
+import { AssetLoader } from './src/loader.js';
+import { CharacterComposer } from './src/composer.js';
+
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var D = null;
+  var resolver = null;
+  var loader = null;
+  var composer = null;
+  var currentChar = null;
+
+  var S = { job: 0, gender: 1, outfit: 0, mount: 0, mado: 0, hair: 1, color: 0, body: -1, equip: [], garment: 0, fx: {},
+            action: 0, dir: 0, headdir: 0, anim: 1, speed: 1, frame: 0, tab: 'hair' };
+  
+  // Tabs: English labels
+  var TABS = [
+    ['hair', 'Hair'],
+    ['T', 'Upper'],
+    ['M', 'Middle'],
+    ['L', 'Lower'],
+    ['TM', 'Upper+Mid'],
+    ['ML', 'Mid+Lower'],
+    ['TL', 'Upper+Lower'],
+    ['TML', 'Full Head'],
+    ['garment', 'Garment'],
+    ['fx', 'Effect Stone']
+  ];
+  
+  var FX = [
+    [25059, 'Ghost Effect (Middle)', 'M', 'Translucent', { opacity: 0.45 }, '#d9dde8']
+  ];
+  var POS_NAME = { T: 'Upper', M: 'Middle', L: 'Lower', G: 'Garment' };
+  var MOUNT_NAME = { peco: 'Peco Peco', dragon: 'Dragon', gryphon: 'Gryphon', mado: 'Madogear', union: 'Union' };
+  var th = function (p) { return 'thumbs/' + p; };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var find = function (list, id) { for (var i = 0; i < list.length; i++) if (list[i][0] === id) return list[i]; return null; };
+  var jobRow = function () { return find(D.jobs, S.job); };
+  var hairRow = function () { return find(D.hair[String(S.gender)] || [], S.hair); };
+  var hairPals = function (h) { return (h ? h[1] : []).map(function (p) { return p[0]; }); };
+  var icon = function (j) { return j[2] ? '<img class="ico" src="' + th('jobicon/' + j[0] + '.png') + '" alt="">' : '<span class="ico blank"></span>'; };
+  var overlaps = function (a, b) { for (var i = 0; i < a.length; i++) if (b.indexOf(a[i]) >= 0) return true; return false; };
+
+  /* ---------- Job Dropdown ---------- */
+  function drawJobBtn() { var j = jobRow(); $('jobBtn').innerHTML = icon(j) + '<span>' + esc(j[1]) + '</span>'; }
+  function drawJobList() {
+    var q = $('jobQ').value.trim().toLowerCase();
+    $('jobList').innerHTML = D.jobs.filter(function (j) { return !q || j[1].toLowerCase().indexOf(q) >= 0 || String(j[0]) === q; })
+      .map(function (j) {
+        var tags = []; if (j[3]) tags.push('2nd Costume'); if (j[5]) tags.push(MOUNT_NAME[j[5][1]]);
+        return '<div class="dd-item' + (j[0] === S.job ? ' on' : '') + '" data-j="' + j[0] + '">' + icon(j) + '<span>' + esc(j[1]) + '</span><span class="tag">' + tags.join(' · ') + '</span></div>';
+      }).join('');
+  }
+  function setJob(id) {
+    S.job = id; S.mount = 0; S.mado = 0; S.body = -1;
+    var j = jobRow();
+    if (j[4] >= 0) S.gender = j[4];
+    syncButtons(); syncActions(); drawJobBtn(); drawColors(); drawGrid(); chips(); render();
+  }
+
+  /* ---------- Preview Box Synchronized States ---------- */
+  function syncHeadDir() {
+    var overlay = $('overlayHead');
+    var isMobile = (window.matchMedia && window.matchMedia('(max-width: 900px), (pointer: coarse), (hover: none)').matches) ||
+                   /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    if (overlay) {
+      if (isMobile) {
+        overlay.style.display = 'none';
+      } else {
+        // Rule: Head turn controls visible ONLY when Standing (0) or Sitting (2)
+        var canTurn = (S.action === 0 || S.action === 2);
+        overlay.style.display = canTurn ? 'flex' : 'none';
+      }
+    }
+    var canTurnAction = (S.action === 0 || S.action === 2);
+    if (!canTurnAction) {
+      S.headdir = 0;
+    }
+    var hl = $('btnHeadLeft'), hr = $('btnHeadRight');
+    if (hl) hl.classList.toggle('on', S.headdir === 2);
+    if (hr) hr.classList.toggle('on', S.headdir === 1);
+  }
+
+  function syncGender() {
+    var j = jobRow();
+    var btnF = $('btnGenderF'), btnM = $('btnGenderM');
+    if (btnF && btnM) {
+      btnF.disabled = (j[4] === 1);
+      btnM.disabled = (j[4] === 0);
+      btnF.classList.toggle('on', S.gender === 0);
+      btnM.classList.toggle('on', S.gender === 1);
+    }
+  }
+
+  function syncOutfitBtn() {
+    var j = jobRow();
+    var btn = $('btnOutfit');
+    if (!btn) return;
+    btn.disabled = !j[3];
+    if (!j[3]) S.outfit = 0;
+    btn.classList.toggle('on', S.outfit === 1);
+    // Rule: Show "Second Costume" first. When clicked, toggle to "Default Outfit"
+    btn.textContent = S.outfit ? 'Default Outfit' : 'Second Costume';
+    btn.title = j[3] ? (S.outfit ? 'Click for Default Outfit' : 'Click for Second Costume') : 'No Second Costume available';
+  }
+
+  function syncMountBtn() {
+    var j = jobRow(), m = j[5];
+    var btn = $('btnMount');
+    if (!btn) return;
+    if (!m) {
+      btn.disabled = true;
+      btn.classList.remove('on');
+      btn.textContent = 'Mount';
+      btn.title = 'No Mount available';
+      S.mount = 0;
+      S.mado = 0;
+      return;
+    }
+    btn.disabled = false;
+    btn.classList.toggle('on', S.mount === 1);
+    if (m[1] === 'mado') {
+      if (!S.mount) {
+        btn.textContent = 'Madogear';
+        btn.title = 'Click to ride Madogear Robot';
+      } else if (S.mado === 0) {
+        btn.textContent = 'Mado Robot';
+        btn.title = 'Click to switch to Madogear Suit';
+      } else {
+        btn.textContent = 'Mado Suit';
+        btn.title = 'Click to dismount Madogear';
+      }
+    } else {
+      var mname = MOUNT_NAME[m[1]] || m[1];
+      btn.textContent = S.mount ? mname : 'Ride ' + mname;
+      btn.title = S.mount ? 'Dismount ' + mname : 'Ride ' + mname;
+    }
+  }
+
+  function syncActions() {
+    var j = jobRow(), ok = (S.mount && j[8]) ? j[8] : (j[7] || [1, 1, 1]);
+    var btns = $('pvActions').querySelectorAll('[data-atk]'), cur = null, first = null;
+    btns.forEach(function (b) {
+      var on = !!ok[+b.dataset.atk]; b.disabled = !on;
+      if (on && first === null) first = b;
+      if (+b.dataset.v === S.action) cur = b;
+    });
+    if (cur && cur.disabled && first) { S.action = +first.dataset.v; }
+    $('pvActions').querySelectorAll('[data-v]').forEach(function (b) { b.classList.toggle('on', +b.dataset.v === S.action); });
+    syncHeadDir();
+  }
+
+  function syncPlayPauseBtn() {
+    var btn = $('btnPlayPause');
+    if (!btn) return;
+    if (S.anim) {
+      btn.textContent = '⏸';
+      btn.title = 'Pause';
+      btn.classList.add('playing');
+    } else {
+      btn.textContent = '▶';
+      btn.title = 'Play';
+      btn.classList.remove('playing');
+    }
+  }
+
+  function syncButtons() {
+    syncGender();
+    syncOutfitBtn();
+    syncMountBtn();
+    syncHeadDir();
+    syncPlayPauseBtn();
+  }
+
+  /* ---------- Color Swatches ---------- */
+  function drawColors() {
+    var hr = hairRow();
+    $('hairColors').innerHTML = (hr ? hr[1] : []).map(function (p) {
+      return '<button type="button" title="Hair Color ' + p[0] + '" data-c="' + p[0] + '" style="background:' + p[1] + '"' + (p[0] === S.color ? ' class="on"' : '') + '></button>';
+    }).join('');
+    var pals = jobRow()[6] || [];
+    $('bodyColors').innerHTML = '<button type="button" class="def' + (S.body < 0 ? ' on' : '') + '" title="Default" data-b="-1"></button>' + pals.map(function (p) {
+      return '<button type="button" title="Cloth Dye ' + p[0] + '" data-b="' + p[0] + '" style="background:' + p[1] + '"' + (p[0] === S.body ? ' class="on"' : '') + '></button>';
+    }).join('');
+  }
+
+  /* ---------- Picture Grids ---------- */
+  function tile(on, src, name, k, v) {
+    return '<div class="tile' + (on ? ' on' : '') + '" data-k="' + k + '" data-v="' + v + '"><div class="pic">' +
+      (src ? '<img loading="lazy" src="' + src + '" alt="">' : '') + '</div><div class="n">' + esc(name) + '</div></div>';
+  }
+  function noneTile(k, on) { return '<div class="tile none' + (on ? ' on' : '') + '" data-k="' + k + '" data-v="0"><div class="pic">None</div><div class="n"></div></div>'; }
+  function worn(v) { for (var i = 0; i < S.equip.length; i++) if (S.equip[i][0] === v) return true; return false; }
+  function drawGrid() {
+    var q = $('q').value.trim().toLowerCase();
+    var match = function (name, id) { return !q || String(name).toLowerCase().indexOf(q) >= 0 || String(id) === q; };
+    var html = [], n = 0;
+    if (S.tab === 'hair') {
+      (D.hair[String(S.gender)] || []).forEach(function (h) { if (!match('Style ' + h[0], h[0])) return; n++;
+        var pal = hairPals(h).indexOf(S.color) >= 0 ? S.color : 0;
+        html.push(tile(h[0] === S.hair, th('hair/' + S.gender + '_' + h[0] + '_' + pal + '.png'), 'Style ' + h[0], 'hair', h[0])); });
+    } else if (S.tab === 'fx') {
+      FX.forEach(function (f) { if (!match(f[1], f[0])) return; n++;
+        html.push('<div class="tile' + (S.fx[f[2]] === f[0] ? ' on' : '') + '" data-k="fx" data-v="' + f[0] + '"><div class="pic"><div class="fxbadge" style="background:' + f[5] + '">' + f[3] + '</div></div>' +
+          '<div class="n">' + esc(f[1]) + '</div><div class="pos">Slot 4 of ' + POS_NAME[f[2]] + ' Costume</div></div>'); });
+    } else if (S.tab === 'garment') {
+      html.push(noneTile('garment', !S.garment));
+      D.garments.forEach(function (g) { if (!match(g[1], g[0])) return; n++;
+        html.push(tile(g[0] === S.garment, th('gm/' + g[0] + '.png'), g[1], 'garment', g[0])); });
+    } else {
+      var tab = S.tab, anyHere = S.equip.some(function (e) { return e[2] === tab; });
+      html.push(noneTile('hg', !anyHere));
+      D.headgears.forEach(function (h) { if (h[2] !== tab || !match(h[1], h[0])) return; n++;
+        html.push(tile(worn(h[0]), th('hg/' + h[0] + '.png'), h[1], 'hg', h[0])); });
+    }
+    $('grid').innerHTML = html.join('');
+    $('count').textContent = n + ' Items';
+  }
+  function pick(k, v) {
+    if (k === 'fx') {
+      var f = null; FX.forEach(function (x) { if (x[0] === v) f = x; });
+      if (f) { if (S.fx[f[2]] === v) delete S.fx[f[2]]; else S.fx[f[2]] = v; }
+      drawGrid(); chips(); applyFx(); return;
+    }
+    if (k === 'hg') {
+      if (!v) S.equip = S.equip.filter(function (e) { return e[2] !== S.tab; });
+      else {
+        // a new item takes off everything that shares one of its slots
+        var row = find(D.headgears, v), slots = row[2].split('');
+        S.equip = S.equip.filter(function (e) { return !overlaps(e[2].split(''), slots); });
+        S.equip.push(row);
+      }
+    } else {
+      S[k] = v;
+      if (k === 'hair' && hairPals(hairRow()).indexOf(S.color) < 0) S.color = 0;
+      if (k === 'hair') drawColors();
+    }
+    drawGrid(); chips(); render();
+  }
+  function chips() {
+    var j = jobRow(), c = [j[1]];
+    if (S.mount) c.push(j[5][1] === 'mado' ? 'Madogear ' + (S.mado ? 'Suit' : 'Robot') : MOUNT_NAME[j[5][1]]);
+    if (S.outfit) c.push('Second Costume');
+    c.push('Style ' + S.hair + ' · Color ' + S.color + (S.body >= 0 ? ' · Cloth ' + S.body : ''));
+    S.equip.forEach(function (e) { c.push(e[1]); });
+    var g = S.garment && find(D.garments, S.garment); if (g) c.push(g[1]);
+    Object.keys(S.fx).forEach(function (p) { FX.forEach(function (f) { if (f[0] === S.fx[p]) c.push(f[1]); }); });
+    $('chips').innerHTML = c.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('');
+    drawSlots();
+  }
+
+  // Four 1:1 square slots left of preview: Upper / Middle / Lower / Garment
+  var SLOTS = [['T', 'Upper'], ['M', 'Middle'], ['L', 'Lower'], ['G', 'Garment']];
+  function drawSlots() {
+    $('slots').innerHTML = SLOTS.map(function (s) {
+      var item = null, src = '', tab = s[0], multi = false;
+      if (s[0] === 'G') {
+        item = S.garment && find(D.garments, S.garment); tab = 'garment';
+        if (item) src = th('gm/' + item[0] + '.png');
+      } else {
+        S.equip.forEach(function (e) { if (e[2].indexOf(s[0]) >= 0) item = e; });
+        if (item) { src = th('hg/' + item[0] + '.png'); tab = item[2]; multi = item[2].length > 1; }
+      }
+      if (!item) return '<div class="slot" data-tab="' + tab + '"><span class="lb">' + s[1] + '</span></div>';
+      return '<div class="slot full' + (multi ? ' link' : '') + '" data-tab="' + tab + '" title="' + esc(item[1]) + '">' +
+        '<button type="button" class="x" data-off="' + s[0] + '" title="Unequip">✕</button>' +
+        '<img src="' + src + '" alt=""></div>';
+    }).join('');
+  }
+  function takeOff(slot) {
+    if (slot === 'G') S.garment = 0;
+    else S.equip = S.equip.filter(function (e) { return e[2].indexOf(slot) < 0; });
+    drawGrid(); chips(); render();
+  }
+  function openTab(t) {
+    $('tabs').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === t); });
+    S.tab = t; $('q').value = ''; drawGrid();
+  }
+
+  /* ---------- Client-Side Rendering + Animation Player ---------- */
+  var seq = 0, timer = 0, play = 0, cur = 0;
+
+  function requestConfig() {
+    var j = jobRow(), jid = S.mount && j[5] ? j[5][0] : S.job;
+    var hg = [0, 0, 0]; S.equip.forEach(function (e, i) { if (i < 3) hg[i] = e[0]; });
+    return {
+      job: jid,
+      gender: S.gender,
+      outfit: S.outfit,
+      head: S.hair,
+      headPalette: S.color,
+      bodyPalette: S.body,
+      headdir: S.headdir,
+      headgear: hg,
+      garment: S.garment,
+      mount: S.mount,
+      mado: S.mount ? S.mado : 0,
+      action: S.action * 8 + S.dir,
+      enableShadow: false
+    };
+  }
+
+  function render() {
+    clearTimeout(timer);
+    timer = setTimeout(loadAndRender, 60);
+  }
+
+  async function loadAndRender() {
+    var my = ++seq;
+    stop();
+    var cfg = requestConfig();
+    try {
+      currentChar = await loader.loadCharacter(cfg);
+      if (my !== seq) return;
+      $('gmNote').hidden = !(cfg.garment && !currentChar.garment);
+      var actionIndex = S.action * 8 + S.dir;
+      var maxFrames = composer.getMaxFrames(currentChar, actionIndex);
+      var maxF = Math.max(0, maxFrames - 1);
+      $('frame').max = maxF;
+      if (S.frame > maxF) S.frame = 0;
+      if (cur > maxF) cur = 0;
+      var displayFrame = S.anim ? cur : S.frame;
+      $('frame').value = displayFrame;
+      $('frameNo').textContent = 'Frame ' + (displayFrame + 1) + '/' + maxFrames;
+      applyFx();
+      show();
+    } catch (e) {
+      if (my !== seq) return;
+      console.error('Render error:', e);
+      $('stage').innerHTML = '<div class="err">Failed to render character (' + esc(e.message) + ')</div>';
+    }
+  }
+
+  function stop() {
+    clearTimeout(play);
+  }
+
+  function show() {
+    stop();
+    if (!currentChar) return;
+    var canvas = $('pv');
+    if (!canvas) {
+      $('stage').innerHTML = '<canvas id="pv" width="220" height="220"></canvas>';
+      canvas = $('pv');
+      applyFx();
+    }
+    var actionIndex = S.action * 8 + S.dir;
+    var maxFrames = composer.getMaxFrames(currentChar, actionIndex);
+
+    syncPlayPauseBtn();
+
+    if (S.anim) {
+      var step = function () {
+        if (!currentChar) return;
+        composer.renderCharacter(canvas, currentChar, actionIndex, cur, S.headdir);
+        $('frame').value = cur;
+        $('frameNo').textContent = 'Frame ' + (cur + 1) + '/' + maxFrames;
+        var delay = (composer.getDelayMs(currentChar, actionIndex) || 100) / S.speed;
+        cur = (cur + 1) % maxFrames;
+        play = setTimeout(step, delay);
+      };
+      step();
+    } else {
+      composer.renderCharacter(canvas, currentChar, actionIndex, S.frame, S.headdir);
+      $('frame').value = S.frame;
+      $('frameNo').textContent = 'Frame ' + (S.frame + 1) + '/' + maxFrames;
+    }
+  }
+
+  function applyFx() {
+    var pv = $('pv'); if (!pv) return;
+    var scale = 1, opacity = 1, filters = [];
+    Object.keys(S.fx).forEach(function (p) { FX.forEach(function (f) {
+      if (f[0] !== S.fx[p]) return;
+      if (f[4].scale) scale = Math.min(scale, f[4].scale);
+      if (f[4].opacity) opacity = Math.min(opacity, f[4].opacity);
+      if (f[4].filter) filters.push(f[4].filter);
+    }); });
+    pv.style.transform = scale !== 1 ? 'scale(' + scale + ')' : '';
+    pv.style.opacity = opacity;
+    pv.style.filter = filters.join(' ');
+  }
+
+  /* ---------- Touch / Mouse Swipe on Stage (Top Half: Head, Bottom Half: Body) ---------- */
+  function initStageSwipe() {
+    var wrap = $('stageWrap');
+    if (!wrap) return;
+
+    var startX = 0, startY = 0, lastX = 0;
+    var isTopHalf = false;
+    var tracking = false;
+    var accumulatedDeltaX = 0;
+    var STEP_THRESHOLD = 24;
+
+    function onStart(x, y, target) {
+      if (target && target.closest('button')) return;
+      var rect = wrap.getBoundingClientRect();
+      startX = x;
+      startY = y;
+      lastX = x;
+      accumulatedDeltaX = 0;
+      var relativeY = y - rect.top;
+      isTopHalf = relativeY < (rect.height / 2);
+      tracking = true;
+    }
+
+    function onMove(x, y, ev) {
+      if (!tracking) return;
+      var deltaX = x - lastX;
+      var totalDeltaX = x - startX;
+
+      if (isTopHalf) {
+        // TOP HALF: Turn Head (allowed ONLY when Sitting (2) or Standing (0))
+        if (S.action !== 0 && S.action !== 2) return;
+        if (ev && ev.cancelable) ev.preventDefault();
+
+        if (totalDeltaX > 25) {
+          if (S.headdir !== 1) {
+            S.headdir = 1;
+            syncHeadDir();
+            render();
+          }
+        } else if (totalDeltaX < -25) {
+          if (S.headdir !== 2) {
+            S.headdir = 2;
+            syncHeadDir();
+            render();
+          }
+        } else if (Math.abs(totalDeltaX) < 12) {
+          if (S.headdir !== 0) {
+            S.headdir = 0;
+            syncHeadDir();
+            render();
+          }
+        }
+      } else {
+        // BOTTOM HALF: Rotate Body (Continuous drag across 8 directions)
+        if (ev && ev.cancelable) ev.preventDefault();
+        accumulatedDeltaX += deltaX;
+        lastX = x;
+
+        if (accumulatedDeltaX >= STEP_THRESHOLD) {
+          var steps = Math.floor(accumulatedDeltaX / STEP_THRESHOLD);
+          accumulatedDeltaX %= STEP_THRESHOLD;
+          S.dir = (S.dir + 7 * steps) % 8;
+          render();
+        } else if (accumulatedDeltaX <= -STEP_THRESHOLD) {
+          var steps = Math.floor(Math.abs(accumulatedDeltaX) / STEP_THRESHOLD);
+          accumulatedDeltaX %= STEP_THRESHOLD;
+          S.dir = (S.dir + steps) % 8;
+          render();
+        }
+      }
+    }
+
+    function onEnd() {
+      tracking = false;
+    }
+
+    // Touch events for mobile phones / tablets
+    wrap.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1) {
+        onStart(e.touches[0].clientX, e.touches[0].clientY, e.target);
+      }
+    }, { passive: true });
+
+    wrap.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 1) {
+        onMove(e.touches[0].clientX, e.touches[0].clientY, e);
+      }
+    }, { passive: false });
+
+    wrap.addEventListener('touchend', onEnd, { passive: true });
+    wrap.addEventListener('touchcancel', onEnd, { passive: true });
+
+    // Pointer events for desktop preview testing / mouse dragging
+    wrap.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      onStart(e.clientX, e.clientY, e.target);
+    });
+    window.addEventListener('pointermove', function (e) {
+      onMove(e.clientX, e.clientY, e);
+    });
+    window.addEventListener('pointerup', onEnd);
+    window.addEventListener('pointercancel', onEnd);
+  }
+
+  function init() {
+    if (!find(D.jobs, S.job)) S.job = D.jobs[0][0];
+    $('tabs').innerHTML = TABS.filter(function (t) { return t[0] === 'hair' || t[0] === 'garment' || t[0] === 'fx' || D.headgears.some(function (h) { return h[2] === t[0]; }); })
+      .map(function (t) { return '<button data-t="' + t[0] + '"' + (t[0] === S.tab ? ' class="on"' : '') + '>' + t[1] + '</button>'; }).join('');
+    $('tabs').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      $('tabs').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      S.tab = b.dataset.t; $('q').value = ''; drawGrid();
+    });
+    $('grid').addEventListener('click', function (e) { var t = e.target.closest('[data-k]'); if (t) pick(t.dataset.k, +t.dataset.v); });
+    $('grid').addEventListener('load', function (e) {
+      var im = e.target; if (im.tagName !== 'IMG') return;
+      if (im.naturalWidth <= 32 && im.naturalHeight <= 32) { im.style.setProperty('--w', im.naturalWidth); im.classList.add('x2'); }
+    }, true);
+    $('q').addEventListener('input', drawGrid);
+    $('slots').addEventListener('click', function (e) {
+      var x = e.target.closest('[data-off]'); if (x) { e.stopPropagation(); takeOff(x.dataset.off); return; }
+      var s = e.target.closest('[data-tab]'); if (s) openTab(s.dataset.tab);
+    });
+    $('slots').addEventListener('load', function (e) {
+      var im = e.target; if (im.tagName !== 'IMG') return;
+      if (im.naturalWidth <= 24 && im.naturalHeight <= 18) { im.style.setProperty('--w', im.naturalWidth); im.classList.add('x2'); }
+    }, true);
+    $('jobBtn').addEventListener('click', function () { $('jobDD').classList.toggle('open'); $('jobQ').value = ''; drawJobList(); $('jobQ').focus(); });
+    $('jobQ').addEventListener('input', drawJobList);
+    $('jobList').addEventListener('click', function (e) { var it = e.target.closest('[data-j]'); if (!it) return; $('jobDD').classList.remove('open'); setJob(+it.dataset.j); });
+    document.addEventListener('click', function (e) { if (!$('jobDD').contains(e.target)) $('jobDD').classList.remove('open'); });
+
+    $('hairColors').addEventListener('click', function (e) { var b = e.target.closest('[data-c]'); if (!b) return; S.color = +b.dataset.c; drawColors(); drawGrid(); chips(); render(); });
+    $('bodyColors').addEventListener('click', function (e) { var b = e.target.closest('[data-b]'); if (!b) return; S.body = +b.dataset.b; drawColors(); chips(); render(); });
+
+    /* ---------- In-Preview Event Handlers ---------- */
+    // Head turn
+    $('btnHeadLeft').addEventListener('click', function () {
+      if (S.action !== 0 && S.action !== 2) return;
+      S.headdir = (S.headdir === 2) ? 0 : 2;
+      syncHeadDir();
+      render();
+    });
+    $('btnHeadRight').addEventListener('click', function () {
+      if (S.action !== 0 && S.action !== 2) return;
+      S.headdir = (S.headdir === 1) ? 0 : 1;
+      syncHeadDir();
+      render();
+    });
+
+    // Body turn
+    $('btnBodyLeft').addEventListener('click', function () {
+      S.dir = (S.dir + 1) % 8;
+      render();
+    });
+    $('btnBodyRight').addEventListener('click', function () {
+      S.dir = (S.dir + 7) % 8;
+      render();
+    });
+
+    // Gender toggle
+    $('btnGenderF').addEventListener('click', function () {
+      var j = jobRow(); if (j[4] === 1) return;
+      S.gender = 0;
+      if (!hairRow()) S.hair = 1;
+      if (hairPals(hairRow()).indexOf(S.color) < 0) S.color = 0;
+      syncGender(); drawColors(); drawGrid(); chips(); render();
+    });
+    $('btnGenderM').addEventListener('click', function () {
+      var j = jobRow(); if (j[4] === 0) return;
+      S.gender = 1;
+      if (!hairRow()) S.hair = 1;
+      if (hairPals(hairRow()).indexOf(S.color) < 0) S.color = 0;
+      syncGender(); drawColors(); drawGrid(); chips(); render();
+    });
+
+    // Action buttons (1. Stand, 2. Sit, 3. Walk, 4. Ready, 5. Attack 1..3)
+    $('pvActions').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-v]'); if (!b || b.disabled) return;
+      $('pvActions').querySelectorAll('[data-v]').forEach(function (x) { x.classList.toggle('on', x === b); });
+      S.action = +b.dataset.v;
+      syncHeadDir();
+      render();
+    });
+
+    // Outfit toggle (Shows "Second Costume" first, toggles to "Default Outfit")
+    $('btnOutfit').addEventListener('click', function () {
+      var j = jobRow(); if (!j[3]) return;
+      S.outfit = S.outfit ? 0 : 1;
+      syncOutfitBtn(); chips(); render();
+    });
+
+    // Mount toggle
+    $('btnMount').addEventListener('click', function () {
+      var j = jobRow(), m = j[5]; if (!m) return;
+      if (m[1] === 'mado') {
+        if (!S.mount) { S.mount = 1; S.mado = 0; }
+        else if (S.mado === 0) { S.mount = 1; S.mado = 2; }
+        else { S.mount = 0; S.mado = 0; }
+      } else {
+        S.mount = S.mount ? 0 : 1;
+      }
+      syncMountBtn(); syncActions(); chips(); render();
+    });
+
+    // Play/Pause button
+    $('btnPlayPause').addEventListener('click', function () {
+      if (S.anim) {
+        S.anim = 0;
+        S.frame = cur;
+        stop();
+        show();
+      } else {
+        S.anim = 1;
+        cur = S.frame;
+        show();
+      }
+      syncPlayPauseBtn();
+    });
+
+    // Frame scrubber
+    $('frame').addEventListener('input', function () {
+      S.anim = 0;
+      S.frame = +this.value;
+      cur = S.frame;
+      syncPlayPauseBtn();
+      show();
+    });
+
+    // Speed buttons under frame scrubber
+    $('speed').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      $('speed').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      S.speed = parseFloat(b.dataset.v);
+      if (S.anim) {
+        show();
+      }
+    });
+
+    // Init touch/mouse swipe on stage
+    initStageSwipe();
+
+    // Responsive / mobile detection
+    function updateMobileState() {
+      var isMob = (window.matchMedia && window.matchMedia('(max-width: 900px), (pointer: coarse), (hover: none)').matches) ||
+                  /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      document.body.classList.toggle('is-mobile', isMob);
+      syncHeadDir();
+    }
+    updateMobileState();
+    window.addEventListener('resize', updateMobileState);
+
+    // Download PNG
+    $('dl').addEventListener('click', function () {
+      var canvas = $('pv');
+      if (!canvas) return;
+      var j = jobRow();
+      var fn = 'character_' + (j ? j[1] : 'ro') + '_act' + S.action + '_dir' + S.dir + (S.anim ? '' : '_f' + S.frame) + '.png';
+      $('dl').download = fn;
+      $('dl').href = canvas.toDataURL('image/png');
+    });
+
+    function exportCurrentSprite() {
+      var canvas = $('pv');
+      if (!canvas) return null;
+      var j = jobRow();
+      var fn = 'ro_sim_' + (j ? j[1] : 'ro') + '_act' + S.action + '_dir' + S.dir + (S.anim ? '' : '_f' + S.frame) + '.png';
+      var dataUrl = canvas.toDataURL('image/png');
+      var payload = {
+        type: 'RO_SPRITE_EXPORT',
+        action: 'sprite_exported',
+        dataUrl: dataUrl,
+        filename: fn,
+        width: canvas.width,
+        height: canvas.height,
+        job: j ? j[1] : 'Unknown',
+        gender: S.gender === 1 ? 'Male' : 'Female'
+      };
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage(payload, '*');
+      }
+      return payload;
+    }
+
+    window.addEventListener('message', function (ev) {
+      if (!ev.data) return;
+      var act = ev.data.action || ev.data.type || ev.data;
+      if (act === 'export_sprite' || act === 'RO_GET_SPRITE' || act === 'get_sprite') {
+        exportCurrentSprite();
+      }
+    });
+
+    if (window.parent && window.parent !== window) {
+      try {
+        var sendBtn = document.createElement('button');
+        sendBtn.type = 'button';
+        sendBtn.id = 'sendToStudioBtn';
+        sendBtn.className = 'dl';
+        sendBtn.style.cssText = 'background: linear-gradient(135deg, #2563eb, #3b82f6); color: white; border: none; font-weight: 700; margin-left: 8px; cursor: pointer; padding: 4px 12px; border-radius: 6px; box-shadow: 0 2px 6px rgba(37,99,235,0.3);';
+        sendBtn.innerHTML = '⚡ Send to Studio';
+        sendBtn.onclick = function (e) {
+          e.preventDefault();
+          exportCurrentSprite();
+        };
+        var dlA = $('dl');
+        if (dlA && dlA.parentNode) {
+          dlA.parentNode.appendChild(sendBtn);
+        }
+      } catch (_) {}
+    }
+
+    setJob(S.job);
+  }
+
+  // Pure client-side initialization: load sim-data.json, resolver.json, and optional manifest.json
+  Promise.all([
+    fetch('sim-data.json').then(function (r) { if (!r.ok) throw new Error('sim-data.json: HTTP ' + r.status); return r.json(); }),
+    fetch('resolver.json').then(function (r) { if (!r.ok) throw new Error('resolver.json: HTTP ' + r.status); return r.json(); }),
+    fetch('manifest.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+  ]).then(function (res) {
+    D = res[0];
+    var resolverData = res[1];
+    var manifestData = res[2];
+    resolver = new ResourceResolver(resolverData, '.');
+    if (manifestData) {
+      resolver.setManifest(manifestData);
+    }
+    loader = new AssetLoader(resolver);
+    composer = new CharacterComposer({
+      canvasWidth: 220,
+      canvasHeight: 220,
+      originX: 110,
+      originY: 180
+    });
+
+    // Expose for testing/verification
+    window.simState = S;
+    window.simResolver = resolver;
+    window.simLoader = loader;
+    window.simComposer = composer;
+    window.simChar = function () { return currentChar; };
+
+    init();
+  }).catch(function (err) {
+    console.error('Initialization error:', err);
+    $('stage').innerHTML = '<div class="err">Failed to load data (' + esc(err.message) + ')</div>';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>RO-Simulation</title>
+<style>
+  :root {
+    --bg: #eef2f7; --panel: #ffffff; --line: #c9d5e4; --text: #0f172a; --muted: #64748b;
+    --accent: #2563eb; --accent-light: #eff6ff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text);
+    font-family: "Segoe UI", Tahoma, -apple-system, BlinkMacSystemFont, sans-serif; }
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  main { flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; padding: 48px 20px 24px; }
+  h1 { margin: 0 0 6px; font-size: 30px; letter-spacing: -.3px; }
+  .lead { margin: 0 0 32px; color: var(--muted); font-size: 15px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+  .card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 20px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(70, 90, 120, .08); color: inherit; text-decoration: none;
+    transition: transform .15s, box-shadow .15s, border-color .15s; }
+  a.card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(37, 99, 235, .15); }
+  .card.soon { opacity: .65; cursor: default; }
+  .icon { width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center;
+    background: var(--accent-light); color: var(--accent); }
+  .icon svg { width: 26px; height: 26px; }
+  .card h2 { margin: 4px 0 0; font-size: 17px; }
+  .card p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+  .badge { position: absolute; top: 16px; right: 16px; font-size: 11px; font-weight: 600;
+    padding: 3px 8px; border-radius: 999px; background: #f1f5f9; color: var(--muted); }
+  .badge.live { background: #dcfce7; color: #15803d; }
+  footer { padding: 16px 20px 20px; text-align: center; font-size: 11.5px; color: #6b7280; line-height: 1.5; }
+</style>
+</head>
+<body>
+<main>
+  <h1>RO-Simulation</h1>
+  <p class="lead">Ragnarok Online simulators and calculators that run entirely in your browser.</p>
+
+  <div class="grid">
+    <a class="card" href="costume/">
+      <span class="badge live">Available</span>
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 6v4l3 1v10h10V11l3-1V6l-4-3"/><path d="M8 3a4 4 0 0 0 8 0"/></svg></span>
+      <h2>Costume Simulator</h2>
+      <p>Preview jobs, hairstyles, dyes, costume headgears and garments with full animation.</p>
+    </a>
+
+    <div class="card soon" aria-disabled="true">
+      <span class="badge">Coming soon</span>
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+      <h2>Status Calculator</h2>
+      <p>Plan base stats and see the resulting ATK, MATK, HIT, FLEE, ASPD and more.</p>
+    </div>
+
+    <div class="card soon" aria-disabled="true">
+      <span class="badge">Coming soon</span>
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+      <h2>Skill Calculator</h2>
+      <p>Build a skill tree for any job and check the skill points you need.</p>
+    </div>
+
+    <div class="card soon" aria-disabled="true">
+      <span class="badge">Coming soon</span>
+      <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/></svg></span>
+      <h2>Equipment Calculator</h2>
+      <p>Combine weapons, armor, cards and enchants and compare the bonuses.</p>
+    </div>
+  </div>
+</main>
+<footer>Ragnarok Online is a trademark of Gravity Co., Ltd. All game sprites and artwork &copy; Gravity Co., Ltd. and their licensors.<br>
+This is a non-commercial fan project and is not affiliated with, endorsed by or sponsored by Gravity Co., Ltd.</footer>
+</body>
+</html>
