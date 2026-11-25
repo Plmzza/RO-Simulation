@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>RO Simulator</title>
+<link rel="stylesheet" href="style.css">
+<script>
+  // some local preview servers send .css with a wrong content type, which browsers ignore: load it as text instead
+  addEventListener('DOMContentLoaded', () => {
+    const ok = [...document.styleSheets].some((x) => x.href && x.href.endsWith('/style.css') && x.cssRules?.length);
+    if (!ok) fetch('style.css').then((r) => r.text()).then((t) => { const st = document.createElement('style'); st.textContent = t; document.head.append(st); });
+  });
+</script>
+</head>
+<body>
+<header class="bar">
+  <a class="home" href="../">← RO-Simulation</a>
+  <label>อาชีพ <select id="job"></select></label>
+  <label class="chk"><input type="checkbox" id="trans"> Trans</label>
+  <label>Base Lv <input type="number" id="baseLv" min="1" max="275"></label>
+  <label>Job Lv <input type="number" id="jobLv" min="1" max="70"></label>
+  <span class="grow"></span>
+  <button id="btnExport">Export</button>
+  <button id="btnImport">Import</button>
+  <input type="file" id="fileImport" accept=".json,application/json" hidden>
+  <button id="btnReset" class="danger">เริ่มใหม่</button>
+</header>
+<div id="loading" class="loading">กำลังโหลดข้อมูล…</div>
+
+<main id="app" hidden>
+  <div class="row1">
+    <!-- 1. Skill -->
+    <section class="win" id="wSkill">
+      <h2>รายการ Skill</h2>
+      <div class="skillwrap">
+        <nav class="vtabs" id="skillTabs"></nav>
+        <div class="skillgrid" id="skillGrid"></div>
+      </div>
+      <footer><img class="jobspr" id="jobSprite" alt=""><span id="skillPoint"></span><span class="grow"></span>
+        <button id="skillMax" title="อัปทุกสกิลของแท็บนี้เท่าที่แต้มพอ">Max</button><button id="skillReset">Reset</button></footer>
+    </section>
+
+    <div class="col">
+      <!-- 3. Equipment -->
+      <section class="win" id="wEquip">
+        <h2>ไอเท็มสวมใส่</h2>
+        <nav class="tabs" id="equipTabs">
+          <button data-t="general" class="on">General</button><button data-t="special">Special</button>
+        </nav>
+        <div class="equipbox" id="equipGrid"></div>
+      </section>
+      <!-- 2. Status -->
+      <section class="win" id="wStatus">
+        <h2>Status</h2>
+        <div class="stbox" id="statusBox"></div>
+        <h3>Advanced Status</h3>
+        <div class="stbox" id="traitBox"></div>
+        <div class="hpsp" id="hpsp"></div>
+        <div class="cmd"><input id="stCmd" placeholder="/str+ 130 · /int- 10 · /reset" autocomplete="off" spellcheck="false"><button id="stCmdGo">Enter</button></div>
+        <div class="cmdlog" id="stCmdLog"></div>
+      </section>
+    </div>
+
+    <!-- 4. Equipment Status -->
+    <section class="win" id="wEqStat">
+      <h2>Equipment Status</h2>
+      <div class="eqstat">
+        <nav class="vtabs txt" id="eqStatTabs"></nav>
+        <div class="eqlist" id="eqStatList"></div>
+      </div>
+    </section>
+
+    <!-- 5. Inventory -->
+    <section class="win" id="wInv">
+      <h2>ไอเท็มที่ครอบครอง</h2>
+      <div class="invwrap">
+        <nav class="vtabs txt" id="invTabs"><button data-t="cons" class="on">cons.</button><button data-t="equip">equip</button></nav>
+        <div class="invmain">
+          <div class="invtools" id="invTools"></div>
+          <div class="invgrid" id="invList"></div>
+        </div>
+      </div>
+      <footer id="invFoot"></footer>
+    </section>
+  </div>
+
+  <div class="row2">
+    <!-- 6. Craft -->
+    <section class="win" id="wCraft">
+      <h2 id="craftTitle">Equipment Craft</h2>
+      <div class="craft" id="craftBox"></div>
+    </section>
+
+    <section class="win" id="wBuff">
+      <h2>บัพ / ดีบัพมอนสเตอร์</h2>
+      <nav class="tabs" id="buffTabs"><button data-t="self" class="on">สกิลตัวเอง</button><button data-t="party">จากคนอื่น / ปาร์ตี้</button><button data-t="debuff">ดีบัพมอนสเตอร์</button></nav>
+      <div class="invtools"><input id="buffSearch" placeholder="ค้นหา…"><label class="chk"><input type="checkbox" id="buffAll"> แสดงที่ใช้ไม่ได้ด้วย</label></div>
+      <div class="bufflist" id="buffList"></div>
+    </section>
+
+    <section class="win" id="wDmg">
+      <h2>Damage</h2>
+      <div class="dmgform">
+        <label>มอนสเตอร์ <input id="mob" list="mobList" placeholder="ชื่อหรือ ID"></label>
+        <datalist id="mobList"></datalist>
+        <label>สกิล <select id="atkSkill"></select></label>
+        <label>Lv <input type="number" id="atkLv" min="1" max="10"></label>
+      </div>
+      <div class="dmgout" id="dmgOut"></div>
+    </section>
+  </div>
+</main>
+
+<!-- skill description window (like the game's) -->
+<section class="win float" id="wSkillInfo" hidden>
+  <h2><span id="siTitle">Skill</span><button class="x" id="siClose">✕</button></h2>
+  <div class="skillinfo" id="skillInfo"></div>
+</section>
+<!-- item description window (right click) -->
+<section class="win float" id="wItemInfo" hidden>
+  <h2><span id="iiTitle">Item</span><button class="x" id="iiClose">✕</button></h2>
+  <div class="iteminfo" id="itemInfo"></div>
+</section>
+<div class="tip" id="tip" hidden></div>
+
+<div class="modal" id="modal" hidden><div class="mbox"><h2 id="mTitle"></h2><div id="mBody"></div>
+  <footer><span class="grow"></span><button id="mClose">ปิด</button></footer></div></div>
+
+<footer class="credit">Formulas and data: rAthena (GPL-3.0) · Skill window positions and new skill icons: <a href="https://www.divine-pride.net" target="_blank" rel="noopener">Divine Pride</a> · Font: <a href="https://hyperos.mi.com/font/" target="_blank" rel="noopener">MiSans by Xiaomi</a> · Ragnarok Online © Gravity Co., Ltd.</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>

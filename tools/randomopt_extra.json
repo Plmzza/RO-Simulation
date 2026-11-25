@@ -1,0 +1,2380 @@
+{
+ "_doc": "Random options the server data lacks (from muhro wiki pages the user pointed to). Applied by build_randomopt_extra.py after build_randomopt.py.",
+ "groups": {
+  "FAN_UPGRADE_KIT_EX": {
+   "slots": [
+    [
+     {
+      "o": "VAR_PLUSASPDPERCENT",
+      "min": 3,
+      "max": 10
+     },
+     {
+      "o": "DEC_SPELL_CAST_TIME",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "DAMAGE_CRI_TARGET",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "MELEE_ATTACK_DAMAGE_TARGET",
+      "min": 1,
+      "max": 7
+     },
+     {
+      "o": "RANGE_ATTACK_DAMAGE_TARGET",
+      "min": 1,
+      "max": 7
+     },
+     {
+      "o": "ADDSKILLMDAMAGE_ALL",
+      "min": 1,
+      "max": 7
+     },
+     {
+      "o": "VAR_CRITICALSUCCESSVALUE",
+      "min": 1,
+      "max": 7
+     },
+     {
+      "o": "VAR_HITSUCCESSVALUE",
+      "min": 5,
+      "max": 15
+     },
+     {
+      "o": "DEC_SP_CONSUMPTION",
+      "min": 3,
+      "max": 5
+     },
+     {
+      "o": "VAR_MAXHPPERCENT",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "VAR_MAXSPPERCENT",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "VAR_ATKPERCENT",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "VAR_MAGICATKPERCENT",
+      "min": 1,
+      "max": 5
+     }
+    ],
+    [
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_NOTHING",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_UNDEAD",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_ANIMAL",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_PLANT",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_INSECT",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_FISHS",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_DEVIL",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_HUMAN",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_ANGEL",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_DRAGON",
+      "min": 5,
+      "max": 10
+     },
+     {
+      "o": "ADDEXPPERCENT_KILLRACE_ALL",
+      "min": 3,
+      "max": 5
+     }
+    ]
+   ],
+   "maxRandom": 0,
+   "random": [],
+   "src": "https://wiki.muhro.eu/Sea_Otter_and_Fur_Seal_Mini_Fan (2 lines: combat + EXP)"
+  },
+  "GGT_SHADOW_SPELLBOOK": {
+   "slots": [
+    [
+     {
+      "o": "VAR_MAXHPAMOUNT",
+      "min": 100,
+      "max": 500
+     },
+     {
+      "o": "VAR_MAXSPAMOUNT",
+      "min": 20,
+      "max": 100
+     },
+     {
+      "o": "VAR_ATTPOWER",
+      "min": 1,
+      "max": 15
+     },
+     {
+      "o": "VAR_ATTMPOWER",
+      "min": 1,
+      "max": 15
+     },
+     {
+      "o": "VAR_ATKPERCENT",
+      "min": 1,
+      "max": 3
+     },
+     {
+      "o": "VAR_MAGICATKPERCENT",
+      "min": 1,
+      "max": 3
+     },
+     {
+      "o": "VAR_PLUSASPD",
+      "min": 1,
+      "max": 1
+     },
+     {
+      "o": "VAR_PLUSASPDPERCENT",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "VAR_HITSUCCESSVALUE",
+      "min": 5,
+      "max": 15
+     },
+     {
+      "o": "VAR_AVOIDSUCCESSVALUE",
+      "min": 5,
+      "max": 15
+     },
+     {
+      "o": "VAR_ITEMDEFPOWER",
+      "min": 10,
+      "max": 25
+     },
+     {
+      "o": "VAR_MDEFPOWER",
+      "min": 1,
+      "max": 3
+     },
+     {
+      "o": "VAR_CRITICALSUCCESSVALUE",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "DAMAGE_CRI_TARGET",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "RANGE_ATTACK_DAMAGE_TARGET",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "MELEE_ATTACK_DAMAGE_TARGET",
+      "min": 1,
+      "max": 5
+     },
+     {
+      "o": "HEAL_VALUE",
+      "min": 3,
+      "max": 5
+     },
+     {
+      "o": "HEAL_MODIFY_PERCENT",
+      "min": 3,
+      "max": 5
+     },
+     {
+      "o": "DEC_SPELL_CAST_TIME",
+      "min": 1,
+      "max": 3
+     },
+     {
+      "o": "ADDSKILLMDAMAGE_ALL",
+      "min": 1,
+      "max": 5
+     }
+    ]
+   ],
+   "maxRandom": 1,
+   "random": [
+    {
+     "o": "VAR_POWAMOUNT",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_SPLAMOUNT",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_STAAMOUNT",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_WISAMOUNT",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_CONAMOUNT",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_CRTAMOUNT",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_PATKAMOUNT",
+     "min": 1,
+     "max": 2
+    },
+    {
+     "o": "VAR_SMATKAMOUNT",
+     "min": 1,
+     "max": 2
+    },
+    {
+     "o": "VAR_RESAMOUNT",
+     "min": 5,
+     "max": 15
+    },
+    {
+     "o": "VAR_MRESAMOUNT",
+     "min": 5,
+     "max": 15
+    },
+    {
+     "o": "VAR_HEAL_PLUS",
+     "min": 3,
+     "max": 10
+    },
+    {
+     "o": "VAR_CRITICAL_RATE",
+     "min": 1,
+     "max": 5
+    }
+   ],
+   "src": "https://ro.gnjoy.in.th/2026-halloween-scroll/ (MaxHP/MaxSP +0.5% lines left out: options are whole numbers)"
+  },
+  "GENERIC_1": {
+   "slots": [],
+   "maxRandom": 1,
+   "random": [
+    {
+     "o": "RACE_DAMAGE_NOTHING",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_NOTHING",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_NOTHING",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_NOTHING",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_UNDEAD",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_UNDEAD",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_UNDEAD",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_UNDEAD",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_ANIMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_ANIMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_ANIMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_ANIMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_PLANT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_PLANT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_PLANT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_PLANT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_INSECT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_INSECT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_INSECT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_INSECT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_FISHS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_FISHS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_FISHS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_FISHS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_DEVIL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_DEVIL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_DEVIL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_DEVIL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_HUMAN",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_HUMAN",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_HUMAN",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_HUMAN",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_ANGEL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_ANGEL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_ANGEL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_ANGEL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_DRAGON",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_DRAGON",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_DRAGON",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_DRAGON",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "DAMAGE_PROPERTY_NOTHING_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_NOTHING_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_NOTHING",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_WATER_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_WATER_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_WATER",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_GROUND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_GROUND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_GROUND",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_FIRE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_FIRE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_FIRE",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_WIND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_WIND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_WIND",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_POISON_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_POISON_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_POISON",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_SAINT_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_SAINT_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_SAINT",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_DARKNESS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_DARKNESS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_DARKNESS",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_TELEKINESIS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_TELEKINESIS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_TELEKINESIS",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_UNDEAD_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_UNDEAD_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_UNDEAD",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_SIZE_SMALL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_SMALL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_SIZE_MIDIUM_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_MIDIUM_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_SIZE_LARGE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_LARGE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_DAMAGE_NORMAL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_DAMAGE_BOSS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_MDAMAGE_NORMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_MDAMAGE_BOSS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_IGNORE_DEF_PERCENT_NORMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_DEF_PERCENT_BOSS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_MDEF_PERCENT_NORMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_MDEF_PERCENT_BOSS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "DAMAGE_SIZE_PERFECT",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_ALL",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "VAR_ATTPOWER",
+     "min": 1,
+     "max": 65
+    },
+    {
+     "o": "VAR_ATKPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RANGE_ATTACK_DAMAGE_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "MELEE_ATTACK_DAMAGE_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "VAR_ATTMPOWER",
+     "min": 1,
+     "max": 65
+    },
+    {
+     "o": "VAR_MAGICATKPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_CRITICALSUCCESSVALUE",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_CRI_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "VAR_PLUSASPD",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_PLUSASPDPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DEC_SPELL_DELAY_TIME",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DEC_SPELL_CAST_TIME",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_MAXHPPERCENT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_MAXHPAMOUNT",
+     "min": 50,
+     "max": 1000
+    },
+    {
+     "o": "VAR_MAXSPPERCENT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_MAXSPAMOUNT",
+     "min": 20,
+     "max": 400
+    },
+    {
+     "o": "VAR_STRAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_AGIAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_VITAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_INTAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_DEXAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_LUKAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_POWAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_SPLAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_STAAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_WISAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CONAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CRTAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CRITICAL_RATE",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_PATKAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_SMATKAMOUNT",
+     "min": 1,
+     "max": 20
+    }
+   ],
+   "src": "generic option list (no official table)"
+  },
+  "GENERIC_2": {
+   "slots": [],
+   "maxRandom": 2,
+   "random": [
+    {
+     "o": "RACE_DAMAGE_NOTHING",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_NOTHING",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_NOTHING",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_NOTHING",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_UNDEAD",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_UNDEAD",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_UNDEAD",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_UNDEAD",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_ANIMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_ANIMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_ANIMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_ANIMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_PLANT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_PLANT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_PLANT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_PLANT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_INSECT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_INSECT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_INSECT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_INSECT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_FISHS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_FISHS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_FISHS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_FISHS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_DEVIL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_DEVIL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_DEVIL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_DEVIL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_HUMAN",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_HUMAN",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_HUMAN",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_HUMAN",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_ANGEL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_ANGEL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_ANGEL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_ANGEL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_DRAGON",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_DRAGON",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_DRAGON",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_DRAGON",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "DAMAGE_PROPERTY_NOTHING_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_NOTHING_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_NOTHING",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_WATER_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_WATER_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_WATER",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_GROUND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_GROUND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_GROUND",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_FIRE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_FIRE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_FIRE",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_WIND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_WIND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_WIND",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_POISON_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_POISON_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_POISON",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_SAINT_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_SAINT_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_SAINT",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_DARKNESS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_DARKNESS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_DARKNESS",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_TELEKINESIS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_TELEKINESIS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_TELEKINESIS",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_UNDEAD_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_UNDEAD_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_UNDEAD",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_SIZE_SMALL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_SMALL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_SIZE_MIDIUM_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_MIDIUM_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_SIZE_LARGE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_LARGE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_DAMAGE_NORMAL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_DAMAGE_BOSS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_MDAMAGE_NORMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_MDAMAGE_BOSS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_IGNORE_DEF_PERCENT_NORMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_DEF_PERCENT_BOSS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_MDEF_PERCENT_NORMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_MDEF_PERCENT_BOSS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "DAMAGE_SIZE_PERFECT",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_ALL",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "VAR_ATTPOWER",
+     "min": 1,
+     "max": 65
+    },
+    {
+     "o": "VAR_ATKPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RANGE_ATTACK_DAMAGE_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "MELEE_ATTACK_DAMAGE_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "VAR_ATTMPOWER",
+     "min": 1,
+     "max": 65
+    },
+    {
+     "o": "VAR_MAGICATKPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_CRITICALSUCCESSVALUE",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_CRI_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "VAR_PLUSASPD",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_PLUSASPDPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DEC_SPELL_DELAY_TIME",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DEC_SPELL_CAST_TIME",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_MAXHPPERCENT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_MAXHPAMOUNT",
+     "min": 50,
+     "max": 1000
+    },
+    {
+     "o": "VAR_MAXSPPERCENT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_MAXSPAMOUNT",
+     "min": 20,
+     "max": 400
+    },
+    {
+     "o": "VAR_STRAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_AGIAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_VITAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_INTAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_DEXAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_LUKAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_POWAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_SPLAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_STAAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_WISAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CONAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CRTAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CRITICAL_RATE",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_PATKAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_SMATKAMOUNT",
+     "min": 1,
+     "max": 20
+    }
+   ],
+   "src": "generic option list (no official table)"
+  },
+  "GENERIC_3": {
+   "slots": [],
+   "maxRandom": 3,
+   "random": [
+    {
+     "o": "RACE_DAMAGE_NOTHING",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_NOTHING",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_NOTHING",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_NOTHING",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_UNDEAD",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_UNDEAD",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_UNDEAD",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_UNDEAD",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_ANIMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_ANIMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_ANIMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_ANIMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_PLANT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_PLANT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_PLANT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_PLANT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_INSECT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_INSECT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_INSECT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_INSECT",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_FISHS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_FISHS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_FISHS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_FISHS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_DEVIL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_DEVIL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_DEVIL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_DEVIL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_HUMAN",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_HUMAN",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_HUMAN",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_HUMAN",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_ANGEL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_ANGEL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_ANGEL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_ANGEL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_DAMAGE_DRAGON",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_MDAMAGE_DRAGON",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RACE_IGNORE_DEF_PERCENT_DRAGON",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "RACE_IGNORE_MDEF_PERCENT_DRAGON",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "DAMAGE_PROPERTY_NOTHING_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_NOTHING_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_NOTHING",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_WATER_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_WATER_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_WATER",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_GROUND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_GROUND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_GROUND",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_FIRE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_FIRE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_FIRE",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_WIND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_WIND_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_WIND",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_POISON_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_POISON_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_POISON",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_SAINT_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_SAINT_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_SAINT",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_DARKNESS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_DARKNESS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_DARKNESS",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_TELEKINESIS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_TELEKINESIS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_TELEKINESIS",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_PROPERTY_UNDEAD_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_PROPERTY_UNDEAD_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_UNDEAD",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "DAMAGE_SIZE_SMALL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_SMALL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_SIZE_MIDIUM_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_MIDIUM_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_SIZE_LARGE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "MDAMAGE_SIZE_LARGE_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_DAMAGE_NORMAL_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_DAMAGE_BOSS_TARGET",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_MDAMAGE_NORMAL",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_MDAMAGE_BOSS",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "CLASS_IGNORE_DEF_PERCENT_NORMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_DEF_PERCENT_BOSS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_MDEF_PERCENT_NORMAL",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "CLASS_IGNORE_MDEF_PERCENT_BOSS",
+     "min": 1,
+     "max": 100
+    },
+    {
+     "o": "DAMAGE_SIZE_PERFECT",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "o": "ADDSKILLMDAMAGE_ALL",
+     "min": 1,
+     "max": 25
+    },
+    {
+     "o": "VAR_ATTPOWER",
+     "min": 1,
+     "max": 65
+    },
+    {
+     "o": "VAR_ATKPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "RANGE_ATTACK_DAMAGE_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "MELEE_ATTACK_DAMAGE_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "VAR_ATTMPOWER",
+     "min": 1,
+     "max": 65
+    },
+    {
+     "o": "VAR_MAGICATKPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_CRITICALSUCCESSVALUE",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DAMAGE_CRI_TARGET",
+     "min": 1,
+     "max": 50
+    },
+    {
+     "o": "VAR_PLUSASPD",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "o": "VAR_PLUSASPDPERCENT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DEC_SPELL_DELAY_TIME",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "DEC_SPELL_CAST_TIME",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_MAXHPPERCENT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_MAXHPAMOUNT",
+     "min": 50,
+     "max": 1000
+    },
+    {
+     "o": "VAR_MAXSPPERCENT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_MAXSPAMOUNT",
+     "min": 20,
+     "max": 400
+    },
+    {
+     "o": "VAR_STRAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_AGIAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_VITAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_INTAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_DEXAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_LUKAMOUNT",
+     "min": 1,
+     "max": 30
+    },
+    {
+     "o": "VAR_POWAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_SPLAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_STAAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_WISAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CONAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CRTAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_CRITICAL_RATE",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_PATKAMOUNT",
+     "min": 1,
+     "max": 20
+    },
+    {
+     "o": "VAR_SMATKAMOUNT",
+     "min": 1,
+     "max": 20
+    }
+   ],
+   "src": "generic option list (no official table)"
+  }
+ },
+ "items": {
+  "28440": [
+   "FAN_UPGRADE_KIT"
+  ],
+  "490374": [
+   "FAN_UPGRADE_KIT_EX"
+  ],
+  "490375": [
+   "FAN_UPGRADE_KIT_EX"
+  ],
+  "490099": [
+   "FAN_UPGRADE_KIT"
+  ],
+  "490100": [
+   "FAN_UPGRADE_KIT"
+  ],
+  "490101": [
+   "FAN_UPGRADE_KIT"
+  ],
+  "24908": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "24909": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "24952": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "24953": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270043": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270044": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270045": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270046": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270081": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270082": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270085": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "1270086": [
+   "GGT_SHADOW_SPELLBOOK"
+  ],
+  "15391": [
+   "GENERIC_3"
+  ],
+  "15392": [
+   "GENERIC_3"
+  ],
+  "15393": [
+   "GENERIC_3"
+  ],
+  "15394": [
+   "GENERIC_3"
+  ],
+  "15395": [
+   "GENERIC_3"
+  ],
+  "15396": [
+   "GENERIC_3"
+  ],
+  "450175": [
+   "GENERIC_3"
+  ],
+  "450299": [
+   "GENERIC_3"
+  ],
+  "480076": [
+   "GENERIC_1"
+  ],
+  "460005": [
+   "GENERIC_3"
+  ],
+  "460006": [
+   "GENERIC_3"
+  ],
+  "470071": [
+   "GENERIC_2"
+  ],
+  "470072": [
+   "GENERIC_2"
+  ],
+  "470073": [
+   "GENERIC_2"
+  ],
+  "470074": [
+   "GENERIC_2"
+  ],
+  "470076": [
+   "GENERIC_2"
+  ],
+  "470077": [
+   "GENERIC_2"
+  ],
+  "450274": [
+   "GENERIC_3"
+  ],
+  "450279": [
+   "GENERIC_3"
+  ],
+  "450280": [
+   "GENERIC_3"
+  ],
+  "450281": [
+   "GENERIC_3"
+  ],
+  "450282": [
+   "GENERIC_3"
+  ],
+  "450283": [
+   "GENERIC_3"
+  ],
+  "450284": [
+   "GENERIC_3"
+  ],
+  "450285": [
+   "GENERIC_3"
+  ],
+  "5918": [
+   "GENERIC_2"
+  ],
+  "410389": [
+   "GENERIC_2"
+  ],
+  "410390": [
+   "GENERIC_2"
+  ],
+  "410391": [
+   "GENERIC_3"
+  ],
+  "401265": [
+   "GENERIC_2"
+  ],
+  "401266": [
+   "GENERIC_2"
+  ],
+  "401267": [
+   "GENERIC_2"
+  ],
+  "401268": [
+   "GENERIC_2"
+  ],
+  "401269": [
+   "GENERIC_2"
+  ],
+  "401270": [
+   "GENERIC_2"
+  ],
+  "401271": [
+   "GENERIC_2"
+  ],
+  "401272": [
+   "GENERIC_2"
+  ],
+  "401273": [
+   "GENERIC_2"
+  ],
+  "401274": [
+   "GENERIC_2"
+  ],
+  "401275": [
+   "GENERIC_2"
+  ],
+  "401276": [
+   "GENERIC_2"
+  ],
+  "401277": [
+   "GENERIC_2"
+  ],
+  "401278": [
+   "GENERIC_2"
+  ],
+  "401279": [
+   "GENERIC_2"
+  ],
+  "401280": [
+   "GENERIC_2"
+  ],
+  "401281": [
+   "GENERIC_2"
+  ],
+  "401282": [
+   "GENERIC_2"
+  ]
+ },
+ "src": {
+  "28440": "Fan Modification Kit",
+  "490374": "Fan Modification Kit EX",
+  "490375": "Fan Modification Kit EX",
+  "490099": "Pendant Crafted Stone (same list, https://wiki.muhro.eu/Thanatos_Necklace_Enchant)",
+  "490100": "Dark Stone",
+  "490101": "Dark Stone",
+  "24908": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "24909": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "24952": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "24953": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270043": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270044": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270045": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270046": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270081": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270082": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270085": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "1270086": "Shadow Spellbook / Shadow Essence (2026 Halloween Scroll page; user: same list for all these)",
+  "15391": "generic list, 3 line(s)",
+  "15392": "generic list, 3 line(s)",
+  "15393": "generic list, 3 line(s)",
+  "15394": "generic list, 3 line(s)",
+  "15395": "generic list, 3 line(s)",
+  "15396": "generic list, 3 line(s)",
+  "450175": "generic list, 3 line(s)",
+  "450299": "generic list, 3 line(s)",
+  "480076": "generic list, 1 line(s)",
+  "460005": "generic list, 3 line(s)",
+  "460006": "generic list, 3 line(s)",
+  "470071": "generic list, 2 line(s)",
+  "470072": "generic list, 2 line(s)",
+  "470073": "generic list, 2 line(s)",
+  "470074": "generic list, 2 line(s)",
+  "470076": "generic list, 2 line(s)",
+  "470077": "generic list, 2 line(s)",
+  "450274": "generic list, 3 line(s)",
+  "450279": "generic list, 3 line(s)",
+  "450280": "generic list, 3 line(s)",
+  "450281": "generic list, 3 line(s)",
+  "450282": "generic list, 3 line(s)",
+  "450283": "generic list, 3 line(s)",
+  "450284": "generic list, 3 line(s)",
+  "450285": "generic list, 3 line(s)",
+  "5918": "generic list, 2 line(s)",
+  "410389": "generic list, 2 line(s)",
+  "410390": "generic list, 2 line(s)",
+  "410391": "generic list, 3 line(s)",
+  "401265": "generic list, 2 line(s)",
+  "401266": "generic list, 2 line(s)",
+  "401267": "generic list, 2 line(s)",
+  "401268": "generic list, 2 line(s)",
+  "401269": "generic list, 2 line(s)",
+  "401270": "generic list, 2 line(s)",
+  "401271": "generic list, 2 line(s)",
+  "401272": "generic list, 2 line(s)",
+  "401273": "generic list, 2 line(s)",
+  "401274": "generic list, 2 line(s)",
+  "401275": "generic list, 2 line(s)",
+  "401276": "generic list, 2 line(s)",
+  "401277": "generic list, 2 line(s)",
+  "401278": "generic list, 2 line(s)",
+  "401279": "generic list, 2 line(s)",
+  "401280": "generic list, 2 line(s)",
+  "401281": "generic list, 2 line(s)",
+  "401282": "generic list, 2 line(s)"
+ },
+ "reshape": {
+  "GRACE_CONVERT1": {
+   "secondLineRandom": true,
+   "rename": {
+    "DAMAGE_SIZE_MIDIUM_USER": "DAMAGE_SIZE_MIDIUM_TARGET",
+    "MDAMAGE_SIZE_MIDIUM_USER": "MDAMAGE_SIZE_MIDIUM_TARGET"
+   },
+   "src": "https://ro.gnjoy.in.th/grace-set/ (line 1 always, line 2 by chance; 'vs Medium' is the target-size option)"
+  },
+  "GRACE_CONVERT2": {
+   "secondLineRandom": true,
+   "rename": {
+    "DAMAGE_SIZE_MIDIUM_USER": "DAMAGE_SIZE_MIDIUM_TARGET",
+    "MDAMAGE_SIZE_MIDIUM_USER": "MDAMAGE_SIZE_MIDIUM_TARGET"
+   },
+   "src": "https://ro.gnjoy.in.th/grace-set/ (line 1 always, line 2 by chance; 'vs Medium' is the target-size option)"
+  },
+  "GRACE_CONVERT3": {
+   "secondLineRandom": true,
+   "rename": {
+    "DAMAGE_SIZE_MIDIUM_USER": "DAMAGE_SIZE_MIDIUM_TARGET",
+    "MDAMAGE_SIZE_MIDIUM_USER": "MDAMAGE_SIZE_MIDIUM_TARGET"
+   },
+   "src": "https://ro.gnjoy.in.th/grace-set/ (line 1 always, line 2 by chance; 'vs Medium' is the target-size option)"
+  },
+  "GRACE_CONVERT4": {
+   "secondLineRandom": true,
+   "rename": {
+    "DAMAGE_SIZE_MIDIUM_USER": "DAMAGE_SIZE_MIDIUM_TARGET",
+    "MDAMAGE_SIZE_MIDIUM_USER": "MDAMAGE_SIZE_MIDIUM_TARGET"
+   },
+   "src": "https://ro.gnjoy.in.th/grace-set/ (line 1 always, line 2 by chance; 'vs Medium' is the target-size option)"
+  }
+ }
+}

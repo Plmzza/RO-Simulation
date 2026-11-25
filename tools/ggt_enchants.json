@@ -1,0 +1,3387 @@
+[
+ {
+  "key": "nebula_pendant_lt",
+  "url": "https://ro.gnjoy.in.th/nebula-pendant-lt-enchant/",
+  "targets": [
+   "Nebula Pendant-LT"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Expert Archer 3Lv",
+    "Fighting Spirit 3Lv",
+    "Sharp 3Lv",
+    "Spell 4Lv",
+    "Expert Archer 4Lv",
+    "Fighting Spirit 4Lv",
+    "Sharp 4Lv",
+    "Star of Mettle Lv.1",
+    "Star of Master Archer Lv.1",
+    "Star of Sharp Lv.1",
+    "Star of Spell Lv.1",
+    "Star of Speed Lv.1",
+    "Star of Vital Lv.1",
+    "Star of Spirit Lv.1",
+    "Star of Mettle Lv.2",
+    "Star of Master Archer Lv.2",
+    "Star of Sharp Lv.2",
+    "Star of Spell Lv.2",
+    "Star of Speed Lv.2",
+    "Star of Vital Lv.2",
+    "Star of Spirit Lv.2",
+    "Star of Mettle Lv.3",
+    "Star of Master Archer Lv.3",
+    "Star of Sharp Lv.3",
+    "Star of Spell Lv.3",
+    "Star of Speed Lv.3",
+    "Star of Vital Lv.3",
+    "Star of Spirit Lv.3",
+    "Star of Mettle Lv.4",
+    "Star of Master Archer Lv.4",
+    "Star of Sharp Lv.4",
+    "Star of Spell Lv.4",
+    "Star of Speed Lv.4",
+    "Star of Vital Lv.4",
+    "Star of Spirit Lv.4",
+    "Star of Mettle Lv.5",
+    "Star of Master Archer Lv.5",
+    "Star of Sharp Lv.5",
+    "Star of Spell Lv.5",
+    "Star of Speed Lv.5",
+    "Star of Vital Lv.5",
+    "Star of Spirit Lv.5"
+   ],
+   "2": [
+    "Spell 3Lv",
+    "Expert Archer 3Lv",
+    "Fighting Spirit 3Lv",
+    "Sharp 3Lv",
+    "Spell 4Lv",
+    "Expert Archer 4Lv",
+    "Fighting Spirit 4Lv",
+    "Sharp 4Lv",
+    "Star of Mettle Lv.1",
+    "Star of Master Archer Lv.1",
+    "Star of Sharp Lv.1",
+    "Star of Spell Lv.1",
+    "Star of Speed Lv.1",
+    "Star of Vital Lv.1",
+    "Star of Spirit Lv.1",
+    "Star of Mettle Lv.2",
+    "Star of Master Archer Lv.2",
+    "Star of Sharp Lv.2",
+    "Star of Spell Lv.2",
+    "Star of Speed Lv.2",
+    "Star of Vital Lv.2",
+    "Star of Spirit Lv.2",
+    "Star of Mettle Lv.3",
+    "Star of Master Archer Lv.3",
+    "Star of Sharp Lv.3",
+    "Star of Spell Lv.3",
+    "Star of Speed Lv.3",
+    "Star of Vital Lv.3",
+    "Star of Spirit Lv.3",
+    "Star of Mettle Lv.4",
+    "Star of Master Archer Lv.4",
+    "Star of Sharp Lv.4",
+    "Star of Spell Lv.4",
+    "Star of Speed Lv.4",
+    "Star of Vital Lv.4",
+    "Star of Spirit Lv.4",
+    "Star of Mettle Lv.5",
+    "Star of Master Archer Lv.5",
+    "Star of Sharp Lv.5",
+    "Star of Spell Lv.5",
+    "Star of Speed Lv.5",
+    "Star of Vital Lv.5",
+    "Star of Spirit Lv.5"
+   ]
+  },
+  "note": "สุ่ม ช่อง 4 และ 3 (ช่อง 2 ไม่มีข้อมูลในหน้าเว็บ)"
+ },
+ {
+  "key": "temporal_ring_lt",
+  "url": "https://ro.gnjoy.in.th/temporal-ring-lt-enchant/",
+  "targets": [
+   "Temporal Ring-LT"
+  ],
+  "slots": {
+   "3": [
+    "Spell 5Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv",
+    "Spell 3Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Attack Delay 4",
+    "Attack Delay 2",
+    "Post-Skill Delay Level 3",
+    "Post-Skill Delay Level 1"
+   ],
+   "2": [
+    "Spell 5Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv",
+    "Spell 3Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Attack Delay 4",
+    "Attack Delay 2",
+    "Post-Skill Delay Level 3",
+    "Post-Skill Delay Level 1"
+   ],
+   "1": [
+    "Strong",
+    "Rigid",
+    "Celestial Bow",
+    "White Cloud",
+    "Divine Power",
+    "Flash"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม / ช่อง 2 เลือกได้"
+ },
+ {
+  "key": "good_evil_crown",
+  "url": "https://ro.gnjoy.in.th/good-and-evil-enchant/",
+  "targets": [
+   "Crown of Good and Evil"
+  ],
+  "slots": {
+   "3": [
+    "Adamantine Lv. 1",
+    "Adamantine Lv. 2",
+    "Adamantine Lv. 3",
+    "Magic Essence Lv. 1",
+    "Magic Essence Lv. 2",
+    "Magic Essence Lv. 3",
+    "Master Archer Lv. 1",
+    "Master Archer Lv. 2",
+    "Master Archer Lv. 3",
+    "Acute Lv. 1",
+    "Acute Lv. 2",
+    "Acute Lv. 3",
+    "Affection Lv. 1",
+    "Affection Lv. 2",
+    "Affection Lv. 3",
+    "Tenacity Lv. 1",
+    "Tenacity Lv. 2",
+    "Tenacity Lv. 3"
+   ],
+   "2": [
+    "Good Spell",
+    "Evil Spell"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม/การันตี อัพได้ถึง Lv3 / ช่อง 3 เลือกได้"
+ },
+ {
+  "key": "good_evil_weapon",
+  "url": "https://ro.gnjoy.in.th/good-and-evil-enchant/",
+  "targets": [
+   "re:^(Brilliant Light|Sinful) "
+  ],
+  "slots": {
+   "3": [
+    "Sharp 1Lv",
+    "Attack Delay 1",
+    "Hit Plus 1Lv",
+    "Caster 1Lv",
+    "Sharp 2Lv",
+    "Attack Delay 2",
+    "Hit Plus 2Lv",
+    "Caster 2Lv",
+    "Sharp 3Lv",
+    "Attack Delay 3",
+    "Hit Plus 3Lv",
+    "Caster 3Lv",
+    "Sharp 4Lv",
+    "Attack Delay 4",
+    "Hit Plus 4Lv",
+    "Caster 4Lv",
+    "Sharp 5Lv",
+    "Attack Delay 5",
+    "Hit Plus 5Lv",
+    "Caster 5Lv"
+   ],
+   "2": [
+    "Expert Archer 1Lv",
+    "Expert Fighter 1Lv",
+    "Expert Magician 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Fighter 2Lv",
+    "Expert Magician 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Fighter 4Lv",
+    "Expert Magician 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-5 (แหวน/สร้อย Brilliant Light / Sinful)"
+ },
+ {
+  "key": "good_evil_boots",
+  "url": "https://ro.gnjoy.in.th/good-evil-boot-enchant/",
+  "targets": [
+   "re:^Good & Evil Boot|^Shoes of Good and Evil|Good and Evil.*(Boot|Shoes)"
+  ],
+  "slots": {
+   "3": [
+    "Spell 5Lv",
+    "Expert Archer 3Lv",
+    "Attack Delay 2",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv"
+   ],
+   "2": [
+    "Good Vigor ({job})",
+    "Evil Vigor ({job})"
+   ]
+  },
+  "note": "เลือกได้"
+ },
+ {
+  "key": "rstars2026_cape",
+  "url": "https://ro.gnjoy.in.th/ragnarok-stars-2026-cape-enchant/",
+  "targets": [
+   "Ragnarok Stars 2026 Cape"
+  ],
+  "slots": {
+   "3": [
+    "Expert Archer 1Lv",
+    "Expert Fighter 1Lv",
+    "Expert Magician 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Fighter 2Lv",
+    "Expert Magician 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Fighter 4Lv",
+    "Expert Magician 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv",
+    "Rune of Strength Lv 1",
+    "Rune of Agility Lv 1",
+    "Rune of Intelligence Lv 1",
+    "Rune of Dexterity Lv 1",
+    "Rune of Luck Lv 1",
+    "Rune of Vitality Lv 1"
+   ],
+   "2": [
+    "Expert Archer 1Lv",
+    "Expert Fighter 1Lv",
+    "Expert Magician 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Fighter 2Lv",
+    "Expert Magician 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Fighter 4Lv",
+    "Expert Magician 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv"
+   ],
+   "1": [
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 เลือกได้ อัพเลเวลได้"
+ },
+ {
+  "key": "issgard_crown",
+  "url": "https://ro.gnjoy.in.th/issgard-crowns-enchant/",
+  "targets": [
+   "re:^Issgard (Warrior|Ranger|Magician|Supreme) Crown"
+  ],
+  "slots": {
+   "3": [
+    "Issgard Crystal"
+   ],
+   "2": [
+    "Issgard Crystal (Mage)",
+    "Issgard Crystal (Assassin)",
+    "Issgard Crystal (Shooter)",
+    "Issgard Crystal (Warrior)"
+   ],
+   "1": [
+    "Issgard Crystal (Berserker)",
+    "Issgard Crystal (Marksman)",
+    "Issgard Crystal (Executioner)",
+    "Issgard Crystal (Grand Mage)"
+   ]
+  },
+  "note": "เลือกได้ ตามลำดับ 4>3>2"
+ },
+ {
+  "key": "furious_ring",
+  "url": "https://ro.gnjoy.in.th/furious-enchant/",
+  "targets": [
+   "re:^(White )?Furious Ring"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "2": [
+    "POW Assistance",
+    "SPL Assistance",
+    "STA Assistance",
+    "WIS Assistance",
+    "CRT Assistance",
+    "POW Enforcement",
+    "SPL Enforcement",
+    "STA Enforcement",
+    "WIS Enforcement",
+    "CRT Enforcement",
+    "CON Assistance",
+    "CON Enforcement (Physical)",
+    "CON Enforcement (Magical)"
+   ],
+   "1": [
+    "Warrior Orb Lv.15",
+    "Shooter Orb Lv.15",
+    "Magician Orb Lv.15"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม / ช่อง 2 เลือกได้"
+ },
+ {
+  "key": "furious_crown",
+  "url": "https://ro.gnjoy.in.th/furious-enchant/",
+  "targets": [
+   "re:^Furious Crown"
+  ],
+  "slots": {
+   "3": [
+    "POW Assistance",
+    "SPL Assistance",
+    "STA Assistance",
+    "WIS Assistance",
+    "CRT Assistance",
+    "POW Enforcement",
+    "SPL Enforcement",
+    "STA Enforcement",
+    "WIS Enforcement",
+    "CRT Enforcement",
+    "CON Assistance",
+    "CON Enforcement (Physical)",
+    "CON Enforcement (Magical)"
+   ],
+   "2": [
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Mettle Lv. 1",
+    "Mettle Lv. 2",
+    "Mettle Lv. 3",
+    "Magic Essence Lv. 1",
+    "Magic Essence Lv. 2",
+    "Magic Essence Lv. 3",
+    "Acute Lv. 1",
+    "Acute Lv. 2",
+    "Acute Lv. 3",
+    "Master Archer Lv. 1",
+    "Master Archer Lv. 2",
+    "Master Archer Lv. 3",
+    "Tenacity Lv. 1",
+    "Tenacity Lv. 2",
+    "Tenacity Lv. 3"
+   ]
+  },
+  "note": "เลือกได้ ช่อง 3 อัพ Lv1-3"
+ },
+ {
+  "key": "furious_weapon_boots",
+  "url": "https://ro.gnjoy.in.th/furious-enchant/",
+  "targets": [
+   {
+    "re": "^Furious (?!Shadow$)",
+    "type": "Weapon"
+   },
+   "re:^Furious (Boots|Shoes)"
+  ],
+  "slots": {
+   "3": [
+    "Furious Crystal (Neutral)",
+    "Furious Crystal (Water)",
+    "Furious Crystal (Wind)",
+    "Furious Crystal (Fire)",
+    "Furious Crystal (Earth)",
+    "Furious Crystal (Undead)",
+    "Furious Crystal (Shadow)",
+    "Furious Crystal (Ghost)",
+    "Furious Crystal (Holy)",
+    "Furious Crystal (Poison)"
+   ],
+   "2": [
+    "Furious Energy (Formless)",
+    "Furious Energy (Demihuman)",
+    "Furious Energy (Dragon)",
+    "Furious Energy (Plant)",
+    "Furious Energy (Insect)",
+    "Furious Energy (Brute)",
+    "Furious Energy (Fish)",
+    "Furious Energy (Angel)",
+    "Furious Energy (Demon)",
+    "Furious Energy (Undead)"
+   ]
+  },
+  "note": "เลือกได้ (เกรด B/A เพิ่มผล) — Furious Shadow เอนชานต์ไม่ได้"
+ },
+ {
+  "key": "loyal_servant_morocc",
+  "url": "https://ro.gnjoy.in.th/loyal-servant-of-demon-god-morocc-enchant/",
+  "targets": [
+   "Loyal Servant of Demon God Morocc"
+  ],
+  "slots": {
+   "3": [
+    "Dark Lord Essence Force 3",
+    "Dark Lord Essence Intelligence 3",
+    "Dark Lord Essence Speed 3",
+    "Dark Lord Essence Vitality 3",
+    "Dark Lord Essence Concentration 3",
+    "Dark Lord Essence Luck 3"
+   ],
+   "2": [
+    "Dark Lord Essence Force 3",
+    "Dark Lord Essence Intelligence 3",
+    "Dark Lord Essence Speed 3",
+    "Dark Lord Essence Vitality 3",
+    "Dark Lord Essence Concentration 3",
+    "Dark Lord Essence Luck 3"
+   ],
+   "1": [
+    "Dark Lord Essence Force 3",
+    "Dark Lord Essence Intelligence 3",
+    "Dark Lord Essence Speed 3",
+    "Dark Lord Essence Vitality 3",
+    "Dark Lord Essence Concentration 3",
+    "Dark Lord Essence Luck 3"
+   ]
+  },
+  "note": "เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "orrivane_ring",
+  "url": "https://ro.gnjoy.in.th/orrivane-ring-enchant/",
+  "targets": [
+   "Orrivane Ring"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "2": [
+    "Stead of Varmundt Lv.1",
+    "Stead of Varmundt Lv.2",
+    "Stead of Varmundt Lv.3",
+    "Stead of Varmundt Lv.4",
+    "Stead of Varmundt Lv.5",
+    "Tenacity of Varmundt Lv.1",
+    "Tenacity of Varmundt Lv.2",
+    "Tenacity of Varmundt Lv.3",
+    "Tenacity of Varmundt Lv.4",
+    "Tenacity of Varmundt Lv.5",
+    "Intelligence of Varmundt Lv.1",
+    "Intelligence of Varmundt Lv.2",
+    "Intelligence of Varmundt Lv.3",
+    "Intelligence of Varmundt Lv.4",
+    "Intelligence of Varmundt Lv.5",
+    "Focus of Varmundt Lv.1",
+    "Focus of Varmundt Lv.2",
+    "Focus of Varmundt Lv.3",
+    "Focus of Varmundt Lv.4",
+    "Focus of Varmundt Lv.5",
+    "Agility of Varmundt Lv.1",
+    "Agility of Varmundt Lv.2",
+    "Agility of Varmundt Lv.3",
+    "Agility of Varmundt Lv.4",
+    "Agility of Varmundt Lv.5",
+    "Mental of Varmundt Lv.1",
+    "Mental of Varmundt Lv.2",
+    "Mental of Varmundt Lv.3",
+    "Mental of Varmundt Lv.4",
+    "Mental of Varmundt Lv.5"
+   ],
+   "1": [
+    "Orrivane Orb ({job})"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม (ช่อง 3 อัพ Lv1-5) / ช่อง 2 เลือก Orb ตามอาชีพ"
+ },
+ {
+  "key": "dim_glacier_ring",
+  "url": "https://ro.gnjoy.in.th/dim-glacier-ring-of-resonance-enchant/",
+  "targets": [
+   "Dim Glacier Ring of Resonance"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "2": [
+    "Star of Spirit Lv.1",
+    "Star of Spirit Lv.2",
+    "Star of Spirit Lv.3",
+    "Star of Spirit Lv.4",
+    "Star of Spirit Lv.5",
+    "Star of Vital Lv.1",
+    "Star of Vital Lv.2",
+    "Star of Vital Lv.3",
+    "Star of Vital Lv.4",
+    "Star of Vital Lv.5",
+    "Star of Spell Lv.1",
+    "Star of Spell Lv.2",
+    "Star of Spell Lv.3",
+    "Star of Spell Lv.4",
+    "Star of Spell Lv.5",
+    "Star of Speed Lv.1",
+    "Star of Speed Lv.2",
+    "Star of Speed Lv.3",
+    "Star of Speed Lv.4",
+    "Star of Speed Lv.5",
+    "Star of Sharp Lv.1",
+    "Star of Sharp Lv.2",
+    "Star of Sharp Lv.3",
+    "Star of Sharp Lv.4",
+    "Star of Sharp Lv.5",
+    "Star of Master Archer Lv.1",
+    "Star of Master Archer Lv.2",
+    "Star of Master Archer Lv.3",
+    "Star of Master Archer Lv.4",
+    "Star of Master Archer Lv.5"
+   ],
+   "1": [
+    "{job} Dim Crystal",
+    "re:^{job} Dim Gale Crystal$"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม (ช่อง 3 อัพ Lv1-5) / ช่อง 2 เลือก Crystal ตามอาชีพ"
+ },
+ {
+  "key": "auto_engine_wing_c_lt",
+  "url": "https://ro.gnjoy.in.th/automatic-engine-wing-c-type-lt-enchant/",
+  "targets": [
+   "Automatic Engine Wing C-Type-LT"
+  ],
+  "slots": {
+   "3": [
+    "Rune of Strength Lv 1",
+    "Rune of Agility Lv 1",
+    "Rune of Intelligence Lv 1",
+    "Rune of Dexterity Lv 1",
+    "Rune of Luck Lv 1",
+    "Rune of Vitality Lv 1"
+   ],
+   "2": [
+    "Expert Archer 1Lv",
+    "Expert Fighter 1Lv",
+    "Expert Magician 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Fighter 2Lv",
+    "Expert Magician 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Fighter 4Lv",
+    "Expert Magician 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv"
+   ],
+   "1": [
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 เลือกได้ อัพเลเวลได้"
+ },
+ {
+  "key": "exotic_astraea_armor_lt",
+  "url": "https://ro.gnjoy.in.th/exotic-temporal-armor-lt-enchant/",
+  "targets": [
+   "Exotic Temporal Armor-LT",
+   "Astraea Armor-LT"
+  ],
+  "slots": {
+   "3": [
+    "STR+3",
+    "INT+3",
+    "AGI+3",
+    "VIT+3",
+    "DEX+2",
+    "STR+4",
+    "INT+4",
+    "AGI+4",
+    "VIT+4",
+    "DEX+3",
+    "INT+5",
+    "AGI+5",
+    "STR+5",
+    "VIT+5",
+    "DEX+4",
+    "Rune of Strength Lv 1",
+    "Rune of Agility Lv 1",
+    "Rune of Intelligence Lv 1",
+    "Rune of Dexterity Lv 1",
+    "Rune of Luck Lv 1",
+    "Rune of Vitality Lv 1"
+   ],
+   "2": [
+    "Nebula of Expert Archer Lv.1",
+    "Nebula of Expert Archer Lv.2",
+    "Nebula of Expert Archer Lv.3",
+    "Nebula of Sharp Lv.1",
+    "Nebula of Sharp Lv.2",
+    "Nebula of Sharp Lv.3",
+    "Nebula of Spell Lv.1",
+    "Nebula of Spell Lv.2",
+    "Nebula of Spell Lv.3",
+    "Nebula of Healing Lv.1",
+    "Nebula of Healing Lv.2",
+    "Nebula of Healing Lv.3",
+    "Nebula of Health Lv.1",
+    "Nebula of Health Lv.2",
+    "Nebula of Health Lv.3",
+    "Nebula of Fighting Spirit Lv.1",
+    "Nebula of Fighting Spirit Lv.2",
+    "Nebula of Fighting Spirit Lv.3"
+   ],
+   "1": [
+    "Star Cluster of Power Lv.1",
+    "Star Cluster of Power Lv.2",
+    "Star Cluster of Power Lv.3",
+    "Star Cluster of Stamina Lv.1",
+    "Star Cluster of Stamina Lv.2",
+    "Star Cluster of Stamina Lv.3",
+    "Star Cluster of Concentration Lv.1",
+    "Star Cluster of Concentration Lv.2",
+    "Star Cluster of Concentration Lv.3",
+    "Star Cluster of Creative Lv.1",
+    "Star Cluster of Creative Lv.2",
+    "Star Cluster of Creative Lv.3",
+    "Star Cluster of Spell Lv.1",
+    "Star Cluster of Spell Lv.2",
+    "Star Cluster of Spell Lv.3",
+    "Star Cluster of Wisdom Lv.1",
+    "Star Cluster of Wisdom Lv.2",
+    "Star Cluster of Wisdom Lv.3"
+   ]
+  },
+  "note": "สุ่มทุกช่อง (ช่อง 2 อัพ Lv1-3) ไอเท็มที่มีออฟสุ่มเอนชานต์ไม่ได้",
+  "randomOptions": false
+ },
+ {
+  "key": "mob_scarf_lt",
+  "url": "https://ro.gnjoy.in.th/mob-scarf-lt-enchant/",
+  "targets": [
+   "Mob Scarf-LT"
+  ],
+  "slots": {
+   "3": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ],
+   "2": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ],
+   "1": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-2"
+ },
+ {
+  "key": "unknown_watch",
+  "url": "https://ro.gnjoy.in.th/unknown-watch-enchant/",
+  "targets": [
+   "Unknown Watch"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "2": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "1": [
+    "Guillotine Cross Clock",
+    "Super Novice Clock",
+    "Shadow Chaser Clock",
+    "Doram Clock",
+    "Wanderer & Minstrel Clock",
+    "Super Novice Magic Clock",
+    "Warlock Clock",
+    "Sorcerer Clock"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม / ช่อง 2 เลือก Clock"
+ },
+ {
+  "key": "khon_kankrai_kradat",
+  "url": "https://ro.gnjoy.in.th/3k-enchant/",
+  "targets": [
+   "Khon",
+   "Kankrai",
+   "Kradat"
+  ],
+  "slots": {
+   "3": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ],
+   "2": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ],
+   "1": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-2"
+ },
+ {
+  "key": "hero_boots_lt",
+  "url": "https://ro.gnjoy.in.th/heroic-token-enchant/",
+  "targets": [
+   "Hero Boots-LT"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5"
+   ],
+   "2": [
+    "Fighting Spirit 4Lv",
+    "Fighting Spirit 5Lv",
+    "Fighting Spirit 6Lv",
+    "Fighting Spirit 7Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Sharp 1Lv",
+    "Sharp 2Lv",
+    "Sharp 3Lv",
+    "Sharp 4Lv",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4"
+   ],
+   "1": [
+    "Valor of Fighter",
+    "Nimbleness of Assassin",
+    "Vigor of Warlord",
+    "Knowledge of Wise Man",
+    "Will of Sharpshooter",
+    "Sharpness of Swordsman"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม (ช่อง 3 อัพได้) / ช่อง 2 เลือกได้"
+ },
+ {
+  "key": "heroic_token",
+  "url": "https://ro.gnjoy.in.th/heroic-token-enchant/",
+  "targets": [
+   "re:^Heroic Token"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5"
+   ],
+   "2": [
+    "Fighting Spirit 4Lv",
+    "Fighting Spirit 5Lv",
+    "Fighting Spirit 6Lv",
+    "Fighting Spirit 7Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Sharp 1Lv",
+    "Sharp 2Lv",
+    "Sharp 3Lv",
+    "Sharp 4Lv",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4"
+   ],
+   "1": [
+    "re:^(Strength|Agility|Vitality|Intelligence|Dexterity|Luck)$"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม (ช่อง 3 อัพได้) / ช่อง 2 เลือกได้"
+ },
+ {
+  "key": "heroic_hairband_lt",
+  "url": "https://ro.gnjoy.in.th/heroic-hairband-enchant/",
+  "targets": [
+   "re:^Heroic Hairband \\("
+  ],
+  "slots": {
+   "3": [
+    "Mettle Lv.1",
+    "Mettle Lv.2",
+    "Mettle Lv.3",
+    "Magic Essence Lv.1",
+    "Magic Essence Lv.2",
+    "Magic Essence Lv.3",
+    "Acute Lv.1",
+    "Acute Lv.2",
+    "Acute Lv.3",
+    "Master Archer Lv.1",
+    "Master Archer Lv.2",
+    "Master Archer Lv.3",
+    "Adamantine Lv.1",
+    "Adamantine Lv.2",
+    "Adamantine Lv.3",
+    "Affection Lv.1",
+    "Affection Lv.2",
+    "Affection Lv.3",
+    "Tenacity Lv.1",
+    "Tenacity Lv.2",
+    "Tenacity Lv.3"
+   ],
+   "2": [
+    "Heroic Valor ({job}) Lv.1",
+    "Heroic Valor ({job}) Lv.2",
+    "Heroic Valor ({job}) Lv.3"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-3"
+ },
+ {
+  "key": "mad_bunny_lt",
+  "url": "https://ro.gnjoy.in.th/mad-bunny-lt-enchant/",
+  "targets": [
+   "Mad Bunny-LT"
+  ],
+  "slots": {
+   "3": [
+    "Global Cooldown 1Lv",
+    "Global Cooldown 2Lv",
+    "Global Cooldown 3Lv",
+    "Long ranged 1Lv",
+    "Long ranged 2Lv",
+    "Long ranged 3Lv",
+    "Variable casting (physical) 1Lv",
+    "Variable casting (physical) 2Lv",
+    "Variable casting (physical) 3Lv",
+    "Variable casting (magical) 1Lv",
+    "Variable casting (magical) 2Lv",
+    "Variable casting (magical) 3Lv",
+    "Attack speed 1Lv",
+    "Attack speed 2Lv",
+    "Attack speed 3Lv",
+    "Mental 1Lv",
+    "Mental 2Lv",
+    "Mental 3Lv",
+    "Defense 1Lv",
+    "Defense 2Lv",
+    "Defense 3Lv",
+    "Vital 1Lv",
+    "Vital 2Lv",
+    "Vital 3Lv",
+    "Physical 1Lv",
+    "Physical 2Lv",
+    "Physical 3Lv",
+    "Magical 1Lv",
+    "Magical 2Lv",
+    "Magical 3Lv"
+   ],
+   "2": [
+    "Global Cooldown 1Lv",
+    "Global Cooldown 2Lv",
+    "Global Cooldown 3Lv",
+    "Long ranged 1Lv",
+    "Long ranged 2Lv",
+    "Long ranged 3Lv",
+    "Variable casting (physical) 1Lv",
+    "Variable casting (physical) 2Lv",
+    "Variable casting (physical) 3Lv",
+    "Variable casting (magical) 1Lv",
+    "Variable casting (magical) 2Lv",
+    "Variable casting (magical) 3Lv",
+    "Attack speed 1Lv",
+    "Attack speed 2Lv",
+    "Attack speed 3Lv",
+    "Mental 1Lv",
+    "Mental 2Lv",
+    "Mental 3Lv",
+    "Defense 1Lv",
+    "Defense 2Lv",
+    "Defense 3Lv",
+    "Vital 1Lv",
+    "Vital 2Lv",
+    "Vital 3Lv",
+    "Physical 1Lv",
+    "Physical 2Lv",
+    "Physical 3Lv",
+    "Magical 1Lv",
+    "Magical 2Lv",
+    "Magical 3Lv"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-3"
+ },
+ {
+  "key": "exotic_temporal_boots_lt",
+  "url": "https://ro.gnjoy.in.th/exotic-temporal-boots-lt-enchant/",
+  "targets": [
+   "Exotic Temporal Boots-LT"
+  ],
+  "slots": {
+   "3": [
+    "Fighting Spirit 4Lv",
+    "Fighting Spirit 5Lv",
+    "Fighting Spirit 6Lv",
+    "Fighting Spirit 7Lv",
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "VIT+2",
+    "VIT+3",
+    "Attack Delay 1",
+    "Attack Delay 2",
+    "Attack Delay 3",
+    "Attack Delay 4",
+    "LUK+3",
+    "LUK+4",
+    "LUK+5",
+    "LUK+6",
+    "MHP+1%",
+    "MHP+2%"
+   ],
+   "2": [
+    "Bear's Power",
+    "Speed Of Light",
+    "Muscle Fool",
+    "Runaway Magic",
+    "Hawkeye",
+    "Lucky Day"
+   ]
+  },
+  "note": "สุ่ม/การันตี ช่อง 4 อัพได้ถึง Lv4"
+ },
+ {
+  "key": "exotic_temporal_manteau_lt",
+  "url": "https://ro.gnjoy.in.th/exotic-temporal-manteau-lt-enchant/",
+  "targets": [
+   "Exotic Temporal Manteau-LT"
+  ],
+  "slots": {
+   "3": [
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "LUK+1",
+    "LUK+2",
+    "Post-Skill Delay Level 1",
+    "Post-Skill Delay Level 2",
+    "Post-Skill Delay Level 3"
+   ],
+   "2": [
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "LUK+1",
+    "LUK+2",
+    "Post-Skill Delay Level 1",
+    "Post-Skill Delay Level 2",
+    "Post-Skill Delay Level 3"
+   ],
+   "1": [
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "LUK+1",
+    "LUK+2",
+    "Post-Skill Delay Level 1",
+    "Post-Skill Delay Level 2",
+    "Post-Skill Delay Level 3",
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "สุ่ม/การันตี อัพเลเวลได้"
+ },
+ {
+  "key": "hero_ring_volcano",
+  "url": "https://ro.gnjoy.in.th/heros-ring-enchant/",
+  "targets": [
+   "Volcano Hero Ring"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv"
+   ],
+   "2": [
+    "Warlock the hero"
+   ],
+   "1": [
+    "Arch Mage Spirit"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 การันตี"
+ },
+ {
+  "key": "hero_ring_dragon_order",
+  "url": "https://ro.gnjoy.in.th/heros-ring-enchant/",
+  "targets": [
+   "Dragon Order's Hero"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv"
+   ],
+   "2": [
+    "Rune Knight The Hero"
+   ],
+   "1": [
+    "Dragon Knight Spirit"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 การันตี"
+ },
+ {
+  "key": "hero_ring_foot_stamp",
+  "url": "https://ro.gnjoy.in.th/heros-ring-enchant/",
+  "targets": [
+   "Hero Foot Stamp"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv"
+   ],
+   "2": [
+    "Star Gladiator The Hero"
+   ],
+   "1": [
+    "Sky Emperor Spirit"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 การันตี"
+ },
+ {
+  "key": "hero_ring_laser",
+  "url": "https://ro.gnjoy.in.th/heros-ring-enchant/",
+  "targets": [
+   "Laser Hero Ring"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv"
+   ],
+   "2": [
+    "Mechanic The Hero"
+   ],
+   "1": [
+    "Meister Spirit"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 การันตี"
+ },
+ {
+  "key": "hero_ring_thorns",
+  "url": "https://ro.gnjoy.in.th/heros-ring-enchant/",
+  "targets": [
+   "Dragon Thorns Plant Hero"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv"
+   ],
+   "2": [
+    "Genetic The Hero"
+   ],
+   "1": [
+    "Biolo Spirit"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 การันตี"
+ },
+ {
+  "key": "angel_ribbon_wing",
+  "url": "https://ro.gnjoy.in.th/angel-ribbon-wing-enchant/",
+  "targets": [
+   "re:^Angel Ribbon Wing"
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "2": [
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3 การันตี อัพ Lv1-7"
+ },
+ {
+  "key": "thanos_boots",
+  "url": "https://ro.gnjoy.in.th/thanos-boots-enchant/",
+  "targets": [
+   "re:^Thanos Boots \\("
+  ],
+  "slots": {
+   "3": [
+    "Spell 3Lv",
+    "Spell 5Lv",
+    "Attack Delay 2",
+    "Attack Delay 4",
+    "Expert Archer 3Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 5Lv"
+   ],
+   "2": [
+    "Thanos Spell ({job}) Lv.1",
+    "Thanos Spell ({job}) Lv.2",
+    "Thanos Spell ({job}) Lv.3"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม/เลือก / ช่อง 3 ตามประเภทรองเท้า อัพ Lv1-3 (ไม่มีช่อง 2)"
+ },
+ {
+  "key": "helm_of_faith",
+  "url": "https://ro.gnjoy.in.th/helm-of-faith",
+  "targets": [
+   "re:^Helm of Faith"
+  ],
+  "slots": {
+   "3": [
+    "Spell 5Lv",
+    "Attack Delay 4",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv",
+    "Post-Skill Delay Level 3"
+   ],
+   "2": [
+    "Spell 3Lv",
+    "Attack Delay 2",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Post-Skill Delay Level 1"
+   ],
+   "1": [
+    "Mettle Lv. 1",
+    "Mettle Lv. 2",
+    "Mettle Lv. 3",
+    "Mettle Lv. 4",
+    "Mettle Lv. 5",
+    "Adamantine Lv. 1",
+    "Adamantine Lv. 2",
+    "Adamantine Lv. 3",
+    "Adamantine Lv. 4",
+    "Adamantine Lv. 5",
+    "Magic Essence Lv. 1",
+    "Magic Essence Lv. 2",
+    "Magic Essence Lv. 3",
+    "Magic Essence Lv. 4",
+    "Magic Essence Lv. 5",
+    "Master Archer Lv. 1",
+    "Master Archer Lv. 2",
+    "Master Archer Lv. 3",
+    "Master Archer Lv. 4",
+    "Master Archer Lv. 5",
+    "Acute Lv. 1",
+    "Acute Lv. 2",
+    "Acute Lv. 3",
+    "Acute Lv. 4",
+    "Acute Lv. 5",
+    "Affection Lv. 1",
+    "Affection Lv. 2",
+    "Affection Lv. 3",
+    "Affection Lv. 4",
+    "Affection Lv. 5",
+    "Tenacity Lv. 1",
+    "Tenacity Lv. 2",
+    "Tenacity Lv. 3",
+    "Tenacity Lv. 4",
+    "Tenacity Lv. 5"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 เลือกได้ (ช่อง 2 อัพ Lv1-5)"
+ },
+ {
+  "key": "master_shadow_weapon_shield",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "Master Shadow Weapon",
+   "Master Shadow Shield"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "AGI+5",
+    "INT+5",
+    "VIT+5",
+    "DEX+5",
+    "LUK+5"
+   ],
+   "2": [
+    "POW+3",
+    "SPL+3",
+    "STA+3",
+    "CON+3",
+    "WIS+3",
+    "CRT+3"
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "master_shadow_abyss_chaser",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Abyss\\ Chaser Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Abyss\\ Chaser Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_arch_mage",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Arch\\ Mage Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Arch\\ Mage Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_biolo",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Biolo Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Biolo Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_cardinal",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Cardinal Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Cardinal Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_dragon_knight",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Dragon\\ Knight Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Dragon\\ Knight Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_elemental_master",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Elemental\\ Master Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Elemental\\ Master Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_hyper_novice",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Hyper\\ Novice Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Hyper\\ Novice Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_imperial_guard",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Imperial\\ Guard Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Imperial\\ Guard Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_inquisitor",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Inquisitor Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Inquisitor Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_meister",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Meister Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Meister Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_night_watch",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Night\\ Watch Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Night\\ Watch Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_shadow_cross",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Shadow\\ Cross Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Shadow\\ Cross Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_shinkiro_shiranui",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Shinkiro\\ \\&\\ Shiranui Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Shinkiro\\ \\&\\ Shiranui Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_sky_emperor",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Sky\\ Emperor Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Sky\\ Emperor Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_soul_ascetic",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Soul\\ Ascetic Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Soul\\ Ascetic Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_spirit_handler",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Spirit\\ Handler Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Spirit\\ Handler Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_troubadour_trouvere",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Troubadour\\ \\&\\ Trouvere Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Troubadour\\ \\&\\ Trouvere Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "master_shadow_windhawk",
+  "url": "https://ro.gnjoy.in.th/master-shadow-update/",
+  "targets": [
+   "re:^M\\. Windhawk Shadow (Armor|Shoes|Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul",
+    "re:^Windhawk Soul \\("
+   ]
+  },
+  "note": "Shadow Essence เลือกได้ ช่อง 3 มี Soul ของอาชีพ"
+ },
+ {
+  "key": "thanos_helm_warrior",
+  "url": "https://ro.gnjoy.in.th/thanos-helm-enchant/",
+  "targets": [
+   "Thanos Warrior Helmet-LT"
+  ],
+  "slots": {
+   "3": [
+    "Mettle Lv.1",
+    "Mettle Lv.2",
+    "Mettle Lv.3",
+    "Magic Essence Lv.1",
+    "Magic Essence Lv.2",
+    "Magic Essence Lv.3",
+    "Acute Lv.1",
+    "Acute Lv.2",
+    "Acute Lv.3",
+    "Master Archer Lv.1",
+    "Master Archer Lv.2",
+    "Master Archer Lv.3",
+    "Adamantine Lv.1",
+    "Adamantine Lv.2",
+    "Adamantine Lv.3",
+    "Affection Lv.1",
+    "Affection Lv.2",
+    "Affection Lv.3",
+    "Tenacity Lv.1",
+    "Tenacity Lv.2",
+    "Tenacity Lv.3"
+   ],
+   "2": [
+    "Gray Spell (Warrior) Lv.1",
+    "Gray Spell (Warrior) Lv.2",
+    "Gray Spell (Warrior) Lv.3"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-3"
+ },
+ {
+  "key": "thanos_helm_shooter",
+  "url": "https://ro.gnjoy.in.th/thanos-helm-enchant/",
+  "targets": [
+   "Thanos Shooter Helmet-LT"
+  ],
+  "slots": {
+   "3": [
+    "Mettle Lv.1",
+    "Mettle Lv.2",
+    "Mettle Lv.3",
+    "Magic Essence Lv.1",
+    "Magic Essence Lv.2",
+    "Magic Essence Lv.3",
+    "Acute Lv.1",
+    "Acute Lv.2",
+    "Acute Lv.3",
+    "Master Archer Lv.1",
+    "Master Archer Lv.2",
+    "Master Archer Lv.3",
+    "Adamantine Lv.1",
+    "Adamantine Lv.2",
+    "Adamantine Lv.3",
+    "Affection Lv.1",
+    "Affection Lv.2",
+    "Affection Lv.3",
+    "Tenacity Lv.1",
+    "Tenacity Lv.2",
+    "Tenacity Lv.3"
+   ],
+   "2": [
+    "Gray Spell (Shooter) Lv.1",
+    "Gray Spell (Shooter) Lv.2",
+    "Gray Spell (Shooter) Lv.3"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-3"
+ },
+ {
+  "key": "thanos_helm_magic",
+  "url": "https://ro.gnjoy.in.th/thanos-helm-enchant/",
+  "targets": [
+   "Thanos Magic Helmet-LT"
+  ],
+  "slots": {
+   "3": [
+    "Mettle Lv.1",
+    "Mettle Lv.2",
+    "Mettle Lv.3",
+    "Magic Essence Lv.1",
+    "Magic Essence Lv.2",
+    "Magic Essence Lv.3",
+    "Acute Lv.1",
+    "Acute Lv.2",
+    "Acute Lv.3",
+    "Master Archer Lv.1",
+    "Master Archer Lv.2",
+    "Master Archer Lv.3",
+    "Adamantine Lv.1",
+    "Adamantine Lv.2",
+    "Adamantine Lv.3",
+    "Affection Lv.1",
+    "Affection Lv.2",
+    "Affection Lv.3",
+    "Tenacity Lv.1",
+    "Tenacity Lv.2",
+    "Tenacity Lv.3"
+   ],
+   "2": [
+    "Gray Spell (Magic) Lv.1",
+    "Gray Spell (Magic) Lv.2",
+    "Gray Spell (Magic) Lv.3"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-3"
+ },
+ {
+  "key": "thanos_helm_fighter",
+  "url": "https://ro.gnjoy.in.th/thanos-helm-enchant/",
+  "targets": [
+   "Thanos Fighter Helmet-LT"
+  ],
+  "slots": {
+   "3": [
+    "Mettle Lv.1",
+    "Mettle Lv.2",
+    "Mettle Lv.3",
+    "Magic Essence Lv.1",
+    "Magic Essence Lv.2",
+    "Magic Essence Lv.3",
+    "Acute Lv.1",
+    "Acute Lv.2",
+    "Acute Lv.3",
+    "Master Archer Lv.1",
+    "Master Archer Lv.2",
+    "Master Archer Lv.3",
+    "Adamantine Lv.1",
+    "Adamantine Lv.2",
+    "Adamantine Lv.3",
+    "Affection Lv.1",
+    "Affection Lv.2",
+    "Affection Lv.3",
+    "Tenacity Lv.1",
+    "Tenacity Lv.2",
+    "Tenacity Lv.3"
+   ],
+   "2": [
+    "Gray Spell (Fighter) Lv.1",
+    "Gray Spell (Fighter) Lv.2",
+    "Gray Spell (Fighter) Lv.3"
+   ]
+  },
+  "note": "เลือกได้ อัพ Lv1-3"
+ },
+ {
+  "key": "all_above_time_lt",
+  "url": "https://ro.gnjoy.in.th/all-above-timesupreme-lt-enchant/",
+  "targets": [
+   "All Above Time(Supreme)-LT"
+  ],
+  "slots": {
+   "3": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ],
+   "2": [
+    "Ruby of Strength Lv.1",
+    "Ruby of Strength Lv.2",
+    "Amethyst of Vitality Lv.1",
+    "Amethyst of Vitality Lv.2",
+    "Topaz of Agility Lv.1",
+    "Topaz of Agility Lv.2",
+    "Sapphire of Intelligence Lv.1",
+    "Sapphire of Intelligence Lv.2",
+    "Emerald of Dexterity Lv.1",
+    "Emerald of Dexterity Lv.2",
+    "Diamond of Fatality Lv.1",
+    "Diamond of Fatality Lv.2"
+   ],
+   "1": [
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "เลือกได้ ช่อง 4-3 อัพ Lv1-2 / ช่อง 2 อัพ Lv1-7"
+ },
+ {
+  "key": "snow_flower_shadow",
+  "url": "https://ro.gnjoy.in.th/mystical-pass-land-of-snow-flowers-refine-enchant/",
+  "targets": [
+   "re:^Snow Flower (Melee|Range|Magic) Shadow (Armor|Shoes)$"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Snow Flower of Melee",
+    "Snow Flower of Range",
+    "Snow Flower of Magic"
+   ],
+   "2": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Snow Flower of Melee",
+    "Snow Flower of Range",
+    "Snow Flower of Magic"
+   ],
+   "1": [
+    "Snow Flower of Melee",
+    "Snow Flower of Range",
+    "Snow Flower of Magic"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม stat หรือเลือก Snow Flower of X / ช่อง 2 Snow Flower of X"
+ },
+ {
+  "key": "varmundt_shadow_melee",
+  "url": "https://ro.gnjoy.in.th/mystical-pass-varmundts-biosphere-refine-enchant/",
+  "targets": [
+   "re:^Varmundt Melee Shadow (Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Bio Energy of Melee",
+    "Bio Energy of Range",
+    "Bio Energy of Magic"
+   ],
+   "2": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Bio Energy of Melee",
+    "Bio Energy of Range",
+    "Bio Energy of Magic"
+   ],
+   "1": [
+    "Bio Energy of Melee"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม stat หรือเลือก Bio Energy / ช่อง 2 Bio Energy ตามสาย"
+ },
+ {
+  "key": "varmundt_shadow_range",
+  "url": "https://ro.gnjoy.in.th/mystical-pass-varmundts-biosphere-refine-enchant/",
+  "targets": [
+   "re:^Varmundt Range Shadow (Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Bio Energy of Melee",
+    "Bio Energy of Range",
+    "Bio Energy of Magic"
+   ],
+   "2": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Bio Energy of Melee",
+    "Bio Energy of Range",
+    "Bio Energy of Magic"
+   ],
+   "1": [
+    "Bio Energy of Range"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม stat หรือเลือก Bio Energy / ช่อง 2 Bio Energy ตามสาย"
+ },
+ {
+  "key": "varmundt_shadow_magic",
+  "url": "https://ro.gnjoy.in.th/mystical-pass-varmundts-biosphere-refine-enchant/",
+  "targets": [
+   "re:^Varmundt Magic Shadow (Earring|Pendant)$"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Bio Energy of Melee",
+    "Bio Energy of Range",
+    "Bio Energy of Magic"
+   ],
+   "2": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3",
+    "Bio Energy of Melee",
+    "Bio Energy of Range",
+    "Bio Energy of Magic"
+   ],
+   "1": [
+    "Bio Energy of Magic"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม stat หรือเลือก Bio Energy / ช่อง 2 Bio Energy ตามสาย"
+ },
+ {
+  "key": "nebula_shadow",
+  "url": "https://ro.gnjoy.in.th/new-shadow-enchant-update-8-july-2026/",
+  "targets": [
+   "re:^Nebula (Melee|Range|Magic) Shadow (Weapon|Shield)$"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "1": [
+    "Nebula of Melee",
+    "Nebula of Range",
+    "Nebula of Magic"
+   ]
+  },
+  "note": "ช่อง 4-3 สุ่ม / ช่อง 2 เลือก Nebula of X"
+ },
+ {
+  "key": "max_fortune_boost_shadow",
+  "url": "https://ro.gnjoy.in.th/new-shadow-enchant-update-8-july-2026/",
+  "targets": [
+   "re:^Max Fortune Boost Shadow"
+  ],
+  "slots": {
+   "3": [
+    "STR+5",
+    "INT+5",
+    "DEX+5",
+    "AGI+5",
+    "VIT+5",
+    "LUK+5",
+    "POW+3",
+    "STA+3",
+    "WIS+3",
+    "SPL+3",
+    "CON+3",
+    "CRT+3"
+   ],
+   "2": [
+    "Nimble Soul",
+    "Casting Soul",
+    "Critical Soul",
+    "Expert Soul",
+    "Robust Soul"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3 เลือก Soul"
+ },
+ {
+  "key": "ep20_glacier_armor",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Glacier (Armor|Robe)$"
+  ],
+  "slots": {
+   "3": [
+    "Glacier Flower Meow Power (POW&STA)",
+    "Glacier Flower Meow Power (SPL&WIS)",
+    "Glacier Flower Meow Power (CON&CRT)",
+    "Glacier Flower Meow Power (Global Cooldown)"
+   ],
+   "2": [
+    "Glacier Flower Meow Power (Warrior)",
+    "Glacier Flower Meow Power (Shooter)",
+    "Glacier Flower Meow Power (Mage)",
+    "Glacier Flower Meow Power (Power Force)"
+   ],
+   "1": [
+    "Glacier Flower Meow Power (Berserker)",
+    "Glacier Flower Meow Power (Marksman)",
+    "Glacier Flower Meow Power (Grand Mage)"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_dim_glacier_armor",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Dim Glacier (Armor|Robe)$"
+  ],
+  "slots": {
+   "3": [
+    "re:^Warmth of the Snake God \\(Def\\) Lv\\.?\\s*\\d+$"
+   ],
+   "2": [
+    "re:^Warmth of the Snake God \\((Atk|Matk)\\) Lv\\.?\\s*\\d+$"
+   ],
+   "1": [
+    "Blessing of the Snake God"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_glacier_garment",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Glacier (Manteau|Muffler)$"
+  ],
+  "slots": {
+   "3": [
+    "Glacier Flower Meow Power (Physical Defense)",
+    "Glacier Flower Meow Power (Magical Defense)"
+   ],
+   "2": [
+    "Glacier Flower Meow Power (Fast)",
+    "Glacier Flower Meow Power (Caster)",
+    "Glacier Flower Meow Power (Guide Attack)"
+   ],
+   "1": [
+    "Glacier Flower Meow Power (Powerful)",
+    "Glacier Flower Meow Power (Above All)"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_dim_glacier_garment",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Dim Glacier (Manteau|Muffler)$"
+  ],
+  "slots": {
+   "3": [
+    "re:^Malice of the Snake God \\(Def\\) Lv\\.?\\s*\\d+$"
+   ],
+   "2": [
+    "re:^Malice of the Snake God \\((Atk|Matk)\\) Lv\\.?\\s*\\d+$"
+   ],
+   "1": [
+    "Grace of the Snake God"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_glacier_shoes",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Glacier (Boots|Shoes)$"
+  ],
+  "slots": {
+   "3": [
+    "Glacier Flower Meow Power (Vital)",
+    "Glacier Flower Meow Power (Mental)",
+    "Glacier Flower Meow Power (Fixed Casting)"
+   ],
+   "2": [
+    "Glacier Flower Meow Power (Robust)",
+    "Glacier Flower Meow Power (Physical Force)",
+    "Glacier Flower Meow Power (Magical Force)"
+   ],
+   "1": [
+    "Glacier Flower Meow Power (Over Power)",
+    "Glacier Flower Meow Power (Firing Shot)",
+    "Glacier Flower Meow Power (Spell Buster)"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_dim_glacier_shoes",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Dim Glacier (Boots|Shoes)$"
+  ],
+  "slots": {
+   "3": [
+    "re:^Mystery of the Snake God \\(Def\\) Lv\\.?\\s*\\d+$"
+   ],
+   "2": [
+    "re:^Mystery of the Snake God \\((Atk|Matk)\\) Lv\\.?\\s*\\d+$"
+   ],
+   "1": [
+    "Glory of the Snake God"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_glacier_guard",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "Glacier Guard"
+  ],
+  "slots": {
+   "3": [
+    "Glacier Flower Meow Power (Attack)",
+    "Glacier Flower Meow Power (Defense)"
+   ],
+   "2": [
+    "Glacier Flower Meow Power (Magical Resistance)",
+    "Glacier Flower Meow Power (Physical Resistance)"
+   ],
+   "1": [
+    "Glacier Flower Meow Power (Intelligence)",
+    "Glacier Flower Meow Power (Guardian)"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_glacier_neck",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Glacier (Pendant|Necklace)$"
+  ],
+  "slots": {
+   "3": [
+    "Glacier Flower Meow Power (STR)",
+    "Glacier Flower Meow Power (DEX)",
+    "Glacier Flower Meow Power (INT)",
+    "Glacier Flower Meow Power (Speed)"
+   ],
+   "2": [
+    "Glacier Flower Meow Power (Fighting Spirit)",
+    "Glacier Flower Meow Power (Expert Archer)",
+    "Glacier Flower Meow Power (Spell)",
+    "Glacier Flower Meow Power (Fatal)"
+   ],
+   "1": [
+    "Glacier Flower Meow Power (Physical Power)",
+    "Glacier Flower Meow Power (Magical Power)",
+    "Glacier Flower Meow Power (All Force)"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep20_glacier_ring",
+  "url": "https://ro.gnjoy.in.th/episode-20-the-immortal-enchantment/",
+  "targets": [
+   "re:^Glacier (Ring|Earring)$"
+  ],
+  "slots": {
+   "3": [
+    "Glacier Flower Meow Power (AGI)",
+    "Glacier Flower Meow Power (VIT)",
+    "Glacier Flower Meow Power (LUK)",
+    "Glacier Flower Meow Power (Speed)"
+   ],
+   "2": [
+    "Glacier Flower Meow Power (Fighting Spirit)",
+    "Glacier Flower Meow Power (Expert Archer)",
+    "Glacier Flower Meow Power (Spell)",
+    "Glacier Flower Meow Power (Fatal)"
+   ],
+   "1": [
+    "Glacier Flower Meow Power (Physical Power)",
+    "Glacier Flower Meow Power (Magical Power)",
+    "Glacier Flower Meow Power (All Force)"
+   ]
+  },
+  "note": "เลือกได้ (Pipiring) รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "hero_courage_favor_cape_lt",
+  "url": "https://ro.gnjoy.in.th/hero-courage-cape-lt-hero-favor-cape-lt-enchant/",
+  "targets": [
+   "Hero Courage Cape-LT",
+   "Hero Favor Cape-LT"
+  ],
+  "slots": {
+   "3": [
+    "Expert Archer 1Lv",
+    "Expert Fighter 1Lv",
+    "Expert Magician 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Fighter 2Lv",
+    "Expert Magician 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Fighter 4Lv",
+    "Expert Magician 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv",
+    "Rune of Strength Lv 1",
+    "Rune of Agility Lv 1",
+    "Rune of Intelligence Lv 1",
+    "Rune of Dexterity Lv 1",
+    "Rune of Luck Lv 1",
+    "Rune of Vitality Lv 1"
+   ],
+   "2": [
+    "Expert Archer 1Lv",
+    "Expert Fighter 1Lv",
+    "Expert Magician 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Fighter 2Lv",
+    "Expert Magician 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Fighter 3Lv",
+    "Expert Magician 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Fighter 4Lv",
+    "Expert Magician 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 5Lv"
+   ],
+   "1": [
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 เลือกได้ อัพเลเวลได้"
+ },
+ {
+  "key": "re_dim_glacier_armor",
+  "url": "https://ro.gnjoy.in.th/battle-pass-tales-of-issgard-refine-enchant/",
+  "targets": [
+   "re:^Re-Dim Glacier (Armor|Robe) of "
+  ],
+  "slots": {
+   "3": [
+    "Star of Master Archer Lv.1",
+    "Star of Mettle Lv.1",
+    "Star of Sharp Lv.1",
+    "Star of Speed Lv.1",
+    "Star of Spell Lv.1",
+    "Star of Spirit Lv.1",
+    "Star of Vital Lv.1"
+   ],
+   "2": [
+    "re:^Glacier Flower Spell \\((?!ATK\\)|MATK\\)|CRI\\)|Variable Casting\\)|Attack Speed\\)|Global Cooldown\\)|Physical-|Magical-)"
+   ],
+   "1": [
+    "Star Cluster of Power Lv.1",
+    "Star Cluster of Creative Lv.1",
+    "Star Cluster of Stamina Lv.1",
+    "Star Cluster of Spell Lv.1",
+    "Star Cluster of Concentration Lv.1",
+    "Star Cluster of Wisdom Lv.1"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3 เลือก Glacier Flower Spell สกิล / ช่อง 2 เลือก Star Cluster"
+ },
+ {
+  "key": "ann6_ring",
+  "url": "https://ro.gnjoy.in.th/6th-anniversary-6th-ring-enchant/",
+  "targets": [
+   "re:^6th Anniversary"
+  ],
+  "slots": {
+   "3": [
+    "Fragment of Varmundt (POW) Lv.1",
+    "Fragment of Varmundt (POW) Lv.2",
+    "Fragment of Varmundt (POW) Lv.3",
+    "Fragment of Varmundt (POW) Lv.4",
+    "Fragment of Varmundt (POW) Lv.5",
+    "Fragment of Varmundt (CON) Lv.1",
+    "Fragment of Varmundt (CON) Lv.2",
+    "Fragment of Varmundt (CON) Lv.3",
+    "Fragment of Varmundt (CON) Lv.4",
+    "Fragment of Varmundt (CON) Lv.5",
+    "Fragment of Varmundt (CRT) Lv.1",
+    "Fragment of Varmundt (CRT) Lv.2",
+    "Fragment of Varmundt (CRT) Lv.3",
+    "Fragment of Varmundt (CRT) Lv.4",
+    "Fragment of Varmundt (CRT) Lv.5",
+    "Fragment of Varmundt (SPL) Lv.1",
+    "Fragment of Varmundt (SPL) Lv.2",
+    "Fragment of Varmundt (SPL) Lv.3",
+    "Fragment of Varmundt (SPL) Lv.4",
+    "Fragment of Varmundt (SPL) Lv.5",
+    "Brilliant Biosphere Gem (Normal Type)",
+    "Brilliant Biosphere Gem (Boss Type)"
+   ],
+   "2": [
+    "Star of Spirit Lv.1",
+    "Star of Spirit Lv.2",
+    "Star of Spirit Lv.3",
+    "Star of Spirit Lv.4",
+    "Star of Spirit Lv.5",
+    "Star of Vital Lv.1",
+    "Star of Vital Lv.2",
+    "Star of Vital Lv.3",
+    "Star of Vital Lv.4",
+    "Star of Vital Lv.5",
+    "Star of Spell Lv.1",
+    "Star of Spell Lv.2",
+    "Star of Spell Lv.3",
+    "Star of Spell Lv.4",
+    "Star of Spell Lv.5",
+    "Star of Speed Lv.1",
+    "Star of Speed Lv.2",
+    "Star of Speed Lv.3",
+    "Star of Speed Lv.4",
+    "Star of Speed Lv.5",
+    "Star of Sharp Lv.1",
+    "Star of Sharp Lv.2",
+    "Star of Sharp Lv.3",
+    "Star of Sharp Lv.4",
+    "Star of Sharp Lv.5",
+    "Star of Mettle Lv.1",
+    "Star of Mettle Lv.2",
+    "Star of Mettle Lv.3",
+    "Star of Mettle Lv.4",
+    "Star of Mettle Lv.5",
+    "Star of Master Archer Lv.1",
+    "Star of Master Archer Lv.2",
+    "Star of Master Archer Lv.3",
+    "Star of Master Archer Lv.4",
+    "Star of Master Archer Lv.5"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม Fragment หรือเลือก Gem / ช่อง 3 สุ่ม อัพ Lv1-5"
+ },
+ {
+  "key": "ep19_armor",
+  "url": "https://ro.gnjoy.in.th/episode-19-issgard-land-of-snow-flowers-enchantment/",
+  "targets": [
+   {
+    "re": "^Snow Flower (?!(Melee|Range|Magic) Shadow)",
+    "loc": "Armor"
+   }
+  ],
+  "slots": {
+   "3": [
+    "Ice Flower Spell (Physical Defense)",
+    "Ice Flower Spell (Magical Defense)"
+   ],
+   "2": [
+    "Ice Flower Spell (Shooter)",
+    "Ice Flower Spell (Warrior)",
+    "Ice Flower Spell (Magician)",
+    "Ice Flower Spell (Reflection Reject)",
+    "Ice Flower Spell (Power Force)",
+    "Ice Flower Spell (Global Cooldown)"
+   ],
+   "1": [
+    "Ice Flower Spell (Dragonic Breath)",
+    "Ice Flower Spell (Cutter Break)",
+    "Ice Flower Spell (Hundred Wave)",
+    "Ice Flower Spell (Brand Lit)",
+    "Ice Flower Spell (Vanishing Cannon)",
+    "Ice Flower Spell (Genesis Pressure)",
+    "Ice Flower Spell (Boost Cannon)",
+    "Ice Flower Spell (Vulcan Boomerang)",
+    "Ice Flower Spell (Tornado Swing)",
+    "Ice Flower Spell (Hell Tornado)",
+    "Ice Flower Spell (Crazy Cannon)",
+    "Ice Flower Spell (Acid Explosion)",
+    "Ice Flower Spell (Sonic Impact)",
+    "Ice Flower Spell (Cutter Slasher)",
+    "Ice Flower Spell (Berserk Slash)",
+    "Ice Flower Spell (Fatal Attack)",
+    "Ice Flower Spell (Shadow Spell)",
+    "Ice Flower Spell (Angle Shot)",
+    "Ice Flower Spell (Crimson Strain)",
+    "Ice Flower Spell (Jack Lightning)",
+    "Ice Flower Spell (Comet Expansion)",
+    "Ice Flower Spell (Cloud Buster)",
+    "Ice Flower Spell (Varetyr Wave)",
+    "Ice Flower Spell (Diamond Grave)",
+    "Ice Flower Spell (Magnusmus)",
+    "Ice Flower Spell (Holy Judex)",
+    "Ice Flower Spell (Melee Duple)",
+    "Ice Flower Spell (Tiger Empire)",
+    "Ice Flower Spell (Rampage Lightning)",
+    "Ice Flower Spell (Hell Arrow)",
+    "Ice Flower Spell (Aimed Rush)",
+    "Ice Flower Spell (Breeze Shooting)",
+    "Ice Flower Spell (Storm Gale)",
+    "Ice Flower Spell (Sound Metal)",
+    "Ice Flower Spell (Rainstorm)",
+    "Ice Flower Spell (Vulcan Shooting)",
+    "Ice Flower Spell (Blaze Explosion)",
+    "Ice Flower Spell (Moon Kick)",
+    "Ice Flower Spell (Flash Falling)",
+    "Ice Flower Spell (Eswhoo)",
+    "Ice Flower Spell (Espa)",
+    "Ice Flower Spell (Curse Explosion)",
+    "Ice Flower Spell (Des Hammer Dance)",
+    "Ice Flower Spell (Fire Howling Tail)",
+    "Ice Flower Spell (Storm Buster Trip)",
+    "Ice Flower Spell (Flame Ice Wind)",
+    "Ice Flower Spell (Cross Petal)",
+    "Ice Flower Spell (Exploding Flake Wind)",
+    "Ice Flower Spell (Power of Life)",
+    "Ice Flower Spell (Power of Land)",
+    "Ice Flower Spell (Power of Savage)",
+    "Ice Flower Spell (Hyper Melee)",
+    "Ice Flower Spell (Hyper Range)",
+    "Ice Flower Spell (Hyper Magic)"
+   ]
+  },
+  "note": "เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep19_garment",
+  "url": "https://ro.gnjoy.in.th/episode-19-issgard-land-of-snow-flowers-enchantment/",
+  "targets": [
+   {
+    "re": "^Snow Flower ",
+    "loc": "Garment"
+   }
+  ],
+  "slots": {
+   "3": [
+    "Ice Flower Spell (STR)",
+    "Ice Flower Spell (DEX)",
+    "Ice Flower Spell (AGI)",
+    "Ice Flower Spell (INT)",
+    "Ice Flower Spell (VIT)",
+    "Ice Flower Spell (LUK)",
+    "Ice Flower Spell (Physical Defense)",
+    "Ice Flower Spell (Magical Defense)"
+   ],
+   "2": [
+    "Ice Flower Spell (Speed)",
+    "Ice Flower Spell (Caster)",
+    "Ice Flower Spell (Critical)",
+    "Ice Flower Spell (Guide Attack)"
+   ],
+   "1": [
+    "Ice Flower Spell (Above All)",
+    "Ice Flower Spell (Powerful)",
+    "Ice Flower Spell (Mirror Counter)"
+   ]
+  },
+  "note": "เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep19_shoes",
+  "url": "https://ro.gnjoy.in.th/episode-19-issgard-land-of-snow-flowers-enchantment/",
+  "targets": [
+   {
+    "re": "^Snow Flower (?!(Melee|Range|Magic) Shadow)",
+    "loc": "Shoes"
+   }
+  ],
+  "slots": {
+   "3": [
+    "Ice Flower Spell (Physical Defense)",
+    "Ice Flower Spell (Magic Defense)",
+    "Ice Flower Spell (Magical Defense)",
+    "Ice Flower Spell (Vital)",
+    "Ice Flower Spell (Mental)",
+    "Ice Flower Spell (Heal)",
+    "Ice Flower Spell (Robust)"
+   ],
+   "2": [
+    "Ice Flower Spell (Fixed Casting)",
+    "Ice Flower Spell (Magical Force)",
+    "Ice Flower Spell (Physical Force)"
+   ],
+   "1": [
+    "Ice Flower Spell (Unlimited Vital)",
+    "Ice Flower Spell (Spell Buster)",
+    "Ice Flower Spell (Firing Shot)",
+    "Ice Flower Spell (Overpower)",
+    "Ice Flower Spell (Over Power)",
+    "Ice Flower Spell (Fatal Flash)",
+    "Ice Flower Spell (Lucky Strike)"
+   ]
+  },
+  "note": "เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep19_acc_r",
+  "url": "https://ro.gnjoy.in.th/episode-19-issgard-land-of-snow-flowers-enchantment/",
+  "targets": [
+   {
+    "re": "^Snow Flower ",
+    "loc": "Right_Accessory"
+   }
+  ],
+  "slots": {
+   "3": [
+    "Ice Flower Spell (STR)",
+    "Ice Flower Spell (DEX)",
+    "Ice Flower Spell (INT)"
+   ],
+   "2": [
+    "Ice Flower Spell (HP Recovery)",
+    "Ice Flower Spell (Drain Life)",
+    "Ice Flower Spell (Magic Healing)",
+    "Ice Flower Spell (All Force)"
+   ],
+   "1": [
+    "Ice Flower Spell (Delay After Attack)",
+    "Ice Flower Spell (Expert Archer)",
+    "Ice Flower Spell (Fatal)",
+    "Ice Flower Spell (Fighting Spirit)",
+    "Ice Flower Spell (Spell)"
+   ]
+  },
+  "note": "เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "ep19_acc_l",
+  "url": "https://ro.gnjoy.in.th/episode-19-issgard-land-of-snow-flowers-enchantment/",
+  "targets": [
+   {
+    "re": "^Snow Flower ",
+    "loc": "Left_Accessory"
+   }
+  ],
+  "slots": {
+   "3": [
+    "Ice Flower Spell (AGI)",
+    "Ice Flower Spell (VIT)",
+    "Ice Flower Spell (LUK)"
+   ],
+   "2": [
+    "Ice Flower Spell (SP Recovery)",
+    "Ice Flower Spell (Drain Soul)",
+    "Ice Flower Spell (Magic Soul)",
+    "Ice Flower Spell (All Force)"
+   ],
+   "1": [
+    "Ice Flower Spell (Delay After Attack)",
+    "Ice Flower Spell (Expert Archer)",
+    "Ice Flower Spell (Fatal)",
+    "Ice Flower Spell (Fighting Spirit)",
+    "Ice Flower Spell (Spell)"
+   ]
+  },
+  "note": "เลือกได้ รีเซ็ตไม่ได้"
+ },
+ {
+  "key": "nebula_armor",
+  "url": "https://ro.gnjoy.in.th/mystical-pass-constellation-enchant/",
+  "targets": [
+   "re:^Nebula (Armor|Suit|Robe) of "
+  ],
+  "slots": {
+   "2": [
+    "Nebula of Fighting Spirit Lv.1",
+    "Nebula of Expert Archer Lv.1",
+    "Nebula of Health Lv.1",
+    "Nebula of Sharp Lv.1",
+    "Nebula of Spell Lv.1",
+    "Nebula of Healing Lv.1"
+   ],
+   "1": [
+    "Star Cluster of Power Lv.1",
+    "Star Cluster of Concentration Lv.1",
+    "Star Cluster of Stamina Lv.1",
+    "Star Cluster of Creative Lv.1",
+    "Star Cluster of Spell Lv.1",
+    "Star Cluster of Wisdom Lv.1"
+   ]
+  },
+  "note": "ช่อง 3-2 เลือกได้ (ช่อง 4 หน้าเว็บไม่ระบุ)",
+  "merge": true
+ },
+ {
+  "key": "graywolf_armor",
+  "url": "https://ro.gnjoy.in.th/ep18-equipment-enchant/",
+  "targets": [
+   "re:^Gray Wolf (Suits?|Robe)$"
+  ],
+  "slots": {
+   "2": [
+    "Wolf Orb (Ranger) Lv.3",
+    "Wolf Orb (Warrior) Lv.3",
+    "Wolf Orb (Mage) Lv.3",
+    "Wolf Orb (Global Cooldown)"
+   ]
+  },
+  "note": "ช่อง 3 เลือก Wolf Orb (EP18)",
+  "merge": true
+ },
+ {
+  "key": "graywolf_garment",
+  "url": "https://ro.gnjoy.in.th/ep18-equipment-enchant/",
+  "targets": [
+   "re:^Gray Wolf (Manteau|Muffler)$"
+  ],
+  "slots": {
+   "2": [
+    "Wolf Orb (Speed) Lv.3",
+    "Wolf Orb (Caster) Lv.3",
+    "Wolf Orb (Critical) Lv.3",
+    "Wolf Orb (Guide Attack) Lv.3"
+   ]
+  },
+  "note": "ช่อง 3 เลือก Wolf Orb (EP18)",
+  "merge": true
+ },
+ {
+  "key": "graywolf_shoes",
+  "url": "https://ro.gnjoy.in.th/ep18-equipment-enchant/",
+  "targets": [
+   "re:^Gray Wolf (Boots|Shoes)$"
+  ],
+  "slots": {
+   "2": [
+    "Wolf Orb (Fixed Casting) Lv.3",
+    "Wolf Orb (Magical Force) Lv.3",
+    "Wolf Orb (Physical Force) Lv.3"
+   ]
+  },
+  "note": "ช่อง 3 เลือก Wolf Orb (EP18)",
+  "merge": true
+ },
+ {
+  "key": "graywolf_acc",
+  "url": "https://ro.gnjoy.in.th/ep18-equipment-enchant/",
+  "targets": [
+   "re:^Gray Wolf (Pendant|Ring|Earring|Necklace)$"
+  ],
+  "slots": {
+   "2": [
+    "Wolf Orb (HP Recovery) Lv.4",
+    "Wolf Orb (SP Recovery) Lv.4",
+    "Wolf Orb (Expert Archer) Lv.4",
+    "Wolf Orb (Fatal) Lv.4",
+    "Wolf Orb (Fighting Spirit) Lv.4",
+    "Wolf Orb (Spell) Lv.4",
+    "Wolf Orb (ASPD) Lv.4"
+   ]
+  },
+  "note": "ช่อง 3 เลือก Wolf Orb (EP18)",
+  "merge": true
+ },
+ {
+  "key": "graywolf_soul_ring",
+  "url": "https://ro.gnjoy.in.th/gray-wolf-soul-ring-enchant/",
+  "targets": [
+   "re:^Gray Wolf Soul Ring"
+  ],
+  "slots": {
+   "3": [
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Critical",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Attack Delay 1",
+    "Attack Delay 2",
+    "Attack Delay 3",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv"
+   ],
+   "2": [
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Critical",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "Attack Delay 1",
+    "Attack Delay 2",
+    "Attack Delay 3",
+    "Attack Delay 4",
+    "Attack Delay 5",
+    "Attack Delay Lv.5",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv"
+   ],
+   "1": [
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Critical",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "Attack Delay 1",
+    "Attack Delay 2",
+    "Attack Delay 3",
+    "Attack Delay 4",
+    "Attack Delay 5",
+    "Attack Delay Lv.5",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม / ช่อง 3-2 สุ่มหรือเลือก"
+ },
+ {
+  "key": "tears_of_fury",
+  "url": "https://ro.gnjoy.in.th/tears-of-fury-guarantee-enchant/",
+  "targets": [
+   "re:^Temporal Circlet \\("
+  ],
+  "slots": {
+   "1": [
+    "Mettle Lv. 4",
+    "Mettle Lv. 5",
+    "Mettle Lv. 6",
+    "Mettle Lv. 9",
+    "Mettle Lv. 10",
+    "Adamantine Lv. 4",
+    "Adamantine Lv. 5",
+    "Adamantine Lv. 6",
+    "Adamantine Lv. 9",
+    "Adamantine Lv. 10",
+    "Master Archer Lv. 4",
+    "Master Archer Lv. 5",
+    "Master Archer Lv. 6",
+    "Master Archer Lv. 9",
+    "Master Archer Lv. 10",
+    "Magic Essence Lv. 4",
+    "Magic Essence Lv. 5",
+    "Magic Essence Lv. 6",
+    "Magic Essence Lv. 9",
+    "Magic Essence Lv. 10",
+    "Acute Lv. 4",
+    "Acute Lv. 5",
+    "Acute Lv. 6",
+    "Acute Lv. 9",
+    "Acute Lv. 10",
+    "Affection Lv. 4",
+    "Affection Lv. 5",
+    "Affection Lv. 6",
+    "Affection Lv. 9",
+    "Affection Lv. 10",
+    "Tenacity Lv. 4",
+    "Tenacity Lv. 5",
+    "Tenacity Lv. 6",
+    "Tenacity Lv. 9",
+    "Tenacity Lv. 10"
+   ]
+  },
+  "note": "เพิ่มช่อง 2 จาก Tears of Fury",
+  "merge": true
+ },
+ {
+  "key": "wk_mantle",
+  "url": "https://ro.gnjoy.in.th/white-knight-mantle-enchant/",
+  "targets": [
+   "re:^White Knight Mantle \\((Melee|Range|Magic)\\)$"
+  ],
+  "slots": {
+   "3": [
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Critical",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "LUK+1",
+    "LUK+2",
+    "Post-Skill Delay Level 1",
+    "Post-Skill Delay Level 2",
+    "Post-Skill Delay Level 3"
+   ],
+   "2": [
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Critical",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "LUK+1",
+    "LUK+2",
+    "Post-Skill Delay Level 1",
+    "Post-Skill Delay Level 2",
+    "Post-Skill Delay Level 3"
+   ],
+   "1": [
+    "Expert Archer 1Lv",
+    "Expert Archer 2Lv",
+    "Expert Archer 3Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Expert Fighter 1Lv",
+    "Expert Fighter 2Lv",
+    "Expert Fighter 3Lv",
+    "Expert Fighter 4Lv",
+    "Expert Fighter 5Lv",
+    "Expert Magician 1Lv",
+    "Expert Magician 2Lv",
+    "Expert Magician 3Lv",
+    "Expert Magician 4Lv",
+    "Expert Magician 5Lv",
+    "Spell 1Lv",
+    "Spell 2Lv",
+    "Spell 3Lv",
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Critical",
+    "Critical Lv1",
+    "Critical Lv2",
+    "Critical Lv3",
+    "Critical Lv4",
+    "LUK+1",
+    "LUK+2",
+    "Post-Skill Delay Level 1",
+    "Post-Skill Delay Level 2",
+    "Post-Skill Delay Level 3",
+    "Spirit of Knight Lv.1",
+    "Spirit of Knight Lv.2",
+    "Spirit of Knight Lv.3",
+    "Spirit of Knight Lv.4",
+    "Spirit of Knight Lv.5",
+    "Spirit of Knight Lv.6",
+    "Spirit of Knight Lv.7"
+   ]
+  },
+  "note": "เลือกได้ อัพเลเวลได้"
+ }
+]
