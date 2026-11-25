@@ -82,6 +82,9 @@ main { padding: 8px; }
 .slot.empty::before { content: ''; width: 16px; height: 10px; border-radius: 5px; background: #dde3ec; flex: none; }
 .char { grid-column: 2; grid-row: 1 / span 4; text-align: center; align-self: start; margin-top: -4px; }
 .char img { max-width: 70px; max-height: 120px; image-rendering: pixelated; }
+.char canvas { width: 100px; height: 130px; image-rendering: pixelated; display: block; margin: 0 auto; }
+.look { grid-column: 1 / span 3; grid-row: 6; display: flex; gap: 2px; justify-content: center; margin-top: 2px; }
+.look select { font-size: 11px; padding: 0 2px; max-width: 58px; }
 
 /* ---- status window, like the client */
 .stbox { display: grid; grid-template-columns: 124px 1fr; gap: 0 5px; padding: 3px 4px; }
@@ -202,3 +205,5 @@ main { padding: 8px; }
 .sk.can .ic { filter: none; }
 .sk.off:not(.can) .ic { filter: grayscale(1) opacity(.5); }
 .sk .noimg { width: 24px; height: 24px; }
+
+#skillGrid { user-select: none; }   /* fast clicking on skill icons must not select text */

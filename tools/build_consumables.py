@@ -131,10 +131,12 @@ def conditions_at(script, pos):
     return conds
 
 
+MANUAL = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'consumables_manual.json'), encoding='utf-8'))
+WL = set(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'consumables_whitelist.json')))['ids'])
 out = {}
 for iid, e in sorted(items.items()):
     script = e.get('Script') or ''
-    if not script or 'mercenary_sc_start' in script:
+    if (not script and iid not in WL) or 'mercenary_sc_start' in script:
         continue
     effects = []
     for m in re.finditer(r'\bsc_start([24]?)\s+(SC_\w+)\s*,([^;]*);', script):
@@ -146,7 +148,7 @@ for iid, e in sorted(items.items()):
             eff = {'sc': sc, 'vals': [v or 0 for v in vals]}
         elif sc in status and status[sc].get('Script'):
             s = resolve_status_script(sc, vals)
-            if not combat_relevant(s):
+            if not combat_relevant(s) and iid not in WL:
                 continue
             eff = {'script': s}
         else:
@@ -163,9 +165,9 @@ for iid, e in sorted(items.items()):
                             **({'cond': ' && '.join(f'({x})' for x in c)} if c else {})})
     for m in re.finditer(r'\bbonus_script\s+"((?:[^"\\]|\\.)*)"\s*,\s*(\d+)', script):
         inner = m.group(1).strip().strip('{}').strip()
-        if combat_relevant(inner):
+        if combat_relevant(inner) or iid in WL:
             effects.append({'group': f'bonus_script:{iid}', 'value': 1, 'script': inner, 'seconds': int(m.group(2))})
-    if effects:
+    if effects or iid in WL:
         rec = {'name': e.get('Name'), 'aegis': e.get('AegisName'), 'effects': effects}
         j = e.get('Jobs')                      # same format as items.json: list, or { all, except }
         if j and not j.get('All'):
@@ -185,7 +187,10 @@ for iid, e in sorted(items.items()):
             rec['res'] = c.get('identifiedResourceName')
             desc = [re.sub(r'\^[0-9a-fA-F]{6}', '', x).strip() for x in (c.get('identifiedDescriptionName') or {}).values()]
             rec['desc'] = [x for x in desc if x and x != '_']
-            rec['inGame'] = True
+            rec['inGame'] = iid in WL          # the sim lists only the user's chosen consumables
+        if not effects and str(iid) in MANUAL:
+            rec['effects'] = MANUAL[str(iid)]
+        rec['inGame'] = iid in WL
         out[str(iid)] = rec
 
 os.makedirs(out_dir, exist_ok=True)

@@ -1,0 +1,73 @@
+{
+ "_doc": "Effects for chosen consumables whose status is handled in server code (no script in status.yml); written from the GGT item descriptions. HP/SP Increase Potion: status.cpp (MaxHP +1000*size-500+BaseLv*10/3, MaxSP +BaseLv/10+5*size-10 %).",
+ "100232": [
+  {
+   "group": "SC_ADD_ATK_DAMAGE",
+   "value": 15,
+   "script": "bonus bShortAtkRate,15; bonus bLongAtkRate,15;"
+  }
+ ],
+ "100233": [
+  {
+   "group": "SC_ADD_MATK_DAMAGE",
+   "value": 15,
+   "script": "bonus2 bMagicAtkEle,Ele_All,15;"
+  }
+ ],
+ "102803": [
+  {
+   "group": "force_booster",
+   "value": 1,
+   "script": "bonus bAllTraitStats,5; bonus bPAtk,10; bonus bSMatk,10;"
+  }
+ ],
+ "102985": [
+  {
+   "group": "speed_booster",
+   "value": 1,
+   "script": "bonus bFlee,50; bonus bAspd,1;"
+  }
+ ],
+ "12422": [
+  {
+   "group": "SC_PROMOTE_HEALTH_RESERCH",
+   "value": 1,
+   "script": "bonus bMaxHP,500+BaseLevel*10/3;"
+  }
+ ],
+ "12425": [
+  {
+   "group": "SC_ENERGY_DRINK_RESERCH",
+   "value": 1,
+   "script": "bonus bMaxSPrate,BaseLevel/10+-5;"
+  }
+ ],
+ "12423": [
+  {
+   "group": "SC_PROMOTE_HEALTH_RESERCH",
+   "value": 2,
+   "script": "bonus bMaxHP,1500+BaseLevel*10/3;"
+  }
+ ],
+ "12426": [
+  {
+   "group": "SC_ENERGY_DRINK_RESERCH",
+   "value": 2,
+   "script": "bonus bMaxSPrate,BaseLevel/10+0;"
+  }
+ ],
+ "12424": [
+  {
+   "group": "SC_PROMOTE_HEALTH_RESERCH",
+   "value": 3,
+   "script": "bonus bMaxHP,2500+BaseLevel*10/3;"
+  }
+ ],
+ "12427": [
+  {
+   "group": "SC_ENERGY_DRINK_RESERCH",
+   "value": 3,
+   "script": "bonus bMaxSPrate,BaseLevel/10+5;"
+  }
+ ]
+}

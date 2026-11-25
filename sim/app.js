@@ -8,6 +8,7 @@ import {
   buffAvailability, consumableAvailability, debuffList, jobTreeName,
 } from '../calc/index.js';
 import { STATS, TRAITS, statCost } from '../calc/status.js';
+import { drawCharacter, hairStyles } from './sprite.js';
 import { STAT_TABS, labelOf, categoryOf, RACES, ELES, SIZES, OPTIONS, optionScript } from './labels.js';
 
 const $ = (id) => document.getElementById(id);
@@ -29,7 +30,7 @@ const DEFAULT = () => ({
   v: 1, jobId: 0, trans: false, baseLv: 1, jobLv: 1,
   base: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 }, trait: { pow: 0, sta: 0, wis: 0, spl: 0, con: 0, crt: 0 },
   skills: {}, buffs: {}, debuffs: {}, consumables: [], inventory: [], equipped: {},
-  ui: { skillTier: null, equipTab: 'general', eqTab: 'all', invTab: 'cons', buffTab: 'self', inGameOnly: true },
+  ui: { skillTier: null, equipTab: 'general', eqTab: 'all', invTab: 'cons', buffTab: 'self', inGameOnly: true, look: { gender: 1, hair: 1, color: 0 } },
   mobId: 1002, atkSkill: '', atkLv: 1,
 });
 let S;
@@ -187,6 +188,28 @@ function blockReason(n) {
   if (tierLeft(tier) <= 0) return `Skill Point ของ ${tier.label} หมดแล้ว`;
   return null;
 }
+/** raise a skill to lv, learning the prerequisites first (like the game's skill window); null = done, else why not */
+function raiseTo(n, lv, depth = 0) {
+  const d = skillDef(n);
+  if (!d) return 'อาชีพนี้ไม่มีสกิลนี้';
+  if (lv > d[1] || depth > 30) return 'เลเวลสูงสุดแล้ว';
+  for (const [r, rl] of d[2] || []) {
+    if ((S.skills[r] || 0) < rl) { const why = raiseTo(r, rl, depth + 1); if (why) return why; }
+  }
+  while ((S.skills[n] || 0) < lv) {
+    const why = blockReason(n);
+    if (why) return `${skName(n)}: ${why}`;
+    S.skills[n] = (S.skills[n] || 0) + 1;
+  }
+  return null;
+}
+function learnWithPrereqs(n, lv) {
+  const before = { ...S.skills };
+  const why = raiseTo(n, lv);
+  if (why) { S.skills = before; skillMsg(why); return false; }
+  skillSel = n;
+  return true;
+}
 /** skills that need this one at its current level (it cannot be lowered while they are learned) */
 function dependents(n) {
   const lv = S.skills[n] || 0, out = [];
@@ -295,9 +318,7 @@ $('skillTabs').onclick = (e) => { const k = e.target.dataset.k; if (k) { S.ui.sk
 $('skillGrid').onclick = (e) => {
   const { u, d } = e.target.dataset;
   if (u) {
-    const why = blockReason(u);
-    if (why) { skillMsg(why); return; }
-    setSkill(u, (S.skills[u] || 0) + 1); skillSel = u;
+    if (!learnWithPrereqs(u, (S.skills[u] || 0) + 1)) return;
   } else if (d) {
     const deps = dependents(d);
     if (deps.length) { skillMsg('ลดไม่ได้: ' + deps.map(skName).join(', ') + ' ต้องใช้สกิลนี้อยู่'); return; }
@@ -306,8 +327,8 @@ $('skillGrid').onclick = (e) => {
     const card = e.target.closest('.sk');
     if (!card) return;
     const n = card.dataset.n;
-    if (card.classList.contains('can')) { setSkill(n, 1); skillSel = n; refresh(); return; }   // learn it (Lv 1)
-    if (!S.skills[n] && card.classList.contains('locked')) { skillMsg(blockReason(n)); return; }
+    // every click on the icon raises the skill by 1 (prerequisites first), like clicking in the game's skill window
+    if (learnWithPrereqs(n, (S.skills[n] || 0) + 1)) refresh();
     return;
   }
   refresh();
@@ -405,14 +426,14 @@ function renderStatus() {
   $('statusBox').innerHTML = `<div>${STATS.map((k) => st(k, r.base[k], r.total[k], r.nextCost[k], 'st')).join('')}</div>
     <div class="vals">${v('Atk', `${r.atk} + ${atkR}`)}${v('Def', `${r.hardDef} + ${r.def}`)}${v('Matk', `${r.matk} + ${matkR}`)}${v('Mdef', `${r.hardMdef} + ${r.mdef}`)}
     ${v('Hit', r.hit)}${v('Flee', `${r.flee} + ${r.perfectDodge}`)}${v('Critical', r.crit)}${v('Aspd', r.aspd)}
-    ${v('Status Point', `<b class="${r.points.left < 0 ? 'bad' : ''}">${r.points.left}</b>`)}<div></div>${v('Guild', '')}</div>`;
+    ${v('Status Point', `<b class="${r.points.left < 0 ? 'bad' : ''}">${r.points.left}</b>`)}</div>`;
   const traits = (r.traitPoints?.total || 0) > 0;
   $('traitBox').innerHTML = traits ? `<div>${TRAITS.map((k) => st(k, S.trait[k] || 0, r.total[k] ?? (S.trait[k] || 0), 1, 'tr')).join('')}</div>
     <div class="vals">${v('P.Atk', r.patk)}${v('Res', r.res)}${v('S.Matk', r.smatk)}${v('Mres', r.mres)}${v('H.Plus', r.hplus)}<div></div>${v('C.Rate', r.crate)}<div></div>
     ${v('T.Status Point', `<b class="${(r.traitPoints?.left || 0) < 0 ? 'bad' : ''}">${r.traitPoints?.left ?? 0}</b>`)}</div>`
     : '<p class="muted" style="padding:3px 6px;margin:0;grid-column:1/-1">มีเฉพาะอาชีพขั้น 4</p>';
   $('hpsp').innerHTML = `<span>HP <b>${r.hp.toLocaleString()}</b></span><span>SP <b>${r.sp.toLocaleString()}</b></span>` +
-    (r.ap ? `<span>AP <b>${r.ap}</b></span>` : '') + `<span class="muted">Weight ${r.weight}</span>`;
+    `<span class="muted">Weight ${r.weight}</span>`;
 }
 const statInput = (e) => {
   const { st, tr, stup, trup } = e.target.dataset;
@@ -510,7 +531,10 @@ function renderEquip() {
   document.querySelectorAll('#equipTabs button').forEach((b) => b.classList.toggle('on', b.dataset.t === S.ui.equipTab));
   if (!EQ_LAYOUT[S.ui.equipTab]) S.ui.equipTab = 'general';
   const list = EQ_LAYOUT[S.ui.equipTab];
-  let h = `<div class="char"><img src="../costume/thumbs/job/${S.jobId}.png" alt="" onerror="this.style.visibility='hidden'"></div>`;
+  const lk = S.ui.look;
+  let h = `<div class="char"><canvas id="charCv" hidden></canvas><img id="charImg" src="../costume/thumbs/job/${S.jobId}.png" alt="" onerror="this.style.visibility='hidden'"></div>
+    <div class="look"><select data-look="gender" title="เพศ"><option value="1"${lk.gender === 1 ? ' selected' : ''}>ชาย</option><option value="0"${lk.gender === 0 ? ' selected' : ''}>หญิง</option></select>
+    <select data-look="hair" title="ทรงผม"></select><select data-look="color" title="สีผม"></select></div>`;
   list.forEach(([slot, lab, col, row]) => {
     const x = invItem(S.equipped[slot]);
     const right = col === 3;
@@ -520,7 +544,32 @@ function renderEquip() {
       ${x ? iconI(x.id) : ''}<span class="n">${x ? esc(itemLabel(x)) : lab}</span></div>`;
   });
   $('equipGrid').innerHTML = h;
+  drawSprite();
 }
+// ---- character sprite with the worn headgears / garment (sim/sprite.js)
+async function drawSprite() {
+  const lk = S.ui.look, cv = $('charCv');
+  if (!cv) return;
+  const styles = await hairStyles(lk.gender);
+  if (styles.length) {
+    if (!styles.some((x) => x[0] === lk.hair)) lk.hair = styles[0][0];
+    const pals = styles.find((x) => x[0] === lk.hair)[1];
+    if (!pals.some((p) => p[0] === lk.color)) lk.color = pals[0]?.[0] ?? 0;
+    const hs = document.querySelector('#equipGrid [data-look=hair]'), cs = document.querySelector('#equipGrid [data-look=color]');
+    if (hs) hs.innerHTML = styles.map(([n]) => `<option value="${n}"${n === lk.hair ? ' selected' : ''}>ผม ${n}</option>`).join('');
+    if (cs) cs.innerHTML = pals.map(([n]) => `<option value="${n}"${n === lk.color ? ' selected' : ''}>สี ${n}</option>`).join('');
+  }
+  const worn = {};
+  for (const [slot, uid] of Object.entries(S.equipped)) { const x = invItem(uid); if (x) worn[slot] = x.id; }
+  drawCharacter(cv, S.jobId, worn, lk, (ok) => {
+    if (!ok || !cv.isConnected) return;
+    cv.hidden = false; const img = $('charImg'); if (img) img.hidden = true;
+  });
+}
+$('equipGrid').onchange = (e) => {
+  const k = e.target.dataset.look;
+  if (k) { S.ui.look[k] = +e.target.value; save(); drawSprite(); }
+};
 $('equipTabs').onclick = (e) => { const t = e.target.dataset.t; if (t) { S.ui.equipTab = t; renderEquip(); save(); } };
 $('equipGrid').onclick = (e) => { const el = e.target.closest('.slot'); if (el && !S.equipped[el.dataset.slot]) pickForSlot(el.dataset.slot); };
 $('equipGrid').ondblclick = (e) => {
@@ -583,14 +632,16 @@ function renderInv() {
     const replaced = new Set(build.consumables?.replaced || []);
     const list = consumableAvailability(db, build).filter((c) => (on.has(c.id) || ((S.ui.invAll || c.usable) && c.inGame)) &&
       (!q || c.name.toLowerCase().includes(q) || String(c.id) === q));
-    list.sort((a, b) => (on.has(b.id) - on.has(a.id)) || a.name.localeCompare(b.name));
+    list.sort((a, b) => a.id - b.id);   // by item id
     const h = list.map((c) => `<div class="ii${on.has(c.id) ? ' on' : ''}${c.usable ? '' : ' off'}${replaced.has(c.id) ? ' weak' : ''}" data-cons="${c.id}">${iconI(c.id)}</div>`).join('');
     $('invList').innerHTML = fill(h, list.length);
     $('invFoot').innerHTML = `<span>ใช้อยู่ ${S.consumables.length}</span><span class="grow"></span><button id="consClear">เลิกใช้ทั้งหมด</button>`;
   } else {
     $('invTools').innerHTML = `<input id="invQ" placeholder="ค้นหา…" value="${esc(invSearch)}">`;
     const worn = new Set(Object.values(S.equipped));
-    const list = S.inventory.filter((x) => !q || itemLabel(x).toLowerCase().includes(q));
+    // worn pieces leave the inventory (like in the game) and come back when taken off
+    const list = S.inventory.filter((x) => !worn.has(x.uid) && (!q || itemLabel(x).toLowerCase().includes(q)))
+      .sort((a, b) => a.id - b.id || (b.refine || 0) - (a.refine || 0));
     const h = list.map((x) => { const u = itemUsableBy(db.equip, db.equip.items[x.id], build.classId, build.status.baseLv);
       return `<div class="ii${worn.has(x.uid) ? ' eq' : ''}${u.ok ? '' : ' off'}" data-inv="${x.uid}">${iconI(x.id)}${x.refine ? `<span class="cnt">+${x.refine}</span>` : ''}</div>`; }).join('');
     $('invList').innerHTML = fill(h, list.length);
@@ -710,8 +761,9 @@ function renderCraft() {
     h += `<div class="row"><span>เลือก</span>${iconI(editing.id)}<b>${esc(it.name)}</b> <span class="muted">#${editing.id} · ${esc(it.type)}${it.sub ? ' / ' + esc(it.sub) : ''}</span>
       ${u.ok ? '' : `<span class="bad">(${esc(u.reason)} — คราฟเก็บไว้ได้ แต่ใส่ไม่ได้)</span>`}</div>
       <div class="row"><span>เงื่อนไข</span><span>${esc(reqText(it))}</span></div>`;
-    const canRef = !!it.refine && it.type !== 'Ammo', canGrade = !!it.grade;
-    h += `<div class="row"><span>ตีบวก</span><select id="cRef" ${canRef ? '' : 'disabled'}>${Array.from({ length: 21 }, (_, i) => `<option value="${i}" ${i === (editing.refine || 0) ? 'selected' : ''}>+${i}</option>`).join('')}</select>
+    const isShadow = it.type === 'ShadowGear', canRef = (!!it.refine || isShadow) && it.type !== 'Ammo', canGrade = !!it.grade;   // every shadow piece can be refined (to +10)
+    if (isShadow && (editing.refine || 0) > 10) editing.refine = 10;
+    h += `<div class="row"><span>ตีบวก</span><select id="cRef" ${canRef ? '' : 'disabled'}>${Array.from({ length: isShadow ? 11 : 21 }, (_, i) => `<option value="${i}" ${i === (editing.refine || 0) ? 'selected' : ''}>+${i}</option>`).join('')}</select>
       ${canRef ? '' : '<span class="muted">ไอเท็มนี้ตีบวกไม่ได้ (ตามข้อมูลเซิร์ฟเวอร์)</span>'}</div>`;
     h += `<div class="row"><span>เกรด</span><select id="cGrade" ${canGrade ? '' : 'disabled'}>${GRADES.map((g, i) => `<option value="${i}" ${i === (editing.grade || 0) ? 'selected' : ''}>${i ? 'Grade ' + g : 'ไม่มีเกรด'}</option>`).join('')}</select>
       ${canGrade ? '' : '<span class="muted">ไอเท็มนี้ไม่มีระบบเกรด</span>'}</div>`;
