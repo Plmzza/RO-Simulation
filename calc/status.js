@@ -32,7 +32,7 @@ export function jobBonus(cls, jobLv, keys) {
 const div = (a, b) => Math.trunc(a / b);
 
 /**
- * @param {object} data   status/data.json
+ * @param {object} data   data/status.json
  * @param {object} input  { jobId, trans, baseLv, jobLv, base:{str..luk}, bonus:{...}, traitBase:{pow..crt},
  *                          traitBonus:{...}, weapon, shield, hpRate, spRate, aspdRate, aspdAdd,
  *                          equip }   // equip = evaluateEquipment(...).status (optional)

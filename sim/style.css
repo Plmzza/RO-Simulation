@@ -140,6 +140,7 @@ main { padding: 8px; }
 .bf img { width: 20px; height: 20px; }
 .bf .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bf.off { opacity: .45; }
+.bfh { grid-column: 1 / -1; font-weight: 700; color: #3b5a8c; padding: 5px 2px 1px; border-bottom: 1px solid #b8c6e0; }
 .bf input[type=number] { width: 38px; }
 .dmgform { display: flex; gap: 8px; flex-wrap: wrap; padding: 5px; }
 .dmgform label { display: inline-flex; gap: 4px; align-items: center; }
@@ -207,3 +208,5 @@ main { padding: 8px; }
 .sk .noimg { width: 24px; height: 24px; }
 
 #skillGrid { user-select: none; }   /* fast clicking on skill icons must not select text */
+
+#toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #2c3e5c; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: 13px; z-index: 1000; box-shadow: 0 2px 8px #0004; }

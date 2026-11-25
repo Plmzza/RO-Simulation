@@ -22,6 +22,7 @@ const db = await loadAll('../data/');
 const ENCH = await fetch('../data/enchants.json').then((r) => (r.ok ? r.json() : { defs: {}, items: {} })).catch(() => ({ defs: {}, items: {} }));
 const RANDOPT = await fetch('../data/randomopt.json').then((r) => (r.ok ? r.json() : { options: {}, groups: {}, items: {} })).catch(() => ({ options: {}, groups: {}, items: {} }));
 const TREEPOS = await fetch('../data/skilltree.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+const SCX = await fetch('../data/scconflict.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const SKILLINFO = await fetch('../data/skillinfo.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const C = db.equip.constants;
 
@@ -30,7 +31,7 @@ const DEFAULT = () => ({
   v: 1, jobId: 0, trans: false, baseLv: 1, jobLv: 1,
   base: { str: 1, agi: 1, vit: 1, int: 1, dex: 1, luk: 1 }, trait: { pow: 0, sta: 0, wis: 0, spl: 0, con: 0, crt: 0 },
   skills: {}, buffs: {}, debuffs: {}, consumables: [], inventory: [], equipped: {},
-  ui: { skillTier: null, equipTab: 'general', eqTab: 'all', invTab: 'cons', buffTab: 'self', inGameOnly: true, look: { gender: 1, hair: 1, color: 0 } },
+  ui: { skillTier: null, equipTab: 'general', eqTab: 'all', invTab: 'cons', buffTab: 'self', buffJob: '', inGameOnly: true, look: { gender: 1, hair: 1, color: 0 } },
   mobId: 1002, atkSkill: '', atkLv: 1,
 });
 let S;
@@ -665,8 +666,42 @@ $('wInv').addEventListener('dblclick', (e) => {
   if (it) toggleWear(it.dataset.inv);
 });
 function toggleCons(id) {
-  S.consumables = S.consumables.includes(id) ? S.consumables.filter((x) => x !== id) : [...S.consumables, id];
+  if (S.consumables.includes(id)) S.consumables = S.consumables.filter((x) => x !== id);
+  else { S.consumables = [...S.consumables, id]; turnOffClashing({ cons: id }); }
   refresh();
+}
+// ---- buffs that cannot be on together (data/scconflict.json from status.yml EndOnStart / Fail): the one turned on last wins
+const ELEMENT_SC = new Set(['SC_ENCHANTARMS', 'SC_ENCPOISON', 'SC_ASPERSIO', 'SC_FIREWEAPON', 'SC_WATERWEAPON', 'SC_WINDWEAPON',
+  'SC_EARTHWEAPON', 'SC_SHADOWWEAPON', 'SC_GHOSTWEAPON']);              // weapon element: converters, Endow, Enchant Poison, Aspersio
+const scOfBuff = (id) => db.sc?.buffs?.[id]?.sc;
+const scsOfCons = (id) => [...new Set((db.consumables[id]?.effects || [])
+  .flatMap((e) => [e.group, e.buff && scOfBuff(e.buff)]).filter((x) => typeof x === 'string' && x.startsWith('SC_')))];
+const ends = (a, b) => SCX[a]?.end?.includes(b) || SCX[a]?.fail?.includes(b);
+/** a / b: SC names; same = the same status from a skill and something else (Kyrie / Praefatio, Blessing / Moon Cookie) */
+const clash = (a, b, same) => (a === b ? same || ends(a, a) : ends(a, b) || ends(b, a) || (ELEMENT_SC.has(a) && ELEMENT_SC.has(b)));
+function turnOffClashing(on) {
+  const mine = on.buff ? [scOfBuff(on.buff)].filter(Boolean) : scsOfCons(on.cons);
+  if (!mine.length) return;
+  const off = [];
+  for (const id of Object.keys(S.buffs)) {
+    if (id === on.buff) continue;
+    const sc = scOfBuff(id);
+    if (sc && mine.some((m) => clash(m, sc, true))) { delete S.buffs[id]; off.push(db.sc.buffs[id]?.name || id); }
+  }
+  S.consumables = S.consumables.filter((id) => {
+    if (id === on.cons) return true;
+    const hit = scsOfCons(id).some((sc) => mine.some((m) => clash(m, sc, !!on.buff)));
+    if (hit) off.push(db.consumables[id]?.name || id);
+    return !hit;
+  });
+  if (off.length) toast(`ปิด ${off.join(', ')} (ใช้ร่วมกันไม่ได้)`);
+}
+let toastT = 0;
+function toast(msg) {
+  let el = $('toast');
+  if (!el) { el = document.createElement('div'); el.id = 'toast'; document.body.append(el); }
+  el.textContent = msg; el.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { el.hidden = true; }, 3500);
 }
 function toggleWear(uidv) {
   const x = invItem(uidv), it = db.equip.items[x.id];
@@ -888,6 +923,36 @@ function soulLinkFits(id) {
   return (mapid & 0xFFF) === SOUL_LINK[id];
 }
 let buffQ = '';
+// party buffs grouped by job line (castBy = skill-tree jobs that have the skill in their own list)
+const BUFF_LINES = [
+  ['Swordman / Knight', 'Swordman Knight Lord_Knight Rune_Knight Dragon_Knight'],
+  ['Crusader / Royal Guard', 'Crusader Paladin Royal_Guard Imperial_Guard'],
+  ['Mage / Wizard', 'Mage Wizard High_Wizard Warlock Arch_Mage'],
+  ['Sage / Sorcerer', 'Sage Professor Sorcerer Elemental_Master'],
+  ['Archer / Hunter', 'Archer Hunter Sniper Ranger Windhawk'],
+  ['Bard / Dancer', 'Bard Dancer Clown Gypsy Minstrel Wanderer Troubadour Trouvere'],
+  ['Acolyte / Priest', 'Acolyte Priest High_Priest Arch_Bishop Cardinal'],
+  ['Monk / Sura', 'Monk Champion Sura Inquisitor'],
+  ['Merchant / Blacksmith', 'Merchant Blacksmith Whitesmith Mechanic Meister'],
+  ['Alchemist / Genetic', 'Alchemist Creator Genetic Biolo'],
+  ['Thief / Assassin', 'Thief Assassin Assassin_Cross Guillotine_Cross Shadow_Cross'],
+  ['Rogue / Shadow Chaser', 'Rogue Stalker Shadow_Chaser Abyss_Chaser'],
+  ['Taekwon / Star Gladiator', 'Taekwon Star_Gladiator Star_Emperor Sky_Emperor'],
+  ['Soul Linker / Soul Reaper', 'Soul_Linker Soul_Reaper Soul_Ascetic'],
+  ['Ninja', 'Ninja Kagerou Oboro Shinkiro Shiranui'],
+  ['Gunslinger', 'Gunslinger Rebellion Night_Watch'],
+  ['Summoner', 'Summoner Spirit_Handler'],
+  ['Super Novice', 'Novice Supernovice Super_Baby Super_Novice Hyper_Novice'],
+];
+const LINE_OF = {};
+BUFF_LINES.forEach(([, jobs], i) => jobs.split(' ').forEach((j) => { LINE_OF[j] = i; }));
+const OTHER_LINE = BUFF_LINES.length;                          // equipment-only / unknown
+function buffLine(b) {
+  const lines = (b.castBy || []).map((j) => LINE_OF[j.replace(/^Baby_/, '').replace(/_(T|E|High)$/, '').replace(/\d+$/, '')])
+    .filter((x) => x !== undefined);
+  return lines.find((x) => x !== BUFF_LINES.length - 1) ?? lines[0] ?? OTHER_LINE;   // Super Novice only when no one else has it
+}
+const lineName = (i) => BUFF_LINES[i]?.[0] || 'อุปกรณ์ / อื่นๆ';
 function renderBuffs() {
   document.querySelectorAll('#buffTabs button').forEach((b) => b.classList.toggle('on', b.dataset.t === S.ui.buffTab));
   const q = buffQ.toLowerCase(), all = $('buffAll').checked;
@@ -903,16 +968,28 @@ function renderBuffs() {
   }
   const self = S.ui.buffTab === 'self';
   // from others: only skills some player job can cast (or worn equipment grants); item buffs are used from the inventory
-  const list = avail.filter((b) => (self ? b.kind === 'self' : b.kind !== 'self' && b.kind !== 'item' && (b.castBy?.length || b.fromEquip)) &&
+  let list = avail.filter((b) => (self ? b.kind === 'self' : b.kind !== 'self' && b.kind !== 'item' && (b.castBy?.length || b.fromEquip)) &&
     soulLinkFits(b.id) && match(b));
+  const jsel = $('buffJob');
+  jsel.hidden = self;
+  if (!self) {
+    const lines = [...new Set(list.map(buffLine))].sort((a, b) => a - b);
+    if (S.ui.buffJob !== '' && !lines.includes(+S.ui.buffJob)) S.ui.buffJob = '';
+    jsel.innerHTML = `<option value="">ทุกอาชีพ</option>` + lines.map((i) => `<option value="${i}"${String(i) === String(S.ui.buffJob) ? ' selected' : ''}>${esc(lineName(i))}</option>`).join('');
+    list = list.map((b) => [buffLine(b), b]).filter(([l]) => S.ui.buffJob === '' || l === +S.ui.buffJob)
+      .sort((a, b) => a[0] - b[0]).map(([l, b]) => Object.assign(Object.create(b), { line: l }));
+  }
+  let lastLine = -1;
   $('buffList').innerHTML = list.map((b) => {
+    let head = '';
+    if (!self && b.line !== lastLine) { lastLine = b.line; head = `<div class="bfh">${esc(lineName(b.line))}</div>`; }
     const max = buffMax(b), ok = b.available && max > 0;
-    if (!ok && !all) return '';
+    if (!ok && !all) return head && list.some((o) => o.line === b.line && o.available && buffMax(o) > 0) ? head : '';
     const lv = S.buffs[b.id] || 0;
     const on = lv > 0 && ok;
     const isOn = b.sc && active[b.sc];
     const why = !ok ? (b.reason || 'ยังไม่ได้เรียนสกิลนี้') : (b.note || '');
-    return `<div class="bf${ok ? '' : ' off'}" data-n="${b.id}" data-tip="${esc(b.name + (why ? '\n' + why : ''))}"><input type="checkbox" data-bf="${b.id}" ${on ? 'checked' : ''} ${ok ? '' : 'disabled'}>${iconS(b.id)}
+    return `${head}<div class="bf${ok ? '' : ' off'}" data-n="${b.id}" data-tip="${esc(b.name + (why ? '\n' + why : ''))}"><input type="checkbox" data-bf="${b.id}" ${on ? 'checked' : ''} ${ok ? '' : 'disabled'}>${iconS(b.id)}
       <span class="nm">${esc(b.name)}${self && ok ? ` <span class="muted">${S.skills[b.id] ? `(Lv ${Math.min(S.skills[b.id], b.maxLv)})` : `(อุปกรณ์ Lv ${b.fromEquip?.lv})`}</span>` : ''}${on && b.sc && !isOn ? ' <span class="bad">(ไม่ทำงาน)</span>' : ''}</span>
       <input type="number" data-bflv="${b.id}" min="1" max="${max || 1}" value="${Math.min(lv || max || 1, max || 1)}" ${ok ? '' : 'disabled'}></div>`;
   }).join('') || '<p class="muted">ไม่มีบัพในหมวดนี้</p>';
@@ -920,10 +997,11 @@ function renderBuffs() {
 $('buffTabs').onclick = (e) => { const t = e.target.dataset.t; if (t) { S.ui.buffTab = t; renderBuffs(); save(); } };
 $('buffSearch').oninput = () => { buffQ = $('buffSearch').value; renderBuffs(); };
 $('buffAll').onchange = renderBuffs;
+$('buffJob').onchange = () => { S.ui.buffJob = $('buffJob').value; renderBuffs(); save(); };
 $('buffList').onchange = (e) => {
   const d = e.target.dataset;
   const lvOf = (id) => Number(document.querySelector(`[data-bflv="${id}"],[data-dblv="${id}"]`)?.value) || 1;
-  if (d.bf) { if (e.target.checked) S.buffs[d.bf] = lvOf(d.bf); else delete S.buffs[d.bf]; }
+  if (d.bf) { if (e.target.checked) { S.buffs[d.bf] = lvOf(d.bf); turnOffClashing({ buff: d.bf }); } else delete S.buffs[d.bf]; }
   else if (d.bflv) { if (S.buffs[d.bflv]) S.buffs[d.bflv] = Number(e.target.value) || 1; }
   else if (d.db) { if (e.target.checked) S.debuffs[d.db] = lvOf(d.db); else delete S.debuffs[d.db]; }
   else if (d.dblv) { if (S.debuffs[d.dblv]) S.debuffs[d.dblv] = Number(e.target.value) || 1; }

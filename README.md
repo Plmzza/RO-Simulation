@@ -7,9 +7,7 @@ Ragnarok Online simulators and calculators that run entirely in the browser (HTM
 | Tool | Path | Status |
 |---|---|---|
 | Costume Simulator | [`costume/`](costume/) | Available |
-| Status Calculator | `status/` | Planned |
-| Skill Calculator | `skill/` | Planned |
-| Equipment Calculator | `equipment/` | Planned |
+| RO Simulator | [`sim/`](sim/) | Available |
 
 ---
 
@@ -71,10 +69,11 @@ costume/
 ```text
 ├── index.html         # Landing page that links to every tool
 ├── costume/           # Costume Simulator
+├── sim/               # RO Simulator
 └── .nojekyll          # Serve files as-is on GitHub Pages
 ```
 
-New tools go in their own folder (for example `status/`) and get a card on the landing page.
+New tools go in their own folder (for example `newtool/`) and get a card on the landing page.
 
 ---
 
