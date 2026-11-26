@@ -56,7 +56,7 @@ function equipmentInput() {
   return out;
 }
 const baseInput = () => ({ jobId: S.jobId, trans: S.trans, baseLv: S.baseLv, jobLv: S.jobLv, base: S.base, traitBase: S.trait,
-  skills: S.skills, equipment: equipmentInput() });
+  skills: { ...S.skills, ...linkSkills() }, equipment: equipmentInput() });
 let build, avail;
 function compute() {
   const input = baseInput();
@@ -76,7 +76,7 @@ function compute() {
 /** self buffs: the level learned in the skill simulator (or granted by equipment); only an item (scroll, rune) when not learned */
 function buffMax(a) {
   if (a.kind !== 'self') return a.maxLv;
-  const own = Math.max(S.skills[a.id] || 0, a.fromEquip?.lv || 0);
+  const own = Math.max(S.skills[a.id] || 0, linkSkills()[a.id] || 0, a.fromEquip?.lv || 0);   // Soul Link skills while linked
   return own ? Math.min(own, a.maxLv) : 0;      // item buffs come from Inventory → cons. when the item is used
 }
 
@@ -152,6 +152,26 @@ const skillDef = (name) => {
   return null;
 };
 const skName = (n) => db.skills.names?.[n]?.[0] || n;
+// skills that cost no skill points: quest skills (IsQuest, learned from an NPC quest) and Soul Link skills
+// (IsSpirit: only while linked, Lv 1, not learnable — pc_calc_skilltree SKILL_FLAG_TEMPORARY)
+const skFlags = (n) => SKILLINFO[n]?.flags || [];
+const isQuestSk = (n) => skFlags(n).includes('IsQuest');
+const isSpiritSk = (n) => skFlags(n).includes('IsSpirit');
+const freeSk = (n) => isQuestSk(n) || isSpiritSk(n);
+/** a Soul Link of this job is on (party buffs) */
+const linked = () => Object.keys(S.buffs || {}).some((k) => /^SL_/.test(k) && k !== 'SL_KAAHI' && k !== 'SL_KAUPE' && k !== 'SL_KAITE' && soulLinkFits(k));
+/** skills the link gives: the job's IsSpirit skills at Lv 1; Bard / Dancer link: the other gender's song when yours is Lv 10 */
+const BARD_DANCER = [['BA_WHISTLE', 'DC_HUMMING'], ['BA_ASSASSINCROSS', 'DC_DONTFORGETME'], ['BA_POEMBRAGI', 'DC_FORTUNEKISS'], ['BA_APPLEIDUN', 'DC_SERVICEFORYOU']];
+function linkSkills() {
+  const out = {};
+  if (!linked()) return out;
+  for (const t of tiers()) for (const [n] of t.skills) if (isSpiritSk(n)) out[n] = 1;
+  if (S.buffs.SL_BARDDANCER) for (const [ba, dc] of BARD_DANCER) {
+    if ((S.skills[ba] || 0) >= 10) out[dc] = 10;
+    if ((S.skills[dc] || 0) >= 10) out[ba] = 10;
+  }
+  return out;
+}
 const NOIMG = `this.outerHTML='<span class=noimg></span>'`;
 const iconI = (id) => `<img src="icons/i/${id}.png" alt="" loading="lazy" onerror="${NOIMG}">`;
 const iconS = (n) => `<img class="ic" src="icons/s/${n}.png" alt="" loading="lazy" onerror="${NOIMG}">`;
@@ -170,24 +190,25 @@ function pruneSkills() {
     changed = false;
     for (const [n, lv] of Object.entries(S.skills)) {
       const d = all.get(n);
-      if (!d || (d[2] || []).some(([r, rl]) => (S.skills[r] || 0) < rl)) { delete S.skills[n]; changed = true; }
+      if (!d || isSpiritSk(n) || (d[2] || []).some(([r, rl]) => (S.skills[r] || 0) < rl)) { delete S.skills[n]; changed = true; }
       else if (lv > d[1]) S.skills[n] = d[1];
     }
   }
 }
 const tierOf = (name) => tiers().find((t) => t.skills.some((x) => x[0] === name));
-const tierLeft = (tier) => tier.points - tier.skills.reduce((a, [n]) => a + (S.skills[n] || 0), 0);
+const tierLeft = (tier) => tier.points - tier.skills.reduce((a, [n]) => a + (freeSk(n) ? 0 : S.skills[n] || 0), 0);
 const curTier = () => tiers().find((x) => x.key === S.ui.skillTier);
 /** why a skill cannot be raised now (null = it can): prerequisites, job level, skill points, max level */
 function blockReason(n) {
   const d = skillDef(n), T = tiers(), tier = tierOf(n);
   if (!d || !tier) return 'อาชีพนี้ไม่มีสกิลนี้';
+  if (isSpiritSk(n)) return linked() ? 'ได้จากบัพ Soul Link แล้ว (ไม่ต้องอัพ)' : 'ได้จากบัพ Soul Link เท่านั้น (เปิดในหน้าต่างบัพ)';
   if ((S.skills[n] || 0) >= d[1]) return 'เลเวลสูงสุดแล้ว';
   const miss = (d[2] || []).filter(([r, rl]) => (S.skills[r] || 0) < rl);
   if (miss.length) return 'ต้องเรียนก่อน: ' + miss.map(([r, rl]) => `${skName(r)} Lv${rl}`).join(', ');
   const isLast = tier === T[T.length - 1];
   if (d[3] && isLast && S.jobLv < d[3]) return `ต้องมี Job Lv ${d[3]} ขึ้นไป`;
-  if (tierLeft(tier) <= 0) return `Skill Point ของ ${tier.label} หมดแล้ว`;
+  if (!isQuestSk(n) && tierLeft(tier) <= 0) return `Skill Point ของ ${tier.label} หมดแล้ว`;
   return null;
 }
 /** raise a skill to lv, learning the prerequisites first (like the game's skill window); null = done, else why not */
@@ -293,22 +314,24 @@ function renderSkills() {
   }
   for (const k of cells.keys()) maxRow = Math.max(maxRow, Number(k.split(',')[0]));
   let h = '';
+  const LS = linkSkills();
   for (let r = 0; r <= maxRow; r++) for (let c = 0; c < 7; c++) {
     const x = cells.get(`${r},${c}`);
     if (!x) { h += '<div class="cell empty"></div>'; continue; }
-    const [n, max] = x, lv = S.skills[n] || 0, why = blockReason(n);
+    const [n, max] = x, own = S.skills[n] || 0, given = own ? 0 : LS[n] || 0, lv = own || given, why = blockReason(n);
     const lock = !lv && why && why.startsWith('ต้อง');
     // like the client: not learned = icon only (grey when locked, blue frame when it can be learned: click it);
     // learned = "◀ lv / max ▶"
     const can = !lv && !why;
     const cls = ['cell sk', lv ? '' : 'off', lock ? 'locked' : '', can ? 'can' : '', n === skillSel ? 'sel' : '', selReq.has(n) ? 'req' : '', selDep.has(n) ? 'dep' : ''].join(' ');
-    const tip = `${skName(n)}` + (lv ? `\nLv ${lv} / ${max}` : can ? '\nคลิกเพื่อเรียน' : '') + (why && lv < max && !lv ? `\n${why}` : '');
+    const tip = `${skName(n)}` + (given ? `\nLv ${lv} จากบัพ Soul Link (ไม่ใช้ Skill Point)` : lv ? `\nLv ${lv} / ${max}` : can ? '\nคลิกเพื่อเรียน' : '') +
+      (isQuestSk(n) && !given ? '\nสกิลเควส: ไม่ใช้ Skill Point' : '') + (why && lv < max && !lv ? `\n${why}` : '');
     const short = skName(n).length > 9 ? skName(n).slice(0, 8) + '...' : skName(n);
     h += `<div class="${cls}" data-n="${n}" data-tip="${esc(tip)}"><span class="nm">${esc(short)}</span><span class="icw">${iconS(n)}</span>
-      ${lv ? `<span class="lv"><button data-d="${n}">◀</button><b>${lv} / ${max}</b><button data-u="${n}" ${why ? 'disabled' : ''}>▶</button></span>` : ''}</div>`;
+      ${given ? `<span class="lv link"><b>${lv}</b> Soul Link</span>` : lv ? `<span class="lv"><button data-d="${n}">◀</button><b>${lv} / ${max}</b><button data-u="${n}" ${why ? 'disabled' : ''}>▶</button></span>` : ''}${isQuestSk(n) ? '<span class="qtag" title="สกิลเควส: ไม่ใช้ Skill Point">Q</span>' : ''}</div>`;
   }
   $('skillGrid').innerHTML = h;
-  const used = (t) => t.skills.reduce((a, [n]) => a + (S.skills[n] || 0), 0);
+  const used = (t) => t.skills.reduce((a, [n]) => a + (freeSk(n) ? 0 : S.skills[n] || 0), 0);
   const left = tier.points - used(tier);
   $('skillPoint').innerHTML = `SkillPoint : <b class="${left < 0 ? 'bad' : ''}">${left}</b> <span class="muted">/ ${tier.points} (${esc(tier.label)})</span>`;
   $('jobSprite').src = `../costume/thumbs/job/${S.jobId}.png`;
@@ -1111,7 +1134,7 @@ const SOUL_LINK = { SL_ALCHEMIST: 517, SL_ASSASIN: 262, SL_BARDDANCER: 515, SL_B
 const HIGH_FIRST = [0x4001, 0x4002, 0x4003, 0x4004, 0x4005, 0x4006].map((x) => x - 0x4000 + 0x100000);   // High Swordman ... High Thief
 function soulLinkFits(id) {
   if (!id.startsWith('SL_') || !(id in SOUL_LINK || id === 'SL_HIGH')) return true;
-  const mapid = db.equip.jobs?.[build.classId]?.mapid ?? 0;
+  const mapid = db.equip.jobs?.[build?.classId ?? classIdOf(db, { jobId: S.jobId, trans: S.trans })]?.mapid ?? 0;
   if (id === 'SL_HIGH') return HIGH_FIRST.includes(mapid) && build.status.baseLv < 70;   // Spirit of Rebirth: high 1st jobs below Lv 70
   return (mapid & 0xFFF) === SOUL_LINK[id];
 }
@@ -1183,7 +1206,7 @@ function renderBuffs() {
     const isOn = b.sc && active[b.sc];
     const why = !ok ? (b.reason || 'ยังไม่ได้เรียนสกิลนี้') : (b.note || '');
     return `${head}<div class="bf${ok ? '' : ' off'}" data-n="${b.id}" data-tip="${esc(b.name + (why ? '\n' + why : ''))}"><input type="checkbox" data-bf="${b.id}" ${on ? 'checked' : ''} ${ok ? '' : 'disabled'}>${iconS(b.id)}
-      <span class="nm">${esc(b.name)}${self && ok ? ` <span class="muted">${S.skills[b.id] ? `(Lv ${Math.min(S.skills[b.id], b.maxLv)})` : `(อุปกรณ์ Lv ${b.fromEquip?.lv})`}</span>` : ''}${on && b.sc && !isOn ? ' <span class="bad">(ไม่ทำงาน)</span>' : ''}</span>
+      <span class="nm">${esc(b.name)}${self && ok ? ` <span class="muted">${S.skills[b.id] ? `(Lv ${Math.min(S.skills[b.id], b.maxLv)})` : linkSkills()[b.id] ? `(Soul Link Lv ${linkSkills()[b.id]})` : `(อุปกรณ์ Lv ${b.fromEquip?.lv})`}</span>` : ''}${on && b.sc && !isOn ? ' <span class="bad">(ไม่ทำงาน)</span>' : ''}</span>
       <input type="number" data-bflv="${b.id}" min="1" max="${max || 1}" value="${Math.min(lv || max || 1, max || 1)}" ${ok ? '' : 'disabled'}></div>`;
   }).join('') || '<p class="muted">ไม่มีบัพในหมวดนี้</p>';
 }

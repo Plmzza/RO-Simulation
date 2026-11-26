@@ -40,6 +40,9 @@ function makeEnv(env, active, scdb = {}) {
       env.paramBonus?.int || 0, env.paramBonus?.dex || 0, env.paramBonus?.luk || 0] },
     bonus: { hp: 0, sp: 0 }, spiritball: env.spiritball || 0, weapontype1: W_CODE[env.weapon] || 'W_FIST',
     class_: 0, state: {},
+    // right-hand weapon as skill code reads it (Striking: weapon level)
+    equip_index: { EQI_HAND_R: env.weaponLv ? 0 : -1 }, inventory_data: [{ type: 'IT_WEAPON', weapon_level: env.weaponLv || 0 }],
+    spiritball_old: env.spiritball || 10,      // Heat Barrel: coins used (the sim assumes the most, 10)
   };
   const sc = {
     getSCE: (name) => active[name] || 0,
@@ -59,7 +62,7 @@ function makeEnv(env, active, scdb = {}) {
     status_get_str: stat('str'), status_get_agi: stat('agi'), status_get_vit: stat('vit'), status_get_int: stat('int'),
     status_get_dex: stat('dex'), status_get_luk: stat('luk'), status_get_max_hp: stat('hp'), status_get_hp: stat('hp'),
     status_get_max_sp: stat('sp'), status_get_sp: stat('sp'), status_get_class: () => 0, status_get_race: () => 'RC_PLAYER_HUMAN',
-    status_change_end: () => 0, sc_start: () => 0, sc_start2: () => 0, sc_start4: () => 0, status_change_start: () => 0,
+    status_change_end: () => 0, status_charge: () => 1, battle_check_target: () => 1, sc_start: () => 0, sc_start2: () => 0, sc_start4: () => 0, status_change_start: () => 0,
     skill_get_time: () => 0, skill_get_time2: () => 0, skill_get_type: () => 0, skill_get_ele: (name, lv) => {
       const e = scdb.skillEle?.[name];
       return eleIndex(Array.isArray(e) ? e[Math.min(lv || 1, e.length) - 1] : e || 'Neutral');
@@ -83,7 +86,7 @@ export function scActivate(scdb, selected, env = {}) {
   const order = Object.entries(selected || {});
   for (const [key, lv] of order) {
     let b, vals;
-    if (/^SC_/.test(key)) {                    // status change given directly (consumables): { val1, val2, ... }
+    if (/^SC_/.test(key) && !scdb.buffs?.[key]) {   // status change given directly (consumables): { val1, val2, ... }
       b = { sc: key, maxLv: Infinity };
       vals = { val1: 0, val2: 0, val3: 0, val4: 0, ...lv };
     } else {
@@ -94,6 +97,8 @@ export function scActivate(scdb, selected, env = {}) {
       }
       if (!b || !(lv > 0)) continue;
       vals = { val1: Math.min(lv, b.maxLv), val2: 0, val3: 0, val4: 0 };
+      // renewal Magnum Break: skill code starts SC_SUB_WEAPONPROPERTY (ELE_FIRE, 20%) instead of the skill_db status
+      if (key === 'SM_MAGNUM') { b = { ...b, sc: 'SC_SUB_WEAPONPROPERTY', valsCode: null }; vals = { val1: 3, val2: 20, val3: 0, val4: 0 }; }
       if (SELF_FLAG.has(b.sc)) vals.val2 = env.selfCast?.has(key) ? 1 : 0;
       // values the skill itself passes to sc_start (Fighting Spirit from Rune Mastery, Clementia from Blessing...).
       // Cast by yourself: your skills; cast by someone else: the caster is assumed to have the related skills maxed.
@@ -105,7 +110,10 @@ export function scActivate(scdb, selected, env = {}) {
           pc_checkskill: (_sd, name) => (self ? env.skills?.[name] || 0 : scdb.skillMax?.[name] || 0),
           skill_get_max: (name) => scdb.skillMax?.[name] || 0, getSkillId: () => key, skill_get_sc: () => b.sc,
           party_foreachsamemap: () => 1, clif_skill_nodamage: () => 0, clif_skill_fail: () => 0 };
-        const r = runVar(b.valsCode, { vars: { ...e0, src: self ? me : other, target: me, bl: me, sstatus: e0.status,
+        // the builder closes the blocks the call sat in before the "__vN = ..." lines; run them inside the blocks so
+        // block-local variables (Striking: bonus from the weapon level) are still in scope
+        const code = b.valsCode.replace(/\n(\}+)\n(__v1 = [^\n]*)$/, '\n$2\n$1');
+        const r = runVar(code, { vars: { ...e0, src: self ? me : other, target: me, bl: me, sstatus: e0.status,
           skill_lv: vals.val1, flag: 1 }, funcs, constants: CONST, skill_lv: vals.val1 }, '__v1', vals.val1);
         ['__v1', '__v2', '__v3', '__v4'].forEach((k, n) => {
           const v = r.scope?.[k];

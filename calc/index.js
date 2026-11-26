@@ -67,7 +67,7 @@ export function calculateBuild(db, input) {
   for (const [id, lv] of Object.entries(sel)) {
     if (!(lv > 0)) continue;
     const extra = EXTRA_BUFFS.find((b) => b.id === id);
-    if (/^SC_/.test(id)) { if (!(direct[id]?.val1 >= lv)) direct[id] = { val1: lv }; continue; }   // a status given directly
+    if (/^SC_/.test(id) && !db.sc?.buffs?.[id]) { if (!(direct[id]?.val1 >= lv)) direct[id] = { val1: lv }; continue; }   // a status given directly (Shadow Chaser skills are named SC_* too)
     if (extra?.stats) for (const [k, v] of Object.entries(extra.stats(lv))) foodStats[k] = (foodStats[k] || 0) + v;
     else if (extra?.sc) {
       for (const [sc, v] of Object.entries(extra.sc(Math.min(lv, extra.maxLv)))) if (!(direct[sc]?.val1 >= v.val1)) direct[sc] = v;
@@ -92,7 +92,7 @@ export function calculateBuild(db, input) {
   const own = db.skills?.tree ? jobSkills(db.skills.tree, jobTreeName(db, classId)) : {};
   // cast by yourself: own skill, skill granted by equipment, or used from an item (rune stone, scroll)
   const selfCast = new Set(Object.keys(skillSel).filter((k) => own[k] || equip.grantedSkills?.[k] || cons.buffs[k]));
-  const env = { skills: input.skills || {}, weapon: status.weapon, riding: input.riding, selfCast,
+  const env = { skills: input.skills || {}, weapon: status.weapon, weaponLv: db.equip.items[build.weapon?.id]?.wlv || 0, riding: input.riding, selfCast,
     paramBonus: equip.status.stats, spiritball: input.spiritball || 0,
     status: { ...status.total, baseLv: status.baseLv, jobLv: status.jobLv, hp: status.hp, sp: status.sp, atk: status.atk } };
   const act = db.sc ? scActivate(db.sc, { ...skillSel, ...direct }, env) : { active: {}, refused: [], unsupported: [] };

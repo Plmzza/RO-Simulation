@@ -496,6 +496,12 @@ export function calculateDamage(db, build, opt) {
       w = trunc(w * (hand ? hand.sizeMod : sizeMod) / 100);
       let statusAtk = trunc(S.batk * neutralMod / 100) * 2;
       let weaponAtk = ignoreEle ? w : trunc(w * eleMod / 100);
+      // battle_calc_weapon_attack: SC_SUB_WEAPONPROPERTY (Magnum Break) adds val2% of weapon ATK as element val1
+      const sub = scActive.SC_SUB_WEAPONPROPERTY;
+      if (sub && !special) {
+        const subEle = ['Neutral', 'Water', 'Earth', 'Fire', 'Wind', 'Poison', 'Holy', 'Dark', 'Ghost', 'Undead'][sub.val1] || 'Neutral';
+        weaponAtk += trunc(trunc(w * (sub.val2 || 0) / 100) * attr(db, subEle, mob, scActive, tAct) / 100);
+      }
       const eAtk = eq.status.equipAtk + (usesArrow ? eq.base.arrowAtk : 0);       // battle_calc_equip_attack
       let equipAtk = ignoreEle ? eAtk : trunc(eAtk * eleMod / 100);
       if (special?.kind === 'spiral') {
