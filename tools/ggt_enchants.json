@@ -3383,5 +3383,65 @@
    ]
   },
   "note": "เลือกได้ อัพเลเวลได้"
+ },
+ {
+  "key": "time_jewelry_amulet_lv2",
+  "url": "https://ro.gnjoy.in.th/time-jewelry-amulet-enchant/",
+  "targets": [
+   "Time Jewelry Amulet (Lv.2)"
+  ],
+  "slots": {
+   "3": [
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Fighting Spirit 6Lv",
+    "Fighting Spirit 7Lv",
+    "Sharp 4Lv",
+    "Sharp 5Lv",
+    "Critical Lv2",
+    "Critical Lv.3"
+   ],
+   "2": [
+    "Time Jewel (Str) Lv.2",
+    "Time Jewel (Agi) Lv.2",
+    "Time Jewel (Vit) Lv.2",
+    "Time Jewel (Int) Lv.2",
+    "Time Jewel (Dex) Lv.2",
+    "Time Jewel (Luk) Lv.2"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม (ลงก่อน) แล้วช่อง 3 Time Jewel Lv.2 (NPC Time Jewelry Machine, glast_01)"
+ },
+ {
+  "key": "time_jewelry_amulet_lv3",
+  "url": "https://ro.gnjoy.in.th/time-jewelry-amulet-enchant/",
+  "targets": [
+   "Time Jewelry Amulet (Lv.3)"
+  ],
+  "slots": {
+   "3": [
+    "Spell 4Lv",
+    "Spell 5Lv",
+    "Expert Archer 4Lv",
+    "Expert Archer 5Lv",
+    "Fighting Spirit 6Lv",
+    "Fighting Spirit 7Lv",
+    "Sharp 4Lv",
+    "Sharp 5Lv",
+    "Critical Lv2",
+    "Critical Lv.3"
+   ],
+   "2": [
+    "Time Jewel (Str) Lv.3",
+    "Time Jewel (Agi) Lv.3",
+    "Time Jewel (Vit) Lv.3",
+    "Time Jewel (Int) Lv.3",
+    "Time Jewel (Dex) Lv.3",
+    "Time Jewel (Luk) Lv.3"
+   ]
+  },
+  "note": "ช่อง 4 สุ่ม (ลงก่อน) แล้วช่อง 3 Time Jewel Lv.3 (NPC Time Jewelry Machine, glast_01)"
  }
 ]

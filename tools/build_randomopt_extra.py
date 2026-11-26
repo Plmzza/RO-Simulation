@@ -18,6 +18,10 @@ for k, r in ex.get('reshape', {}).items():           # fix server groups to matc
     for lst in g['slots'] + [g['random']]:
         for o in lst:
             o['o'] = r.get('rename', {}).get(o['o'], o['o'])
+    for lst in g['slots'] + [g['random']]:
+        for o in lst:
+            if o['o'] in r.get('ranges', {}):
+                o['min'], o['max'] = r['ranges'][o['o']]
     if r.get('secondLineRandom') and len(g['slots']) == 2:
         g['random'], g['maxRandom'], g['slots'] = g['slots'][1], 1, g['slots'][:1]
 for iid, groups in ex['items'].items():
@@ -25,5 +29,7 @@ for iid, groups in ex['items'].items():
     for gname in groups:
         if gname not in cur:
             cur.append(gname)
+for iid, groups in ex.get('itemsReplace', {}).items():   # the item's server groups are wrong: use only these
+    ro['items'][iid] = list(groups)
 json.dump(ro, open(p, 'w', encoding='utf-8'), separators=(',', ':'))
 print('groups', len(ro['groups']), 'items', len(ro['items']))

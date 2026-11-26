@@ -210,3 +210,23 @@ main { padding: 8px; }
 #skillGrid { user-select: none; }   /* fast clicking on skill icons must not select text */
 
 #toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #2c3e5c; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: 13px; z-index: 1000; box-shadow: 0 2px 8px #0004; }
+
+/* craft popup */
+.craftwin { width: min(1040px, 96vw); height: min(720px, 90vh); max-height: none; }
+.cbody { flex: 1; min-height: 0; display: flex; }
+.cleft { width: 430px; display: flex; flex-direction: column; border-right: 1px solid var(--line); min-height: 0; }
+.cfil { padding: 4px 5px; display: flex; flex-direction: column; gap: 3px; border-bottom: 1px solid var(--line); background: var(--row2); }
+.cfcats { display: flex; flex-wrap: wrap; gap: 2px; }
+.cfcats button { padding: 1px 6px; }
+.cfcats button.on { background: var(--t2); color: #fff; border-color: var(--t2); }
+.cfcats small { opacity: .7; font-size: 9px; }
+.cfrow { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.cfrow > span { min-width: 62px; font-weight: bold; }
+.cfrow #cQ { flex: 1; }
+.cfrow select { max-width: 280px; }
+.cfrow input[type=number] { width: 62px; }
+.results.cflist { flex: 1; max-height: none; border: 0; }
+.cflist > div { border-bottom: 1px solid #edf1f8; }
+.cflist img { width: 24px; height: 24px; }
+.cflist .nm { line-height: 1.15; }
+#craftModal .craft { flex: 1; overflow: auto; min-width: 0; }

@@ -106,6 +106,11 @@ for c in load('item_combos') + load_import('item_combos'):
     if sets and c.get('Script'):
         combos.append({'sets': sets, 'script': c['Script'].strip()})
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from apply_data_fixes import apply as apply_fixes          # corrections to the server data (tools/data_fixes.json)
+_s = {str(k): v for k, v in items.items()}
+apply_fixes(_s, combos)
+items = {int(k): v for k, v in _s.items()}
 json.dump({str(k): v for k, v in sorted(items.items())}, open(f'{out}/items.json', 'w', encoding='utf-8'),
           ensure_ascii=False, separators=(',', ':'))
 json.dump({'refine': refine, 'grades': grades}, open(f'{out}/refine.json', 'w', encoding='utf-8'), separators=(',', ':'))

@@ -2158,9 +2158,6 @@
   "450299": [
    "GENERIC_3"
   ],
-  "480076": [
-   "GENERIC_1"
-  ],
   "460005": [
    "GENERIC_3"
   ],
@@ -2303,7 +2300,7 @@
   "15396": "generic list, 3 line(s)",
   "450175": "generic list, 3 line(s)",
   "450299": "generic list, 3 line(s)",
-  "480076": "generic list, 1 line(s)",
+  "480076": "Unsealed Temporal Key (https://ro.gnjoy.in.th/new-enchant-ancient-weapon-temporal-manteau/)",
   "460005": "generic list, 3 line(s)",
   "460006": "generic list, 3 line(s)",
   "470071": "generic list, 2 line(s)",
@@ -2341,7 +2338,8 @@
   "401279": "generic list, 2 line(s)",
   "401280": "generic list, 2 line(s)",
   "401281": "generic list, 2 line(s)",
-  "401282": "generic list, 2 line(s)"
+  "401282": "generic list, 2 line(s)",
+  "480312": "Unsealed Temporal Key (https://ro.gnjoy.in.th/new-enchant-ancient-weapon-temporal-manteau/)"
  },
  "reshape": {
   "GRACE_CONVERT1": {
@@ -2375,6 +2373,31 @@
     "MDAMAGE_SIZE_MIDIUM_USER": "MDAMAGE_SIZE_MIDIUM_TARGET"
    },
    "src": "https://ro.gnjoy.in.th/grace-set/ (line 1 always, line 2 by chance; 'vs Medium' is the target-size option)"
+  },
+  "GEMSTONE_OF_TIME": {
+   "ranges": {
+    "HEAL_VALUE": [
+     1,
+     5
+    ],
+    "RANGE_ATTACK_DAMAGE_TARGET": [
+     1,
+     5
+    ],
+    "DEC_SPELL_DELAY_TIME": [
+     1,
+     5
+    ]
+   },
+   "src": "https://wiki.muhro.eu/Temporal_Armors (heal / ranged damage / after-skill delay 1~5%, the server had 3~20)"
   }
+ },
+ "itemsReplace": {
+  "480076": [
+   "TIME_UNSEAL_KEY"
+  ],
+  "480312": [
+   "TIME_UNSEAL_KEY"
+  ]
  }
 }

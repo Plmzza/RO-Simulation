@@ -87,12 +87,6 @@
   </div>
 
   <div class="row2">
-    <!-- 6. Craft -->
-    <section class="win" id="wCraft">
-      <h2 id="craftTitle">Equipment Craft</h2>
-      <div class="craft" id="craftBox"></div>
-    </section>
-
     <section class="win" id="wBuff">
       <h2>บัพ / ดีบัพมอนสเตอร์</h2>
       <nav class="tabs" id="buffTabs"><button data-t="self" class="on">สกิลตัวเอง</button><button data-t="party">จากคนอื่น / ปาร์ตี้</button><button data-t="debuff">ดีบัพมอนสเตอร์</button></nav>
@@ -125,6 +119,11 @@
 </section>
 <div class="tip" id="tip" hidden></div>
 
+<!-- 6. Craft (opened from the inventory: + คราฟใหม่ / แก้ไข) -->
+<div class="modal" id="craftModal" hidden><div class="mbox craftwin"><h2 id="craftTitle">Equipment Craft</h2>
+  <div class="cbody"><div class="cleft"><div id="cfFilters" class="cfil"></div><div id="cfList" class="results cflist"></div></div>
+  <div class="craft" id="craftBox"></div></div>
+  <footer><span id="cfCount" class="muted"></span><span class="grow"></span><button id="craftClose">ปิด</button></footer></div></div>
 <div class="modal" id="modal" hidden><div class="mbox"><h2 id="mTitle"></h2><div id="mBody"></div>
   <footer><span class="grow"></span><button id="mClose">ปิด</button></footer></div></div>
 

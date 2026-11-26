@@ -23,6 +23,7 @@ const ENCH = await fetch('../data/enchants.json').then((r) => (r.ok ? r.json() :
 const RANDOPT = await fetch('../data/randomopt.json').then((r) => (r.ok ? r.json() : { options: {}, groups: {}, items: {} })).catch(() => ({ options: {}, groups: {}, items: {} }));
 const TREEPOS = await fetch('../data/skilltree.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const SCX = await fetch('../data/scconflict.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+const SERIES = await fetch('../data/series.json').then((r) => (r.ok ? r.json() : { series: [] })).catch(() => ({ series: [] }));
 const SKILLINFO = await fetch('../data/skillinfo.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const C = db.equip.constants;
 
@@ -654,7 +655,7 @@ $('wInv').addEventListener('input', (e) => { if (e.target.id === 'invQ') { invSe
 $('wInv').addEventListener('change', (e) => { if (e.target.id === 'invAll') { S.ui.invAll = e.target.checked; renderInv(); save(); } });
 $('wInv').addEventListener('click', (e) => {
   if (e.target.id === 'consClear') { S.consumables = []; refresh(); return; }
-  if (e.target.id === 'invNew') { editing = newDraft(); renderCraft(); $('cQ')?.focus(); return; }
+  if (e.target.id === 'invNew') { openCraft(newDraft()); return; }
   const el = e.target.closest('[data-cons],[data-inv]');
   if (el) { document.querySelectorAll('#invList .ii.sel').forEach((x) => x.classList.remove('sel')); el.classList.add('sel'); }
 });
@@ -734,7 +735,7 @@ function itemMenu(uidv) {
         wear(x.uid, slot);
       }
     }
-    if (a === 'edit') { editing = structuredClone(x); renderCraft(); $('wCraft').scrollIntoView({ behavior: 'smooth' }); return; }
+    if (a === 'edit') { openCraft(structuredClone(x)); return; }
     if (a === 'dup') {
       if (S.inventory.length >= MAX_INV) return alert(`ช่องเก็บของเต็ม (${MAX_INV})`);
       S.inventory.splice(S.inventory.indexOf(x) + 1, 0, { ...structuredClone(x), uid: uid() });
@@ -780,16 +781,152 @@ const newDraft = () => ({ uid: null, id: null, refine: 0, grade: 0, cards: [], e
 let craftQ = '';
 const slotOfItem = (it) => Object.keys(SLOTS).find((s) => fits(it, s));
 const idFromText = (t) => { const m = /\[(\d+)\]\s*$/.exec(t || ''); return m ? Number(m[1]) : null; };
+// ---- craft window: filters (category, position / weapon type, series, weapon / armor level, Base Lv, slots...) + list
+const CF_CATS = [['', 'ทั้งหมด'], ['head', 'Headgear'], ['weapon', 'Weapon'], ['shield', 'Shield'], ['armor', 'Armor'], ['garment', 'Garment'],
+  ['shoes', 'Shoes'], ['acc', 'Accessory'], ['shadow', 'Shadow'], ['costume', 'Costume'], ['ammo', 'Ammo']];
+const WTYPE_TH = { Dagger: 'Dagger', '1hSword': 'One-hand Sword', '2hSword': 'Two-hand Sword', '1hSpear': 'One-hand Spear', '2hSpear': 'Two-hand Spear',
+  '1hAxe': 'One-hand Axe', '2hAxe': 'Two-hand Axe', Mace: 'Mace', Staff: 'Staff / Rod', '2hStaff': 'Two-hand Staff', Bow: 'Bow', Knuckle: 'Knuckle',
+  Musical: 'Musical Instrument', Whip: 'Whip', Book: 'Book', Katar: 'Katar', Revolver: 'Revolver', Rifle: 'Rifle', Gatling: 'Gatling Gun',
+  Shotgun: 'Shotgun', Grenade: 'Grenade Launcher', Huuma: 'Huuma Shuriken' };
+const POS_OF = (loc) => [loc.some((l) => /Head_Top/.test(l)) && 'top', loc.some((l) => /Head_Mid/.test(l)) && 'mid', loc.some((l) => /Head_Low/.test(l)) && 'low',
+  loc.some((l) => /Garment/.test(l)) && 'garment'].filter(Boolean);
+const SHADOW_PART = { Shadow_Weapon: 'Weapon', Shadow_Armor: 'Armor', Shadow_Shield: 'Shield', Shadow_Shoes: 'Shoes', Shadow_Right_Accessory: 'Earring (R)', Shadow_Left_Accessory: 'Pendant (L)' };
+const SERIES_OF = {};
+SERIES.series.forEach(([n, ids]) => ids.forEach((id) => (SERIES_OF[id] ||= []).push(n)));
+function catOf(it) {
+  const l = it.loc;
+  if (it.type === 'Ammo') return 'ammo';
+  if (it.type === 'ShadowGear' || l.some((x) => x.startsWith('Shadow_'))) return 'shadow';
+  if (l.some((x) => x.startsWith('Costume_'))) return 'costume';
+  if (it.type === 'Weapon') return 'weapon';
+  if (l.some((x) => /^Head_/.test(x))) return 'head';
+  if (l.includes('Left_Hand')) return 'shield';
+  if (l.includes('Armor')) return 'armor';
+  if (l.includes('Garment')) return 'garment';
+  if (l.includes('Shoes')) return 'shoes';
+  if (l.some((x) => /Accessory/.test(x))) return 'acc';
+  return 'other';
+}
+const CRAFT_ITEMS = equipList.map((x) => {
+  const it = db.equip.items[x.id];
+  return { ...x, it, cat: catOf(it), pos: POS_OF(it.loc), part: it.loc.find((l) => SHADOW_PART[l]), sub: it.sub || '',
+    series: SERIES_OF[x.id] || [], wlv: it.type === 'Weapon' ? it.wlv || 0 : 0, alv: it.type === 'Armor' && !catOf(it).match(/costume/) ? it.alv || 0 : 0 };
+});
+const CF_DEFAULT = () => ({ cat: '', pos: '', wtype: '', part: '', series: '', wlv: [], alv: [], lvMin: '', lvMax: '', slots: '', refine: false, grade: false, sort: 'id' });
+const cfState = () => (S.ui.craftF = { ...CF_DEFAULT(), ...(S.ui.craftF || {}) });
+/** items passing every filter except `skip` (so a select can count what its own choices would give) */
+function craftFilter(skip) {
+  const f = cfState(), q = craftQ.trim().toLowerCase();
+  const usable = (id) => itemUsableBy(db.equip, db.equip.items[id], build.classId, build.status.baseLv).ok;
+  return CRAFT_ITEMS.filter((x) => (skip === 'cat' || !f.cat || x.cat === f.cat)
+    && (skip === 'pos' || !f.pos || x.pos.includes(f.pos))
+    && (skip === 'wtype' || !f.wtype || x.sub === f.wtype)
+    && (skip === 'part' || !f.part || x.part === f.part)
+    && (skip === 'series' || !f.series || x.series.includes(f.series))
+    && (!f.wlv.length || f.wlv.includes(x.wlv))
+    && (!f.alv.length || f.alv.includes(x.alv))
+    && (f.lvMin === '' || (x.it.elv || 1) >= +f.lvMin) && (f.lvMax === '' || (x.it.elv || 1) <= +f.lvMax)
+    && (f.slots === '' || (f.slots === '4' ? (x.it.slots || 0) >= 4 : (x.it.slots || 0) === +f.slots))
+    && (!f.refine || x.it.refine || x.cat === 'shadow') && (!f.grade || x.it.grade)
+    && (!q || x.lc.includes(q) || String(x.id) === q)
+    && (S.ui.craftAll || usable(x.id)));
+}
+function renderCraftFilters() {
+  const f = cfState();
+  const sel = (id, cur, opts) => `<select id="${id}">${opts.map(([v, t]) => `<option value="${esc(v)}" ${String(v) === String(cur) ? 'selected' : ''}>${esc(t)}</option>`).join('')}</select>`;
+  const count = (skip, key) => { const c = {}; craftFilter(skip).forEach((x) => [].concat(x[key]).forEach((k) => { c[k] = (c[k] || 0) + 1; })); return c; };
+  const cc = count('cat', 'cat');
+  let h = `<div class="cfcats">${CF_CATS.map(([v, t]) => `<button data-cfcat="${v}" class="${f.cat === v ? 'on' : ''}">${t}${v && cc[v] ? ` <small>${cc[v]}</small>` : ''}</button>`).join('')}</div>`;
+  h += `<div class="cfrow"><input id="cQ" placeholder="ค้นหาชื่อหรือ ID…" value="${esc(craftQ)}"></div>`;
+  const sc = count('series', 'series');
+  const sers = SERIES.series.map(([n]) => n).filter((n) => sc[n] || n === f.series);
+  h += `<div class="cfrow"><span>ซีรีส์</span>${sel('cfSeries', f.series, [['', `ทุกซีรีส์`], ...sers.map((n) => [n, `${n} (${sc[n] || 0})`])])}</div>`;
+  if (f.cat === 'head' || f.cat === 'costume') {
+    const pc = count('pos', 'pos');
+    const P = [['top', 'บน'], ['mid', 'กลาง'], ['low', 'ล่าง'], ...(f.cat === 'costume' ? [['garment', 'ผ้าคลุม']] : [])];
+    h += `<div class="cfrow"><span>ตำแหน่ง</span>${sel('cfPos', f.pos, [['', 'ทุกตำแหน่ง'], ...P.map(([v, t]) => [v, `${t} (${pc[v] || 0})`])])}</div>`;
+  }
+  if (f.cat === 'weapon') {
+    const wc = count('wtype', 'sub');
+    h += `<div class="cfrow"><span>ชนิด</span>${sel('cfWtype', f.wtype, [['', 'ทุกชนิด'], ...Object.keys(WTYPE_TH).filter((k) => wc[k] || k === f.wtype).map((k) => [k, `${WTYPE_TH[k]} (${wc[k] || 0})`])])}</div>`;
+  }
+  if (f.cat === 'shadow') {
+    const pc = count('part', 'part');
+    h += `<div class="cfrow"><span>ส่วน</span>${sel('cfPart', f.part, [['', 'ทุกส่วน'], ...Object.entries(SHADOW_PART).map(([k, t]) => [k, `${t} (${pc[k] || 0})`])])}</div>`;
+  }
+  const chk = (key, v) => `<label class="chk"><input type="checkbox" data-cf${key}="${v}" ${f[key].includes(v) ? 'checked' : ''}>${v}</label>`;
+  if (!f.cat || f.cat === 'weapon') h += `<div class="cfrow"><span>Weapon Lv</span>${[1, 2, 3, 4, 5].map((v) => chk('wlv', v)).join('')}</div>`;
+  if (['', 'head', 'shield', 'armor', 'garment', 'shoes', 'acc'].includes(f.cat)) h += `<div class="cfrow"><span>Armor Lv</span>${[1, 2].map((v) => chk('alv', v)).join('')}</div>`;
+  h += `<div class="cfrow"><span>Base Lv</span><input type="number" id="cfLvMin" min="1" max="275" placeholder="ต่ำสุด" value="${f.lvMin}"> – <input type="number" id="cfLvMax" min="1" max="275" placeholder="สูงสุด" value="${f.lvMax}"></div>`;
+  h += `<div class="cfrow"><span>ช่องการ์ด</span>${sel('cfSlots', f.slots, [['', 'ไม่กำหนด'], ['0', '0'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4 ขึ้นไป']])}
+    <span>เรียง</span>${sel('cfSort', f.sort, [['id', 'ID'], ['name', 'ชื่อ'], ['lv', 'Base Lv มาก→น้อย']])}</div>`;
+  h += `<div class="cfrow"><label class="chk"><input type="checkbox" id="cfRefine" ${f.refine ? 'checked' : ''}>ตีบวกได้</label>
+    <label class="chk"><input type="checkbox" id="cfGrade" ${f.grade ? 'checked' : ''}>มีเกรด</label>
+    <label class="chk" data-tip="แสดงไอเท็มที่อาชีพ / เลเวลนี้ใส่ไม่ได้ด้วย (คราฟเก็บไว้ได้ แต่ใส่ไม่ได้)"><input type="checkbox" id="cAll" ${S.ui.craftAll ? 'checked' : ''}>ทุกอาชีพ</label>
+    <button id="cfReset">ล้างตัวกรอง</button></div>`;
+  $('cfFilters').innerHTML = h;
+}
+const CF_MAX = 300;
+function renderCraftList() {
+  const f = cfState();
+  const list = craftFilter();
+  if (f.sort === 'name') list.sort((a, b) => a.name.localeCompare(b.name) || a.id - b.id);
+  else if (f.sort === 'lv') list.sort((a, b) => (b.it.elv || 0) - (a.it.elv || 0) || a.id - b.id);
+  else list.sort((a, b) => a.id - b.id);
+  const usable = (id) => itemUsableBy(db.equip, db.equip.items[id], build.classId, build.status.baseLv).ok;
+  const info = (x) => [x.cat === 'weapon' ? (WTYPE_TH[x.sub] || x.sub) : '', x.wlv ? `WLv ${x.wlv}` : '', x.alv ? `ALv ${x.alv}` : '',
+    x.it.elv ? `Lv ${x.it.elv}` : '', x.series[0] || ''].filter(Boolean).join(' · ');
+  $('cfList').innerHTML = list.slice(0, CF_MAX).map((x) => `<div data-pick="${x.id}" class="${x.id === editing.id ? 'sel' : ''}${usable(x.id) ? '' : ' off'}">${iconI(x.id)}
+    <span class="nm">${esc(x.name)}${x.it.slots ? ` [${x.it.slots}]` : ''}<small class="muted"> #${x.id}</small><br><small class="muted">${esc(info(x))}</small></span></div>`).join('')
+    || '<div class="muted">ไม่พบไอเท็มตามตัวกรอง</div>';
+  $('cfCount').textContent = `พบ ${list.length} รายการ${list.length > CF_MAX ? ` (แสดง ${CF_MAX} แรก — กรองเพิ่มเพื่อดูที่เหลือ)` : ''}`;
+}
+function openCraft(draft) {
+  editing = draft;
+  $('craftModal').hidden = false;
+  renderCraftFilters(); renderCraftList(); renderCraft();
+  $('cQ')?.focus();
+}
+$('craftClose').onclick = () => { $('craftModal').hidden = true; };
+$('craftModal').onclick = (e) => { if (e.target === $('craftModal')) $('craftModal').hidden = true; };
+$('cfFilters').addEventListener('click', (e) => {
+  const c = e.target.closest('[data-cfcat]');
+  if (c) { const f = cfState(); f.cat = c.dataset.cfcat; f.pos = f.wtype = f.part = ''; renderCraftFilters(); renderCraftList(); save(); }
+  if (e.target.id === 'cfReset') { S.ui.craftF = CF_DEFAULT(); craftQ = ''; renderCraftFilters(); renderCraftList(); save(); }
+});
+$('cfFilters').addEventListener('input', (e) => {
+  if (e.target.id === 'cQ') { craftQ = e.target.value; renderCraftList(); }
+});
+$('cfFilters').addEventListener('change', (e) => {
+  const f = cfState(), t = e.target, d = t.dataset;
+  const map = { cfSeries: 'series', cfPos: 'pos', cfWtype: 'wtype', cfPart: 'part', cfSlots: 'slots', cfSort: 'sort', cfLvMin: 'lvMin', cfLvMax: 'lvMax' };
+  if (map[t.id]) f[map[t.id]] = t.value;
+  else if (t.id === 'cfRefine') f.refine = t.checked;
+  else if (t.id === 'cfGrade') f.grade = t.checked;
+  else if (t.id === 'cAll') S.ui.craftAll = t.checked;
+  else if (d.cfwlv || d.cfalv) {
+    const k = d.cfwlv ? 'wlv' : 'alv', v = Number(d.cfwlv || d.cfalv);
+    f[k] = t.checked ? [...f[k], v] : f[k].filter((x) => x !== v);
+  } else if (t.id === 'cQ') return;
+  else return;
+  renderCraftFilters(); renderCraftList(); save();
+});
+$('cfList').addEventListener('click', (e) => {
+  const d = e.target.closest('[data-pick]')?.dataset;
+  if (!d) return;
+  const id = Number(d.pick);
+  const keep = editing.id && db.equip.items[editing.id]?.slots === db.equip.items[id].slots;
+  editing = { ...editing, id, cards: keep ? editing.cards : [], enchants: [], options: [], optGroup: null,
+    grade: db.equip.items[id].grade ? editing.grade : 0, refine: db.equip.items[id].refine ? editing.refine : 0 };
+  $('cfList').querySelectorAll('.sel').forEach((x) => x.classList.remove('sel'));
+  e.target.closest('[data-pick]').classList.add('sel');
+  renderCraft();
+});
 function renderCraft() {
   if (!editing) editing = newDraft();
   $('craftTitle').textContent = editing.uid ? 'Equipment Craft — แก้ไข' : 'Equipment Craft';
   const it = editing.id ? db.equip.items[editing.id] : null;
-  const q = craftQ.toLowerCase();
-  const usable = (id) => itemUsableBy(db.equip, db.equip.items[id], build.classId, build.status.baseLv);
-  const res = q.length >= 2 ? equipList.filter((x) => (x.lc.includes(q) || String(x.id) === q) && (S.ui.craftAll || usable(x.id).ok)).slice(0, 80) : [];
-  let h = `<div class="row"><span>ไอเท็ม</span><input class="wide" id="cQ" placeholder="พิมพ์ชื่อหรือ ID อย่างน้อย 2 ตัวอักษร" value="${esc(craftQ)}">
-    <label class="chk" data-tip="แสดงไอเท็มที่อาชีพ / เลเวลนี้ใส่ไม่ได้ด้วย (คราฟเก็บไว้ได้ แต่ใส่ไม่ได้)"><input type="checkbox" id="cAll" ${S.ui.craftAll ? 'checked' : ''}> ทุกอาชีพ</label></div>`;
-  if (q.length >= 2) h += `<div class="results" id="cRes">${res.map((x) => { const u = usable(x.id); return `<div data-pick="${x.id}" class="${x.id === editing.id ? 'sel' : ''}${u.ok ? '' : ' off'}">${iconI(x.id)}${esc(x.name)} <span class="muted">#${x.id}${db.equip.items[x.id].elv ? ' · Lv' + db.equip.items[x.id].elv : ''}</span></div>`; }).join('') || '<div class="muted">ไม่พบ</div>'}</div>`;
+  let h = it ? '' : '<p class="muted">เลือกไอเท็มจากรายการทางซ้าย</p>';
   if (it) {
     const slot = slotOfItem(it);
     const u = itemUsableBy(db.equip, it, build.classId, build.status.baseLv);
@@ -853,12 +990,8 @@ function renderCraft() {
   }
   $('craftBox').innerHTML = h;
 }
-$('craftBox').addEventListener('input', (e) => {
-  if (e.target.id === 'cQ') { craftQ = e.target.value; const p = e.target.selectionStart; renderCraft(); $('cQ').focus(); $('cQ').setSelectionRange(p, p); }
-});
 $('craftBox').addEventListener('change', (e) => {
   const d = e.target.dataset;
-  if (e.target.id === 'cAll') { S.ui.craftAll = e.target.checked; renderCraft(); save(); return; }
   if (e.target.id === 'cRef') { editing.refine = Number(e.target.value); renderCraft(); return; }
   else if (e.target.id === 'cGrade') { editing.grade = Number(e.target.value); renderCraft(); }
   else if (d.card !== undefined) editing.cards[d.card] = idFromText(e.target.value);
@@ -884,16 +1017,9 @@ $('craftBox').addEventListener('change', (e) => {
 });
 $('craftBox').addEventListener('click', (e) => {
   const d = e.target.closest('[data-pick]')?.dataset || e.target.dataset;
-  if (d.pick) {
-    const id = Number(d.pick);
-    const keep = editing.id && db.equip.items[editing.id]?.slots === db.equip.items[id].slots;
-    editing = { ...editing, id, cards: keep ? editing.cards : [], grade: db.equip.items[id].grade ? editing.grade : 0,
-      refine: db.equip.items[id].refine ? editing.refine : 0 };
-    craftQ = ''; renderCraft(); return;
-  }
   if (e.target.id === 'cOptAdd') { if (editing.options.length < 5) editing.options.push({ k: 'atk', a: null, v: 1 }); renderCraft(); }
   if (d.odel !== undefined) { editing.options.splice(Number(d.odel), 1); renderCraft(); }
-  if (e.target.closest('#cNew')) { editing = newDraft(); renderCraft(); }
+  if (e.target.closest('#cNew')) { editing = newDraft(); renderCraft(); renderCraftList(); }
   if (e.target.closest('#cSave')) {
     const it = db.equip.items[editing.id];
     editing.cards = editing.cards.slice(0, it.slots || 0).map((x) => x || null);
@@ -906,7 +1032,10 @@ $('craftBox').addEventListener('click', (e) => {
       if (S.inventory.length >= MAX_INV) return alert(`ช่องเก็บของเต็ม (${MAX_INV})`);
       S.inventory.push({ ...structuredClone(editing), uid: uid() });
     }
+    const wasEdit = !!editing.uid, nm = db.equip.items[editing.id]?.name;
     editing = newDraft(); S.ui.invTab = 'equip'; refresh();
+    if (wasEdit) $('craftModal').hidden = true;
+    else { toast(`เก็บ ${nm} เข้า Inventory แล้ว`); renderCraftList(); }
   }
 });
 
@@ -1127,7 +1256,7 @@ $('itemInfo').addEventListener('click', (e) => {
   $('wItemInfo').hidden = true;
   if (a === 'use') return toggleCons(Number(x.id));
   if (a === 'wear') return toggleWear(x.uid);
-  if (a === 'edit') { editing = structuredClone(x); renderCraft(); $('wCraft').scrollIntoView({ behavior: 'smooth' }); return; }
+  if (a === 'edit') { openCraft(structuredClone(x)); return; }
   if (a === 'dup') {
     if (S.inventory.length >= MAX_INV) return notice(`ช่องเก็บของเต็ม (${MAX_INV})`);
     S.inventory.splice(S.inventory.indexOf(x) + 1, 0, { ...structuredClone(x), uid: uid() }); refresh(); return;

@@ -1,0 +1,131 @@
+{
+ "_doc": "Corrections to the server data, applied to data/items.json and data/combos.json by tools/apply_data_fixes.py (build_equip_data.py runs it too). Each fix was checked against the GGT client description and confirmed by the user.",
+ "items": [
+  {
+   "ids": [
+    490583,
+    490584
+   ],
+   "replace": [
+    "bonus bLongAtkDef,",
+    "bonus bLongAtkRate,"
+   ],
+   "why": "Time Jewelry Amulet: GGT description says +melee / ranged physical damage, the server had ranged damage taken (bLongAtkDef)"
+  }
+ ],
+ "combos": [
+  {
+   "with": [
+    420017,
+    420018,
+    420019,
+    420020,
+    420021,
+    420022
+   ],
+   "replace": [
+    "getequiprefinerycnt(EQI_HEAD_MID)+",
+    ""
+   ],
+   "why": "Young Leaf of World Tree: total refine is armor + garment (the leaf is a lower headgear and cannot be refined); the server also counted the middle headgear"
+  },
+  {
+   "remove": [
+    29677,
+    490583
+   ],
+   "why": "Temporal Jewel (Agi) Lv.3 + Time Jewelry Amulet (Lv.2) gave the Lv.3 bonus; the Lv.2 amulet only gives the Lv.2 bonus"
+  },
+  {
+   "add_to": [
+    313350,
+    490584
+   ],
+   "sets": [
+    [
+     29677,
+     490584
+    ]
+   ],
+   "why": "Temporal Jewel (Agi) Lv.3 + Time Jewelry Amulet (Lv.3): the server had the Lv.2 amulet in this set"
+  },
+  {
+   "add_to": [
+    29673,
+    490583
+   ],
+   "sets": [
+    [
+     29674,
+     490583
+    ]
+   ],
+   "why": "Lv.2 amulet + Temporal Jewel Lv.3 (in the circlet) (Str): Lv.2 bonus; the amulet itself takes Time Jewel Lv.2 only"
+  },
+  {
+   "add_to": [
+    29676,
+    490583
+   ],
+   "sets": [
+    [
+     29677,
+     490583
+    ]
+   ],
+   "why": "Lv.2 amulet + Temporal Jewel Lv.3 (in the circlet) (Agi): Lv.2 bonus; the amulet itself takes Time Jewel Lv.2 only"
+  },
+  {
+   "add_to": [
+    29679,
+    490583
+   ],
+   "sets": [
+    [
+     29680,
+     490583
+    ]
+   ],
+   "why": "Lv.2 amulet + Temporal Jewel Lv.3 (in the circlet) (Vit): Lv.2 bonus; the amulet itself takes Time Jewel Lv.2 only"
+  },
+  {
+   "add_to": [
+    29682,
+    490583
+   ],
+   "sets": [
+    [
+     29683,
+     490583
+    ]
+   ],
+   "why": "Lv.2 amulet + Temporal Jewel Lv.3 (in the circlet) (Int): Lv.2 bonus; the amulet itself takes Time Jewel Lv.2 only"
+  },
+  {
+   "add_to": [
+    29685,
+    490583
+   ],
+   "sets": [
+    [
+     29686,
+     490583
+    ]
+   ],
+   "why": "Lv.2 amulet + Temporal Jewel Lv.3 (in the circlet) (Dex): Lv.2 bonus; the amulet itself takes Time Jewel Lv.2 only"
+  },
+  {
+   "add_to": [
+    29688,
+    490583
+   ],
+   "sets": [
+    [
+     29689,
+     490583
+    ]
+   ],
+   "why": "Lv.2 amulet + Temporal Jewel Lv.3 (in the circlet) (Luk): Lv.2 bonus; the amulet itself takes Time Jewel Lv.2 only"
+  }
+ ]
+}
