@@ -345,7 +345,7 @@ $('skillMax').onclick = () => {
 };
 function flash(el) { el.animate([{ background: '#ffd4d4' }, { background: 'transparent' }], { duration: 600 }); }
 $('skillReset').onclick = () => { if (!curTier()) return; curTier().skills.forEach(([n]) => delete S.skills[n]); pruneSkills(); refresh(); };
-$('siClose').onclick = () => { $('wSkillInfo').hidden = true; skillSel = null; renderSkills(); };
+$('siClose').onclick = () => { $('wSkillInfo').hidden = true; $('wCastInfo').hidden = true; castPopFor = null; skillSel = null; renderSkills(); };
 // drag the description window by its title bar
 (() => {
   const w = $('wSkillInfo'), h = w.querySelector('h2');
@@ -363,44 +363,102 @@ const ELE_TH = { Neutral: 'ไม่มีธาตุ', Water: 'น้ำ', Ear
   Ghost: 'วิญญาณ', Undead: 'อมตะ', Weapon: 'ตามอาวุธ', Endowed: 'ตามธาตุที่เคลือบ', Random: 'สุ่ม' };
 const lvv = (v, lv) => (Array.isArray(v) ? v[Math.min(lv, v.length) - 1] : v);
 const sec = (ms) => (ms == null ? '-' : `${+(ms / 1000).toFixed(2)} วิ`);
+/** skill ratio code (server C) -> readable formula; null when the code has branches / calls we can't show as one line */
+const STAT_TOK = { str: 'STR', agi: 'AGI', vit: 'VIT', int_: 'INT', int: 'INT', dex: 'DEX', luk: 'LUK', pow: 'POW', sta: 'STA', wis: 'WIS', spl: 'SPL', con: 'CON', crt: 'CRT' };
+function ratioFormula(code) {
+  if (!code) return null;
+  let lines = code.split(/;|\n/).map((l) => l.trim()).filter((l) => l && !/^var \w+ = \w+$/.test(l));
+  let dmod = null, expr = '100';
+  for (const l of lines) {
+    let m;
+    if ((m = /^RE_LVL_DMOD\((\d+)\)$/.exec(l))) dmod = m[1];
+    else if ((m = /^skillratio \+= (.+)$/.exec(l))) expr += ` + ${m[1]}`;
+    else if ((m = /^skillratio -= (.+)$/.exec(l))) expr += ` - (${m[1]})`;
+    else if ((m = /^skillratio = (.+)$/.exec(l))) expr = m[1];
+    else return null;
+  }
+  expr = expr.replace(/^100 \+ -100 \+ /, '').replace(/^100 \+ -100$/, '0');
+  expr = expr.replace(/\bskill_lv\b/g, 'SkillLv').replace(/status_get_lv\(src\)/g, 'BaseLv').replace(/status_get_int\(src\)/g, 'INT')
+    .replace(/\bS\.(\w+)/g, (_, k) => STAT_TOK[k] || k.toUpperCase()).replace(/SD\.status\.job_level/g, 'JobLv')
+    .replace(/pc_checkskill\(SD, (\w+)\)/g, (_, k) => `Lv(${k})`).replace(/\*/g, '×');
+  if (/[(){}?:&|!<>=]/.test(expr.replace(/\(|\)/g, '').replace(/Lv\([^)]*\)/g, ''))) return null;
+  return { expr, dmod };
+}
+function fillFormula(f, lv) {
+  const t = build.status.total, v = { SkillLv: lv, BaseLv: build.status.baseLv, JobLv: build.status.jobLv };
+  Object.values(STAT_TOK).forEach((k) => { v[k] = t[k.toLowerCase()] ?? 0; });
+  return f.expr.replace(/\b(SkillLv|BaseLv|JobLv|STR|AGI|VIT|INT|DEX|LUK|POW|STA|WIS|SPL|CON|CRT)\b/g, (k) => v[k] ?? k)
+    .replace(/Lv\((\w+)\)/g, (_, id) => S.skills[id] || 0);
+}
+const SKILL_TYPE_TH = { Weapon: 'กายภาพ', Magic: 'เวทมนตร์', Misc: 'อื่นๆ' };
+function skillRatios(n, info) {
+  if (!db.skills.skills[n] || !info.type || (info.flags || []).includes('NoDamage')) return null;
+  const out = [];
+  for (let lv = 1; lv <= info.maxLv; lv++) {
+    try { const dm = calculateDamage(db, build, { mobId: S.mobId, skill: n, level: lv, debuffs: S.debuffs }); out.push({ lv, ratio: dm.ratio, avg: dm.avg, cast: dm.cast }); }
+    catch { return null; }
+  }
+  return out;
+}
+let castPopFor = null;
 function renderSkillInfo() {
   const box = $('skillInfo');
   const n = skillSel, info = SKILLINFO[n], d = skillDef(n);
-  if (!n || !info) { $('wSkillInfo').hidden = true; return; }
-  $('siTitle').textContent = info.name;
+  if (!n || !info) { $('wSkillInfo').hidden = true; $('wCastInfo').hidden = true; return; }
+  $('siTitle').textContent = 'Skill Info';
   const granted = build.equip.grantedSkills?.[n];
   const learned = Math.max(S.skills[n] || 0, granted?.lv || 0), show = Math.max(1, learned);
-  const r = build.status;
-  const parts = [];
-  parts.push(`<div class="head">${iconS(n)}<b>${esc(info.name)}</b> <span class="muted">(${n} · Lv ${learned} / ${info.maxLv})</span></div>`);
-  const desc = [];
-  desc.push(`ประเภท: ${KIND[info.target] || info.target}${info.type ? ` · ${info.type === 'Weapon' ? 'กายภาพ' : info.type === 'Magic' ? 'เวทมนตร์' : info.type}` : ''}`);
-  if (info.ele && info.type && !(info.flags || []).includes('NoDamage')) desc.push(`ธาตุ: ${esc(ELE_TH[lvv(info.ele, show)] || lvv(info.ele, show))}`);
-  if (info.range) desc.push(`ระยะ: ${Math.abs(lvv(info.range, show))} ช่อง`);
-  if (info.area) desc.push(`พื้นที่: ${lvv(info.area, show) * 2 + 1}×${lvv(info.area, show) * 2 + 1}`);
-  if (info.weapons) desc.push(`อาวุธที่ใช้ได้: ${info.weapons.join(', ')}`);
-  if (info.spheres) desc.push(`ใช้ Spirit Sphere ${lvv(info.spheres, show)} ลูก`);
-  if (info.items) desc.push('ไอเท็มที่ใช้: ' + info.items.map(([it, a, l]) => `${esc(it)} ×${a}${l ? ` (Lv${l})` : ''}`).join(', '));
-  if (granted && !S.skills[n]) desc.push(`<span class="good">ได้จากอุปกรณ์: ${esc(granted.source)} (Lv ${granted.lv})</span>`);
-  if (d?.[2]?.length) desc.push('ต้องเรียนก่อน: ' + d[2].map(([q, ql]) => `<span class="${(S.skills[q] || 0) >= ql ? 'good' : 'bad'}">${esc(skName(q))} Lv${ql}</span>`).join(', '));
-  if (d?.[3]) desc.push(`ต้องมี Job Lv ${d[3]}`);
-  // this build: what the skill does now (buff values or damage)
-  let now = '';
+  const g = (t) => `<span class="c7">${t}:</span> `;
+  const range = (v) => (Array.isArray(v) ? (Math.min(...v) === Math.max(...v) ? sec(v[0]) : `${sec(Math.min(...v)).replace(' วิ', '')} ~ ${sec(Math.max(...v))}`) : sec(v));
+  const L = [];
+  L.push(`${g('Max Lv')}${info.maxLv}`);
+  if (info.type) L.push(`${g('ประเภท')}<span class="co">${SKILL_TYPE_TH[info.type] || info.type}</span>`);
+  L.push(`${g('เป้าหมาย')}${KIND[info.target] || info.target}`);
+  if (info.ele && info.type && !(info.flags || []).includes('NoDamage')) L.push(`${g('ธาตุ')}${esc(ELE_TH[lvv(info.ele, show)] || lvv(info.ele, show))}`);
+  if (info.range) L.push(`${g('ระยะ')}${Math.abs(lvv(info.range, show))} ช่อง`);
+  if (info.area) L.push(`${g('พื้นที่')}${lvv(info.area, show) * 2 + 1}×${lvv(info.area, show) * 2 + 1} ช่อง`);
+  if (info.cast) L.push(`${g('เวลาร่ายแปรผัน')}${range(info.cast)}`);
+  if (info.fixedCast) L.push(`${g('เวลาร่ายคงที่')}${range(info.fixedCast)}`);
+  if (info.cooldown) L.push(`${g('คูลดาวน์')}${range(info.cooldown)}`);
+  if (info.sp) L.push(`${g('SP')}${Array.isArray(info.sp) ? `${Math.min(...info.sp)} ~ ${Math.max(...info.sp)}` : info.sp}`);
+  if (info.weapons) L.push(`${g('อาวุธที่ใช้ได้')}${info.weapons.join(', ')}`);
+  if (info.spheres) L.push(`${g('Spirit Sphere')}${lvv(info.spheres, show)} ลูก`);
+  if (info.items) L.push(g('ไอเท็มที่ใช้') + info.items.map(([it, a, l]) => `<span class="cb">${esc(it)}</span> ${a} ชิ้น${l ? ` (Lv${l})` : ''}`).join(', '));
+  if (d?.[2]?.length) L.push(g('ต้องเรียนก่อน') + d[2].map(([q, ql]) => `<span class="${(S.skills[q] || 0) >= ql ? 'good' : 'bad'}">${esc(skName(q))} Lv${ql}</span>`).join(', '));
+  if (d?.[3]) L.push(`${g('ต้องมี Job Lv')}${d[3]}`);
+  if (granted && !S.skills[n]) L.push(`<span class="cg">ได้จากอุปกรณ์: ${esc(granted.source)} (Lv ${granted.lv})</span>`);
+  const rat = skillRatios(n, info);
+  const base = info.type === 'Magic' ? 'MATK' : 'ATK';
+  let lvLines = '';
+  if (rat) lvLines = rat.map((x) => `<span class="cg">[Lv ${x.lv}]</span> ${base} ${x.ratio}%`).join('<br>');
   const sc = db.sc.buffs?.[n];
-  if (sc) {
+  if (!rat && sc && info.duration) lvLines = Array.from({ length: info.maxLv }, (_, i) => `<span class="cg">[Lv ${i + 1}]</span> ระยะเวลา ${sec(lvv(info.duration, i + 1))}`).join('<br>');
+  // extra: formula with this character's numbers
+  let ex = '';
+  if (rat && learned) {
+    const f = ratioFormula(db.skills.skills[n].ratio), cur = rat[Math.min(learned, rat.length) - 1];
+    const lines = [];
+    if (f) {
+      lines.push(`ตัวคูณ = (${esc(f.expr)})%${f.dmod ? ` × BaseLv / ${f.dmod}` : ''}`);
+      lines.push(`<b>= (${esc(fillFormula(f, learned))})%${f.dmod ? ` × ${build.status.baseLv} / ${f.dmod}` : ''}</b>`);
+    }
+    lines.push(`<b>ตัวคูณ Lv ${learned} = ${cur.ratio}%</b>`);
+    lines.push(`Damage = ${base} × ${cur.ratio}% → เฉลี่ย <b>${Math.round(cur.avg).toLocaleString()}</b>`);
+    ex = `<div class="ex"><div class="t">วิธีคำนวณ (ตัวละครตอนนี้)</div><div class="formula">${lines.join('<br>')}</div></div>`;
+  } else if (sc && learned) {
     const act = build.buffs.active[sc.sc];
-    now = act ? `บัพทำงานอยู่ (Lv${act.val1})` : (learned ? 'เปิดบัพนี้ได้ในหน้าต่าง บัพ' : '');
+    ex = `<div class="ex"><div class="t">ตอนนี้</div><div>${act ? `บัพทำงานอยู่ (Lv${act.val1})` : 'เปิดบัพนี้ได้ในหน้าต่าง บัพ'}</div></div>`;
   }
-  if (db.skills.skills[n] && info.type && !(info.flags || []).includes('NoDamage') && learned) {
-    try {
-      const dm = calculateDamage(db, build, { mobId: S.mobId, skill: n, level: learned, debuffs: S.debuffs });
-      now = `ใส่ ${esc(db.mobs[S.mobId]?.name || '')}: ratio ${dm.ratio}% · ดาเมจเฉลี่ย <b>${Math.round(dm.avg).toLocaleString()}</b>` +
-        (dm.cast ? ` · ร่ายจริง ${sec(dm.cast.castTime)} · ดีเลย์จริง ${sec(dm.cast.delay)}` : '');
-    } catch { /* not calculable */ }
-  }
-  // per-level table
-  const cols = [['sp', 'SP'], ['cast', 'ร่าย (แปรผัน)'], ['fixedCast', 'ร่าย (คงที่)'], ['delay', 'ดีเลย์'], ['cooldown', 'คูลดาวน์'],
-    ['duration', 'ระยะเวลา'], ['hits', 'Hit']].filter(([k]) => info[k] != null);
+  const hasCast = info.cast || info.fixedCast || info.delay || info.cooldown;
+  box.innerHTML = `<div class="hd">${iconS(n)}<span class="nm">${esc(info.name)}</span><span class="c7">(Lv ${learned})</span>
+      ${hasCast ? '<button class="clk" id="siClock" title="เวลาร่าย"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>' : ''}</div>
+    <div class="tx">${L.join('<br>')}${lvLines ? `<br><br>${lvLines}` : ''}</div>${ex}`;
+  if (castPopFor === n) renderCastInfo(); else $('wCastInfo').hidden = true;
+}
+function renderCastInfo() {
+  const n = castPopFor, info = SKILLINFO[n];
+  if (!n || !info) { $('wCastInfo').hidden = true; return; }
+  const r = build.status, learned = S.skills[n] || 0;
   const vct = 1 - Math.min(1, Math.sqrt(Math.max(0, r.total.dex * 2 + r.total.int) / 530));
   const varRate = 1 - Math.min(100, -(r.variableCastRate || 0)) / 100;
   const fixRate = 1 - Math.min(100, -(r.fixedCastRate || 0)) / 100;
@@ -408,13 +466,19 @@ function renderSkillInfo() {
     const c = lvv(info.cast, lv) || 0, f = Math.max(0, (lvv(info.fixedCast, lv) || 0) + (r.fixedCast || 0));
     return Math.max(0, Math.trunc(c * (info.castIgnoreDex ? 1 : vct) * varRate)) + Math.trunc(f * fixRate);
   };
-  const fmt = (k, v) => (v == null ? '-' : ['cast', 'fixedCast', 'delay', 'cooldown', 'duration'].includes(k) ? sec(v) : Math.abs(v));
-  const rows = Array.from({ length: info.maxLv }, (_, i) => i + 1).map((lv) => `<tr class="${lv === learned ? 'cur' : ''}"><td>${lv}</td>` +
-    cols.map(([k]) => `<td>${fmt(k, lvv(info[k], lv))}</td>`).join('') + (info.cast || info.fixedCast ? `<td>${sec(real(lv))}</td>` : '') + '</tr>').join('');
-  box.innerHTML = `<div>${parts.join('')}</div><div class="desc2">${desc.join('<br>')}</div>${now ? `<div class="now">${now}</div>` : ''}
-    ${cols.length ? `<table class="lvtab"><tr><th>Lv</th>${cols.map(([, l]) => `<th>${l}</th>`).join('')}${info.cast || info.fixedCast ? '<th>ร่ายจริง*</th>' : ''}</tr>${rows}</table>
-    ${info.cast || info.fixedCast ? '<p class="muted">* ร่ายจริงของตัวละครนี้: DEX/INT + ลดร่ายจากอุปกรณ์ (ไม่รวมบัพ)</p>' : ''}` : ''}`;
+  const v = (k, lv) => (info[k] == null ? '-' : sec(lvv(info[k], lv)));
+  $('ciTitle').textContent = `เวลาร่าย: ${info.name}`;
+  $('castInfo').innerHTML = `<table class="lvtab"><tr><th>Lv</th><th>ร่ายแปรผัน</th><th>ร่ายคงที่</th><th>ร่ายจริง</th><th>ดีเลย์</th><th>คูลดาวน์</th></tr>` +
+    Array.from({ length: info.maxLv }, (_, i) => i + 1).map((lv) => `<tr class="${lv === learned ? 'cur' : ''}"><td>${lv}</td><td>${v('cast', lv)}</td><td>${v('fixedCast', lv)}</td>
+      <td>${info.cast || info.fixedCast ? sec(real(lv)) : '-'}</td><td>${v('delay', lv)}</td><td>${v('cooldown', lv)}</td></tr>`).join('') + '</table>';
+  const w = $('wCastInfo'), si = $('wSkillInfo').getBoundingClientRect();
+  if (w.hidden) { w.style.left = (si.right + 8) / ZOOM + 'px'; w.style.top = si.top / ZOOM + 'px'; }
+  w.hidden = false;
 }
+$('skillInfo').addEventListener('click', (e) => {
+  if (e.target.closest('#siClock')) { castPopFor = castPopFor === skillSel && !$('wCastInfo').hidden ? null : skillSel; if (castPopFor) renderCastInfo(); else $('wCastInfo').hidden = true; }
+});
+$('ciClose').onclick = () => { $('wCastInfo').hidden = true; castPopFor = null; };
 
 // ------------------------------------------------------------------ 2. status (client layout)
 function renderStatus() {

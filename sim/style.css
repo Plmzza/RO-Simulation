@@ -230,3 +230,20 @@ main { padding: 8px; }
 .cflist img { width: 24px; height: 24px; }
 .cflist .nm { line-height: 1.15; }
 #craftModal .craft { flex: 1; overflow: auto; min-width: 0; }
+
+/* skill info: in-game style + extras (formula, cast time popup) */
+#wSkillInfo.roinfo { width: 360px; background: #fff; border-color: #8c9bb5; }
+#wSkillInfo.roinfo > h2 { background: linear-gradient(#f4f6fa, #dfe4ee); color: #333; border-bottom: 1px solid #b9c3d6; }
+#wSkillInfo.roinfo > h2 .x { background: #fff; border: 1px solid #9aa6bd; color: #333; }
+#wSkillInfo .hd { display: flex; gap: 8px; align-items: center; padding: 2px 2px 4px; }
+#wSkillInfo .hd img { width: 24px; height: 24px; }
+#wSkillInfo .hd .nm { font-weight: bold; font-size: 12.5px; }
+#wSkillInfo .clk { margin-left: auto; align-self: flex-start; margin-top: -4px; width: 20px; height: 20px; padding: 0; border: 1px solid #9aa6bd; border-radius: 3px;
+  background: linear-gradient(#fff, #e6ebf3); color: #2b4a86; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+#wSkillInfo .clk svg { width: 13px; height: 13px; }
+#wSkillInfo .tx { line-height: 1.55; padding: 0 2px 6px; }
+.c7 { color: #777; } .cb { color: #0000ff; } .cg { color: #009900; } .co { color: #cc5500; }
+#wSkillInfo .ex { border-top: 1px dashed #b9c3d6; padding: 6px 0 2px; }
+#wSkillInfo .ex .t { font-weight: bold; color: #2b4a86; margin-bottom: 3px; }
+#wSkillInfo .formula { background: #f6f8fc; border: 1px solid #d6deec; padding: 3px 6px; font-family: Consolas, monospace; font-size: 10px; line-height: 1.6; word-break: break-word; }
+#wCastInfo { width: 360px; z-index: 41; }
