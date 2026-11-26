@@ -14,7 +14,7 @@ import { STAT_TABS, labelOf, categoryOf, RACES, ELES, SIZES, OPTIONS, optionScri
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const KEY = 'ro-sim-v1';
-const ZOOM = 0.9;                 // the whole page is drawn at 90% (style.css body { zoom })
+const ZOOM = matchMedia('(max-width: 1000px)').matches ? 1 : 0.9;   // page drawn at 90% on wide screens (style.css body { zoom }), 100% on phones
 const GRADES = ['-', 'D', 'C', 'B', 'A'];
 const MAX_INV = 100;
 
