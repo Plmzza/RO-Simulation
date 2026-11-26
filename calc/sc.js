@@ -28,6 +28,10 @@ const W_CODE = { Fist: 'W_FIST', Dagger: 'W_DAGGER', '1hSword': 'W_1HSWORD', '2h
 /** skills whose SC remembers whether it was self-cast (skill.cpp passes val2 = src == bl) */
 /** skills whose status is not in data/sc.json buffs but used by damage.js */
 const EXTRA_SKILL_SC = { HW_MAGICPOWER: { sc: 'SC_MAGICPOWER', maxLv: 10 } };
+/** start values the generated code can't give (the server's switch lost its case labels): fixed up after the start code */
+const POST_START = {
+  SC_SHAPESHIFT: (v) => { v.val2 = [0, 3, 2, 4, 1][v.val1] ?? 0; },          // Lv 1 Fire, 2 Earth, 3 Wind, 4 Water (ELE_*)
+};
 const SELF_FLAG = new Set(['SC_OVERTHRUST', 'SC_ADRENALINE', 'SC_ADRENALINE2', 'SC_WEAPONPERFECTION']);
 
 function makeEnv(env, active, scdb = {}) {
@@ -62,7 +66,9 @@ function makeEnv(env, active, scdb = {}) {
     status_get_str: stat('str'), status_get_agi: stat('agi'), status_get_vit: stat('vit'), status_get_int: stat('int'),
     status_get_dex: stat('dex'), status_get_luk: stat('luk'), status_get_max_hp: stat('hp'), status_get_hp: stat('hp'),
     status_get_max_sp: stat('sp'), status_get_sp: stat('sp'), status_get_class: () => 0, status_get_race: () => 'RC_PLAYER_HUMAN',
-    status_change_end: () => 0, status_charge: () => 1, battle_check_target: () => 1, sc_start: () => 0, sc_start2: () => 0, sc_start4: () => 0, status_change_start: () => 0,
+    status_change_end: () => 0, status_charge: () => 1, battle_check_target: () => 1,
+    skill_banding_count: () => 1, skill_get_blewcount: () => 0, status_get_sc_interval: () => 1000, clif_millenniumshield: () => 0,
+    pc_addservantball: () => 0, pc_addabyssball: () => 0, status_get_base_status: () => status, sc_start: () => 0, sc_start2: () => 0, sc_start4: () => 0, status_change_start: () => 0,
     skill_get_time: () => 0, skill_get_time2: () => 0, skill_get_type: () => 0, skill_get_ele: (name, lv) => {
       const e = scdb.skillEle?.[name];
       return eleIndex(Array.isArray(e) ? e[Math.min(lv || 1, e.length) - 1] : e || 'Neutral');
@@ -138,6 +144,7 @@ export function scActivate(scdb, selected, env = {}) {
       for (const k of ['val1', 'val2', 'val3', 'val4']) if (r.scope && k in r.scope) vals[k] = typeof r.scope[k] === 'string' && /^[A-Z]{2,4}_/.test(r.scope[k]) ? r.scope[k] : Number(r.scope[k]) || 0;
       unsupported.push(...r.unsupported.map((u) => `${key}: ${u}`));
     }
+    POST_START[b.sc]?.(vals);
     active[b.sc] = { ...vals, skill: /^SC_/.test(key) ? null : key };
   }
   // Concentration remembers the AGI/DEX from cards so they are left out of its % (status_calc_pc)
