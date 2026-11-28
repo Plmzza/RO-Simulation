@@ -47,10 +47,11 @@ const SIZE_C = { Small: 'SZ_SMALL', Medium: 'SZ_MEDIUM', Large: 'SZ_BIG' };
 const trunc = Math.trunc;
 
 /** Monster status as rAthena computes it (status_calc_misc for non-players). */
+// monster HIT = Lv + DEX + 175: Divine Pride's value (its "Req. Flee" = HIT - 5); the server source uses + 150 (status_calc_misc)
 export function mobStatus(mob, deb, db) {
   let st = { str: mob.str, agi: mob.agi, vit: mob.vit, int: mob.int, dex: mob.dex, luk: mob.luk };
   let def = mob.def, def2 = trunc((mob.lv + mob.vit) / 2), mdef = mob.mdef, mdef2 = trunc((mob.int + mob.lv) / 4);
-  let hit = mob.lv + mob.dex + 150, flee = mob.lv + mob.agi + 100, res = mob.res, mres = mob.mres;
+  let hit = mob.lv + mob.dex + 175, flee = mob.lv + mob.agi + 100, res = mob.res, mres = mob.mres;
   let active = {}, refused = [];
   // debuffs: the server's status code run on the monster (Provoke, Decrease AGI, Signum Crucis, Quagmire, strips...)
   if (deb && db?.sc && Object.keys(deb.sc || {}).length) {
@@ -62,7 +63,7 @@ export function mobStatus(mob, deb, db) {
     const C = scCalculator(db.sc, active, env);
     for (const k of ['str', 'agi', 'vit', 'int', 'dex', 'luk']) st[k] = Math.max(0, C(k, st[k]));
     def = C('def', def); def2 = C('def2', trunc((mob.lv + st.vit) / 2)); mdef = C('mdef', mdef); mdef2 = C('mdef2', trunc((st.int + mob.lv) / 4));
-    hit = C('hit', mob.lv + st.dex + 150); flee = C('flee', mob.lv + st.agi + 100); res = C('res', res); mres = C('mres', mres);
+    hit = C('hit', mob.lv + st.dex + 175); flee = C('flee', mob.lv + st.agi + 100); res = C('res', res); mres = C('mres', mres);
   }
   return {
     ...mob, ...st, def, def2, mdef, mdef2, hit, flee, res, mres, debuffActive: active, debuffRefused: refused,
@@ -273,6 +274,12 @@ export function calculateDamage(db, build, opt) {
   let res;
   if (type === 'Magic') res = magic();
   else res = weapon();
+  if (mobBase.dmgRate && mobBase.dmgRate < 1) {             // monster that takes only a share of the damage (Divine Pride: "Taking only 1% of the damage")
+    const f = (v) => Math.max(1, Math.floor(v * mobBase.dmgRate));
+    const sc = (o) => o && { ...o, min: f(o.min), max: f(o.max), avg: f(o.avg) };
+    res = { ...sc(res), crit: sc(res.crit) };
+    steps.push(['Damage taken', `${+(mobBase.dmgRate * 100).toFixed(2)}% (monster trait)`]);
+  }
 
   // ---------------------------------------------------------------- cast / delay (skills)
   let cast = null;
@@ -431,12 +438,13 @@ export function calculateDamage(db, build, opt) {
     // attacker card fix (renewal: weapon + equip ATK only), per category multiplicative
     let cardfix = 1000;
     if (!ignoreAtkCard) {
+      // battle_calc_cardfix (attacker, renewal): race, element, size, each race2, class, then bAddDamageClass of this monster
       cardfix = trunc(cardfix * (100 + bonusOf(T, 'bAddRace', raceKey, 'RC_All')) / 100);
-      const race2 = (mob.raceGroups || []).reduce((acc, g) => acc + (T['bAddRace2:RC2_' + g] || 0), 0);
-      if (race2) cardfix = trunc(cardfix * (100 + race2) / 100);
       if (!ignoreEle) cardfix = trunc(cardfix * (100 + bonusOf(T, 'bAddEle', eleKey, 'Ele_All')) / 100);
       cardfix = trunc(cardfix * (100 + bonusOf(T, 'bAddSize', sizeKey, 'Size_All')) / 100);
+      for (const g of mob.raceGroups || []) if (T['bAddRace2:RC2_' + g]) cardfix = trunc(cardfix * (100 + T['bAddRace2:RC2_' + g]) / 100);
       cardfix = trunc(cardfix * (100 + bonusOf(T, 'bAddClass', classKey, 'Class_All')) / 100);
+      if (T['bAddDamageClass:' + opt.mobId]) cardfix = trunc(cardfix * (100 + T['bAddDamageClass:' + opt.mobId]) / 100);   // this monster (add_dmg)
     }
     const atkRate = eq.status.atkRate || 0;
     // battle_calc_attack_masteries (renewal): skill masteries + status changes counted as mastery
@@ -674,20 +682,31 @@ export function calculateDamage(db, build, opt) {
     mMin = trunc(mMin * matkRate / 100); mMax = trunc(mMax * matkRate / 100);
     const eleMod = flags.has('IgnoreElement') ? 100 : attr(db, element, mob, scActive, mob.debuffActive || {}, true);
     let mdef = mob.mdef;
-    const ign = Math.min(100, Math.max(0, bonusOf(T, 'bIgnoreMdefRaceRate', raceKey, 'RC_All') + bonusOf(T, 'bIgnoreMdefClassRate', classKey, 'Class_All')));
+    // battle_calc_magic_attack: MDEF ignored by race / class / race2 bonuses and Expiatio
+    const ign = Math.min(100, Math.max(0, bonusOf(T, 'bIgnoreMdefRaceRate', raceKey, 'RC_All') + bonusOf(T, 'bIgnoreMdefClassRate', classKey, 'Class_All')
+      + (mob.raceGroups || []).reduce((acc, g) => acc + (T['bIgnoreMdefRace2Rate:RC2_' + g] || 0), 0) + 5 * (scActive.SC_EXPIATIO?.val1 || 0)));
     if (ign) mdef = mdef - mdef * ign / 100;
     if (mdef < 0) mdef = 0;
     let mres = mob.mres;
-    mres = mres - Math.min(50, bonusOf(T, 'bIgnoreMresRaceRate', raceKey, 'RC_All')) * mres / 100;
+    mres = mres - Math.min(50, bonusOf(T, 'bIgnoreMresRaceRate', raceKey, 'RC_All') + (scActive.SC_A_VITA?.val2 || 0)) * mres / 100;
+    // battle_calc_cardfix_debuff: statuses on the target that raise magic damage of an element
+    const tsc = mob.debuffActive || {};
+    const debuffFix = (tsc.SC_MAGIC_POISON ? 50 : 0) + ({ Fire: tsc.SC_CLIMAX_BLOOM ? 100 : 0, Earth: tsc.SC_CLIMAX_EARTH ? 100 : 0,
+      Water: tsc.SC_MISTYFROST ? 15 : 0, Poison: tsc.SC_CLOUD_POISON ? 5 * (tsc.SC_CLOUD_POISON.val1 || 0) : 0 }[element] || 0);
+    const mrace2 = (mob.raceGroups || []).reduce((acc, g) => acc + (T['bMagicAddRace2:RC2_' + g] || 0), 0) + (T['bAddMagicDamageClass:' + opt.mobId] || 0);
     const applyRe = (d, fix) => d - trunc(d * (100 - Math.max(0, 100 + fix)) / 100);
     const one = (m) => {
       let d = m;
-      if (!flags.has('IgnoreAtkCard')) {
+      // order as the server rounds it (battle_calc_cardfix BF_MAGIC): size, race2, element, target debuffs, attack element, race, class
+      const noAtk = flags.has('IgnoreAtkCard'), noEle = flags.has('IgnoreElement');
+      if (!noAtk) {
         d = applyRe(d, bonusOf(T, 'bMagicAddSize', sizeKey, 'Size_All'));
-        if (!flags.has('IgnoreElement')) {
-          d = applyRe(d, bonusOf(T, 'bMagicAddEle', eleKey, 'Ele_All'));
-          d = applyRe(d, bonusOf(T, 'bMagicAtkEle', 'Ele_' + element, 'Ele_All'));
-        }
+        d = applyRe(d, mrace2);
+        if (!noEle) d = applyRe(d, bonusOf(T, 'bMagicAddEle', eleKey, 'Ele_All'));
+      }
+      if (debuffFix && !flags.has('IgnoreDefCard') && !noEle) d = applyRe(d, debuffFix);
+      if (!noAtk) {
+        if (!noEle) d = applyRe(d, bonusOf(T, 'bMagicAtkEle', 'Ele_' + element, 'Ele_All'));
         d = applyRe(d, bonusOf(T, 'bMagicAddRace', raceKey, 'RC_All'));
         d = applyRe(d, bonusOf(T, 'bMagicAddClass', classKey, 'Class_All'));
       }

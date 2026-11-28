@@ -272,10 +272,13 @@ export function evaluateEquipment(data, build, who, extra = []) {
 }
 
 /** Sum bonuses by name + non-numeric args: { 'bStr': 5, 'bAddRace:RC_Demon': 10, ... } */
+/** bonuses whose first argument is a monster id (bonus2 bAddDamageClass,1002,500): kept per id as 'name:id' */
+const ID_FIRST = new Set(['bAddDamageClass', 'bAddMagicDamageClass', 'bAddDefMonster', 'bAddMDefMonster']);
 export function sumBonuses(list) {
   const t = {};
   for (const { bonus } of list) {
     const [name, ...args] = bonus;
+    if (ID_FIRST.has(name) && args.length === 2) { const k = `${name}:${args[0]}`; t[k] = (t[k] || 0) + (Number(args[1]) || 0); continue; }
     const nums = args.filter((a) => typeof a === 'number');
     const keys = args.filter((a) => typeof a !== 'number');
     const key = [name, ...keys].join(':');

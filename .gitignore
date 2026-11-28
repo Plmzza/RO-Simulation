@@ -3,3 +3,4 @@
 
 # Local API response cache
 .cache/
+__pycache__/

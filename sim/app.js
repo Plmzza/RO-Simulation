@@ -4,7 +4,7 @@
  * State is kept in localStorage and can be exported / imported as JSON.
  */
 import {
-  loadAll, calculateBuild, calculateDamage, calculateDefense, classIdOf, SLOTS, cardsForSlot, itemUsableBy,
+  loadAll, calculateBuild, calculateDamage, calculateDefense, mobStatus, classIdOf, SLOTS, cardsForSlot, itemUsableBy,
   buffAvailability, consumableAvailability, debuffList, jobTreeName,
 } from '../calc/index.js';
 import { STATS, TRAITS, statCost } from '../calc/status.js';
@@ -24,6 +24,8 @@ const RANDOPT = await fetch('../data/randomopt.json').then((r) => (r.ok ? r.json
 const TREEPOS = await fetch('../data/skilltree.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const SCX = await fetch('../data/scconflict.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const SERIES = await fetch('../data/series.json').then((r) => (r.ok ? r.json() : { series: [] })).catch(() => ({ series: [] }));
+const SKILLDESC = await fetch('../data/skilldesc.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));   // Divine Pride text (tools/build_skill_desc.py)
+const SPAWN = await fetch('../data/mobspawn.json').then((r) => (r.ok ? r.json() : { mobs: {}, maps: {} })).catch(() => ({ mobs: {}, maps: {} }));
 const SKILLINFO = await fetch('../data/skillinfo.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
 const C = db.equip.constants;
 
@@ -475,7 +477,7 @@ function renderSkillInfo() {
   const hasCast = info.cast || info.fixedCast || info.delay || info.cooldown;
   box.innerHTML = `<div class="hd">${iconS(n)}<span class="nm">${esc(info.name)}</span><span class="c7">(Lv ${learned})</span>
       ${hasCast ? '<button class="clk" id="siClock" title="เวลาร่าย"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>' : ''}</div>
-    <div class="tx">${L.join('<br>')}${lvLines ? `<br><br>${lvLines}` : ''}</div>${ex}`;
+    <div class="tx">${SKILLDESC[n] ? roText(SKILLDESC[n]).replace(/\n/g, '<br>') : `${L.join('<br>')}${lvLines ? `<br><br>${lvLines}` : ''}`}</div>${ex}`;
   if (castPopFor === n) renderCastInfo(); else $('wCastInfo').hidden = true;
 }
 function renderCastInfo() {
@@ -1226,10 +1228,9 @@ $('buffList').onchange = (e) => {
 };
 
 // ------------------------------------------------------------------ damage
-$('mobList').innerHTML = Object.entries(db.mobs).map(([id, m]) => `<option value="${esc(m.name)} [${id}]">`).join('');
 function renderDamage() {
   const m = db.mobs[S.mobId];
-  $('mob').value = m ? `${m.name} [${S.mobId}]` : '';
+  $('mobPick').innerHTML = m ? `<img class="mobimg" src="${MOB_IMG(S.mobId)}" alt="" onerror="this.style.display='none'">${esc(m.name)} <span class="muted">Lv ${m.lv}</span> ▾` : 'เลือกมอนสเตอร์ ▾';
   const canAttack = (n) => db.skills.skills[n] && (db.skills.names?.[n]?.[1] || 'Passive') !== 'Passive' &&
     !((db.skills.names?.[n]?.[1] === 'Self') && !db.skills.skills[n].ratio && !(db.skills.skills[n].flags || []).includes('Splash'));
   const learned = Object.keys(S.skills).filter(canAttack);
@@ -1254,15 +1255,145 @@ function renderDamage() {
     const b = [tr('มอนสเตอร์ตีเรา', `${n(df.min)} ~ ${n(df.max)}`), tr('โอกาสโดน', `${df.land}%`), tr('Flee / Perfect Dodge', `${df.hitRate}% โดน · PD ${df.perfectDodge}%`),
       tr('โดนกี่ครั้งตาย', `${df.hitsToDie} (${df.secondsToDie ?? '-'} วินาที)`),
       df.reflect?.percent ? tr('สะท้อนกลับ', `${df.reflect.percent}% (${n(df.reflect.avg)})`) : ''].join('');
-    const steps = (d.steps || []).map(([k, v]) => tr(esc(k), esc(v))).join('');
-    $('dmgOut').innerHTML = `<div><h4>เราตี ${esc(m.name)} (${esc(m.ele)} ${m.eleLv} · ${esc(m.race)} · ${esc(m.size)})</h4><table>${a}</table></div>
+    const steps = (d.steps || []).map(([k, v]) => tr(esc(STEP_TH[k] || k), esc(v))).join('');
+    // every attack skill learned (or granted by equipment) against this monster, each at its learned level
+    const rows = ['', ...learned, ...granted].map((sk) => {
+      const lv = sk ? Math.max(S.skills[sk] || 0, build.equip.grantedSkills?.[sk]?.lv || 0) : 1;
+      try {
+        const x = sk === (S.atkSkill || '') && lv === S.atkLv ? d : calculateDamage(db, build, { mobId: S.mobId, skill: sk || undefined, level: lv, debuffs: S.debuffs });
+        return { sk, lv, x };
+      } catch { return null; }
+    }).filter(Boolean).sort((p, q) => (q.x.dps || 0) - (p.x.dps || 0));
+    const all = rows.map(({ sk, lv, x }) => `<tr data-atk="${sk}" class="${sk === (S.atkSkill || '') ? 'cur' : ''}"><td>${sk ? iconS(sk) + esc(skName(sk)) : 'ตีปกติ'}</td><td>${sk ? lv : '-'}</td>
+      <td>${n(x.avg)}</td><td>${x.kill ? x.kill.hits : '-'}</td><td>${n(x.dps)}</td><td>${x.kill?.seconds != null ? (+x.kill.seconds).toLocaleString(undefined, { maximumFractionDigits: 1 }) : '-'}</td></tr>`).join('');
+    const ms = mobStatus(m, null, db);
+    $('dmgOut').innerHTML = `<div class="dmgcard"><img class="mobimg" src="${MOB_IMG(S.mobId)}" alt="" onerror="this.style.display='none'">
+        <div><b>${esc(m.name)}</b> <span class="muted">#${S.mobId} · Lv ${m.lv} · ${esc(m.race)} · ${esc(m.ele)} ${m.eleLv} · ${SIZE_TH[m.size] || m.size}${m.mvp ? ' · MVP' : m.class === 'Boss' ? ' · บอส' : ''}</span><br>
+        <span class="muted">HP ${m.hp.toLocaleString()} · DEF ${m.def}+${ms.def2} · MDEF ${m.mdef}+${ms.mdef2}${m.res || m.mres ? ` · RES ${m.res} · MRES ${m.mres}` : ''} · HIT ที่ต้องมี ${ms.flee + 100} · FLEE ที่ต้องมี ${ms.hit - 5}</span></div></div>
+      <div><h4>เราตี ${esc(m.name)}${S.atkSkill ? ` ด้วย ${esc(skName(S.atkSkill))} Lv ${S.atkLv}` : ' (ตีปกติ)'}</h4><table>${a}</table></div>
       <div><h4>${esc(m.name)} ตีเรา</h4><table>${b}</table></div>
+      <div class="dmgall"><h4>ดาเมจทุกสกิลโจมตี <span class="muted">(เรียงตาม DPS · คลิกเพื่อเลือก)</span></h4>
+        <table class="lvtab"><tr><th>สกิล</th><th>Lv</th><th>เฉลี่ย/ครั้ง</th><th>ตีกี่ทีตาย</th><th>DPS</th><th>วินาทีที่ฆ่า</th></tr>${all}</table></div>
       <details><summary class="muted">ขั้นตอนการคำนวณ</summary><table>${steps}</table></details>`;
   } catch (err) {
     $('dmgOut').innerHTML = `<p class="bad">คำนวณไม่ได้: ${esc(err.message)}</p>`;
   }
 }
-$('mob').onchange = () => { const id = idFromText($('mob').value) ?? (db.mobs[$('mob').value] ? Number($('mob').value) : null); if (id) { S.mobId = id; renderDamage(); save(); } };
+/** step labels of calc/damage.js in Thai */
+const STEP_TH = { 'Status ATK ×2': 'Status ATK ×2', 'Weapon ATK': 'ATK อาวุธ', 'Equip ATK': 'ATK อุปกรณ์', 'Mastery ATK': 'ATK จากสกิลติดตัว', 'ATK %': 'ATK %',
+  'Skill ratio': 'ตัวคูณสกิล', 'Skill damage %': 'เพิ่มดาเมจสกิล %', 'Race/Element/Size/Class': 'เผ่า/ธาตุ/ขนาด/คลาส (การ์ด)', 'Size modifier': 'ผลของขนาดกับอาวุธ',
+  Element: 'ธาตุ', DEF: 'DEF', 'DEF piercing': 'เจาะ DEF', 'Target DEF': 'DEF เป้าหมาย', 'Target MDEF': 'MDEF เป้าหมาย', 'Target RES': 'RES เป้าหมาย',
+  'Target MRES': 'MRES เป้าหมาย', 'Target reductions (cards)': 'ลดดาเมจของเป้าหมาย (การ์ด)', 'Target skill reduction': 'เป้าหมายลดดาเมจสกิล',
+  'Flat skill damage': 'ดาเมจคงที่ของสกิล', 'Special base damage': 'ดาเมจพื้นฐานพิเศษ', 'Final modifiers (target/caster status)': 'ตัวคูณสุดท้าย (สถานะเรา/เป้าหมาย)',
+  'Your statuses (battle_calc_damage)': 'สถานะของเรา', 'Lex Aeterna': 'Lex Aeterna (×2)', 'Double attack': 'Double Attack', 'Dual wield': 'ถือสองมือ',
+  'Katar off-hand': 'Katar มือซ้าย', Hits: 'จำนวนฮิต', 'HIT − FLEE': 'HIT − FLEE', 'Perfect Hit': 'Perfect Hit', MATK: 'MATK',
+  'Autospell (expected per attack)': 'Autospell (เฉลี่ยต่อการตี)', 'Magic reflected (chance)': 'เวทสะท้อน (โอกาส)', 'Target reflects magic (chance)': 'เป้าหมายสะท้อนเวท (โอกาส)',
+  'Reflected back to you': 'สะท้อนกลับมาที่เรา', 'Reflected to the monster': 'สะท้อนไปที่มอนสเตอร์', 'Monster ATK': 'ATK มอนสเตอร์', 'Monster MATK': 'MATK มอนสเตอร์',
+  'Monster skill': 'สกิลมอนสเตอร์', 'Monster skill base': 'ดาเมจพื้นฐานสกิลมอนสเตอร์', 'Monster HIT − your FLEE': 'HIT มอน − FLEE เรา', 'Perfect Dodge': 'Perfect Dodge',
+  'Your DEF': 'DEF ของเรา', 'Your RES': 'RES ของเรา', 'Damage reduction (cards)': 'ลดดาเมจ (การ์ด)', Map: 'แผนที่' };
+$('dmgOut').addEventListener('click', (e) => {
+  const r = e.target.closest('[data-atk]');
+  if (!r) return;
+  S.atkSkill = r.dataset.atk; S.atkLv = S.skills[S.atkSkill] || build.equip.grantedSkills?.[S.atkSkill]?.lv || 1; renderDamage(); save();
+});
+// ---- monster picker: filters (name / ID, map, race, element, size, class, level) + stat card
+const MOB_IMG = (id) => `https://static.divine-pride.net/images/mobs/png/${id}.png`;     // Divine Pride monster pictures
+const ELE_TH2 = { Neutral: 'Neutral', Water: 'Water', Earth: 'Earth', Fire: 'Fire', Wind: 'Wind', Poison: 'Poison', Holy: 'Holy', Dark: 'Dark', Ghost: 'Ghost', Undead: 'Undead' };
+const RACE_LIST = ['Formless', 'Undead', 'Brute', 'Plant', 'Insect', 'Fish', 'Demon', 'Demihuman', 'Angel', 'Dragon'];
+const SIZE_TH = { Small: 'เล็ก', Medium: 'กลาง', Large: 'ใหญ่' };
+const mobKind = (m) => (m.mvp ? 'mvp' : m.class === 'Boss' ? 'boss' : m.class === 'Normal' ? 'normal' : 'other');
+const KIND_TH = { normal: 'ปกติ', boss: 'บอส', mvp: 'MVP', other: 'อื่นๆ' };
+const HIDE_MOBS = new Set([1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085]);   // plants / mushrooms: every hit does 1 (Illusion's Black Mushroom 3755 stays)
+const MOBS = Object.entries(db.mobs).filter(([id]) => !HIDE_MOBS.has(Number(id))).map(([id, m]) => ({ id: Number(id), m, lc: m.name.toLowerCase(), kind: mobKind(m),
+  race: String(m.race).toLowerCase() === 'demihuman' ? 'Demihuman' : m.race, maps: (SPAWN.mobs[id] || []).map(([mp]) => mp) }));
+const ZTYPE_TH = { field: 'ฟิลด์', dungeon: 'ดันเจี้ยน', memorial: 'Memorial Dungeon', other: 'อื่นๆ' };
+const zoneOf = (mp) => SPAWN.zones?.[mp] || [SPAWN.maps[mp] || mp, 'other'];
+const ZONES = {};                      // zone name -> { type, maps }
+for (const mp of new Set(MOBS.flatMap((x) => x.maps))) { const [z, t] = zoneOf(mp); (ZONES[z] ||= { type: t, maps: [] }).maps.push(mp); }   // only maps with a listed monster
+Object.values(ZONES).forEach((z) => z.maps.sort());
+let mobQ = '', mobSel = null;
+const mfState = () => (S.ui.mobF = { ztype: '', zone: '', map: '', race: '', ele: '', size: '', kind: '', lvMin: '', lvMax: '', spawnOnly: true, sort: 'lv', ...(S.ui.mobF || {}) });
+function mobFilter() {
+  const f = mfState(), q = mobQ.trim().toLowerCase();
+  return MOBS.filter((x) => (!q || x.lc.includes(q) || String(x.id) === q)
+    && (!f.spawnOnly || x.maps.length || String(x.id) === q)
+    && (!f.ztype || x.maps.some((mp) => zoneOf(mp)[1] === f.ztype)) && (!f.zone || x.maps.some((mp) => zoneOf(mp)[0] === f.zone)) && (!f.map || x.maps.includes(f.map))
+    && (!f.race || x.race === f.race) && (!f.ele || x.m.ele === f.ele) && (!f.size || x.m.size === f.size) && (!f.kind || x.kind === f.kind)
+    && (f.lvMin === '' || x.m.lv >= +f.lvMin) && (f.lvMax === '' || x.m.lv <= +f.lvMax));
+}
+function renderMobFilters() {
+  const f = mfState();
+  const sel = (id, cur, opts) => `<select id="${id}">${opts.map(([v, t]) => `<option value="${esc(v)}" ${String(v) === String(cur) ? 'selected' : ''}>${esc(t)}</option>`).join('')}</select>`;
+  const zones = Object.keys(ZONES).filter((z) => !f.ztype || ZONES[z].type === f.ztype).sort();
+  const maps = ZONES[f.zone]?.maps.length > 1 ? ZONES[f.zone].maps : [];
+  $('mfFilters').innerHTML = `<div class="cfrow"><input id="mQ" placeholder="ค้นหาชื่อหรือ ID…" value="${esc(mobQ)}"></div>
+    <div class="cfrow"><span>พื้นที่</span>${sel('mfZType', f.ztype, [['', 'ทุกประเภท'], ...Object.entries(ZTYPE_TH)])}
+      ${sel('mfZone', f.zone, [['', 'ทุกโซน'], ...zones.map((z) => [z, z])])}
+      ${maps.length ? sel('mfMap', f.map, [['', 'ทุกแผนที่'], ...maps.map((m) => [m, m])]) : ''}</div>
+    <div class="cfrow"><span>เผ่า</span>${sel('mfRace', f.race, [['', 'ทุกเผ่า'], ...RACE_LIST.map((r) => [r, r])])}
+      <span>ธาตุ</span>${sel('mfEle', f.ele, [['', 'ทุกธาตุ'], ...Object.keys(ELE_TH2).map((e) => [e, e])])}</div>
+    <div class="cfrow"><span>ขนาด</span>${sel('mfSize', f.size, [['', 'ทุกขนาด'], ...Object.entries(SIZE_TH).map(([k, t]) => [k, t])])}
+      <span>ประเภท</span>${sel('mfKind', f.kind, [['', 'ทั้งหมด'], ...Object.entries(KIND_TH).map(([k, t]) => [k, t])])}</div>
+    <div class="cfrow"><span>เลเวล</span><input type="number" id="mfLvMin" placeholder="ต่ำสุด" value="${f.lvMin}"> – <input type="number" id="mfLvMax" placeholder="สูงสุด" value="${f.lvMax}">
+      <span>เรียง</span>${sel('mfSort', f.sort, [['lv', 'เลเวล'], ['name', 'ชื่อ'], ['hp', 'HP มาก→น้อย'], ['id', 'ID']])}</div>
+    <div class="cfrow"><label class="chk"><input type="checkbox" id="mfSpawn" ${f.spawnOnly ? 'checked' : ''}>เฉพาะที่เกิดบนแผนที่</label><button id="mfReset">ล้างตัวกรอง</button></div>`;
+}
+function renderMobList() {
+  const f = mfState(), list = mobFilter();
+  const by = { lv: (a, b) => a.m.lv - b.m.lv || a.id - b.id, name: (a, b) => a.m.name.localeCompare(b.m.name), hp: (a, b) => b.m.hp - a.m.hp, id: (a, b) => a.id - b.id };
+  list.sort(by[f.sort] || by.lv);
+  $('mfList').innerHTML = list.slice(0, 300).map((x) => `<div data-mob="${x.id}" class="${x.id === mobSel ? 'sel' : ''}"><img class="mobimg" src="${MOB_IMG(x.id)}" loading="lazy" alt="" onerror="this.style.visibility='hidden'">
+    <span class="nm">${esc(x.m.name)} <small class="muted">#${x.id}</small> ${x.kind !== 'normal' ? `<span class="mtag ${x.kind}">${KIND_TH[x.kind]}</span>` : ''}<br>
+    <small class="muted">Lv ${x.m.lv} · HP ${x.m.hp.toLocaleString()} · ${esc(x.race)} · ${esc(x.m.ele)} ${x.m.eleLv} · ${SIZE_TH[x.m.size] || x.m.size}</small></span></div>`).join('')
+    || '<div class="muted">ไม่พบมอนสเตอร์ตามตัวกรอง</div>';
+  $('mfCount').textContent = `พบ ${list.length} ตัว${list.length > 300 ? ' (แสดง 300 แรก)' : ''}`;
+}
+/** monster stat card (picker and damage window) */
+function mobCard(id, small) {
+  const m = db.mobs[id];
+  if (!m) return '<p class="muted">เลือกมอนสเตอร์จากรายการ</p>';
+  const ms = mobStatus(m, null, db), kind = mobKind(m);
+  const byZone = {};
+  for (const [mp, n] of (SPAWN.mobs[id] || [])) (byZone[zoneOf(mp)[0]] ||= []).push([mp, n]);
+  const r = (k, v) => `<tr><td>${k}</td><td>${v}</td></tr>`;
+  const flee100 = ms.flee + 100, dodge95 = ms.hit - 5;     // renewal hit rate = HIT - FLEE (is_attack_hitting, 5% .. 100%)
+  return `<div class="mchead"><img class="mobbig" src="${MOB_IMG(id)}" alt="" onerror="this.style.visibility='hidden'">
+      <div><b>${esc(m.name)}</b> <span class="muted">#${id} · ${esc(m.aegis)}</span> ${kind !== 'normal' ? `<span class="mtag ${kind}">${KIND_TH[kind]}</span>` : ''}<br>
+      <span class="muted">Lv ${m.lv} · ${esc(m.race)} · ${esc(m.ele)} ${m.eleLv} · ${SIZE_TH[m.size] || m.size}</span></div></div>
+    <table class="mtab">${r('HP', m.hp.toLocaleString())}${r('ATK', `${m.atk.toLocaleString()} ~ ${m.atk2.toLocaleString()}`)}
+      ${r('DEF / MDEF', `${m.def} + ${ms.def2} / ${m.mdef} + ${ms.mdef2}`)}${m.res || m.mres ? r('RES / MRES', `${m.res} / ${m.mres}`) : ''}
+      ${r('HIT / FLEE', `${ms.hit} / ${ms.flee}`)}${r('STR AGI VIT', `${m.str} / ${m.agi} / ${m.vit}`)}${r('INT DEX LUK', `${m.int} / ${m.dex} / ${m.luk}`)}
+      ${m.dmgRate ? r('รับดาเมจ', `<b>${+(m.dmgRate * 100).toFixed(2)}%</b> ของดาเมจที่ทำได้`) : ''}${m.dp ? r('ที่มาค่าสเตตัส', 'Divine Pride (เซิร์ฟเวอร์ยังไม่มีข้อมูล)') : ''}
+      ${r('ระยะโจมตี', `${m.range} ช่อง · ASPD ${m.adelay} ms`)}
+      ${r('HIT ที่ต้องมี (โดน 100%)', `<b>${flee100}</b>`)}${r('FLEE ที่ต้องมี (หลบ 95%)', `<b>${dodge95}</b>`)}</table>
+    ${small ? '' : `<div class="mmaps"><b>เกิดที่</b>${Object.keys(byZone).length ? Object.entries(byZone).map(([z, l]) => `<div class="mzone"><b>${esc(z)}</b> <small class="muted">${ZTYPE_TH[zoneOf(l[0][0])[1]]}</small> ${l.map(([mp, n]) => `<span class="mmap">${mp.startsWith('md:') ? '' : esc(mp) + ' '}×${n}</span>`).join(' ')}</div>`).join('') : '<span class="muted">ไม่เกิดบนแผนที่ (ซัมมอน / อินสแตนซ์ / อีเวนต์)</span>'}</div>`}`;
+}
+function openMobPicker() {
+  mobSel = S.mobId; $('mobModal').hidden = false;
+  renderMobFilters(); renderMobList(); $('mfCard').innerHTML = mobCard(mobSel);
+  $('mQ')?.focus();
+}
+$('mobPick').onclick = openMobPicker;
+$('mfClose').onclick = () => { $('mobModal').hidden = true; };
+$('mobModal').onclick = (e) => { if (e.target === $('mobModal')) $('mobModal').hidden = true; };
+$('mfUse').onclick = () => { if (mobSel && db.mobs[mobSel]) { S.mobId = mobSel; save(); renderDamage(); } $('mobModal').hidden = true; };
+$('mfFilters').addEventListener('input', (e) => { if (e.target.id === 'mQ') { mobQ = e.target.value; renderMobList(); } });
+$('mfFilters').addEventListener('change', (e) => {
+  const f = mfState(), t = e.target;
+  const map = { mfZType: 'ztype', mfZone: 'zone', mfMap: 'map', mfRace: 'race', mfEle: 'ele', mfSize: 'size', mfKind: 'kind', mfLvMin: 'lvMin', mfLvMax: 'lvMax', mfSort: 'sort' };
+  if (map[t.id]) { f[map[t.id]] = t.value; if (t.id === 'mfZType') f.zone = ''; if (t.id !== 'mfMap') f.map = ''; }
+  else if (t.id === 'mfSpawn') f.spawnOnly = t.checked;
+  else return;
+  renderMobFilters(); renderMobList(); save();
+});
+$('mfFilters').addEventListener('click', (e) => { if (e.target.id === 'mfReset') { S.ui.mobF = null; mobQ = ''; renderMobFilters(); renderMobList(); save(); } });
+$('mfList').addEventListener('click', (e) => {
+  const d = e.target.closest('[data-mob]'); if (!d) return;
+  mobSel = Number(d.dataset.mob);
+  $('mfList').querySelectorAll('.sel').forEach((x) => x.classList.remove('sel')); d.classList.add('sel');
+  $('mfCard').innerHTML = mobCard(mobSel);
+});
+$('mfList').addEventListener('dblclick', (e) => { if (e.target.closest('[data-mob]')) $('mfUse').click(); });
 $('atkSkill').onchange = () => { S.atkSkill = $('atkSkill').value; S.atkLv = S.skills[S.atkSkill] || build.equip.grantedSkills?.[S.atkSkill]?.lv || 1; renderDamage(); save(); };
 $('atkLv').onchange = () => { S.atkLv = Number($('atkLv').value) || 1; renderDamage(); save(); };
 
@@ -1415,10 +1546,18 @@ function notice(t) {
   document.body.append(el);
   setTimeout(() => el.remove(), 5000);
 }
+/** 3rd class (JOBL_THIRD) or the expanded classes that change at Base Lv 99: Rebellion, Kagerou / Oboro, Star Emperor, Soul Reaper */
+function isThirdJob() {
+  const j = db.status.jobs.find((x) => x.id === S.jobId);
+  if (!j || j.traits) return false;
+  const mapid = db.equip.jobs?.[classIdOf(db, { jobId: S.jobId, trans: S.trans })]?.mapid ?? 0;
+  return !!(mapid & 0x1000) || /Rebellion|Kagerou|Oboro|Star Emperor|Soul Reaper/i.test(j.name);
+}
 function refresh() {
   // 3rd jobs: only the line that went through the high (transcendent) classes; special jobs have no trans version
   S.trans = !!db.status.jobs.find((j) => j.id === S.jobId)?.transClass;
   if (db.status.jobs.find((j) => j.id === S.jobId)?.traits && S.baseLv < 200) S.baseLv = 200;   // a 4th job is at least Base Lv 200
+  else if (isThirdJob() && S.baseLv < 99) S.baseLv = 99;                                            // 3rd jobs (and the expanded ones) from Base Lv 99
   pruneSkills();
   unequipLocked();
   compute();

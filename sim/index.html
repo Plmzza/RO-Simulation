@@ -97,8 +97,7 @@
     <section class="win" id="wDmg">
       <h2>Damage</h2>
       <div class="dmgform">
-        <label>มอนสเตอร์ <input id="mob" list="mobList" placeholder="ชื่อหรือ ID"></label>
-        <datalist id="mobList"></datalist>
+        <label>มอนสเตอร์ <button id="mobPick" class="mobpick" title="เลือกมอนสเตอร์"></button></label>
         <label>สกิล <select id="atkSkill"></select></label>
         <label>Lv <input type="number" id="atkLv" min="1" max="10"></label>
       </div>
@@ -128,6 +127,11 @@
   <div class="cbody"><div class="cleft"><div id="cfFilters" class="cfil"></div><div id="cfList" class="results cflist"></div></div>
   <div class="craft" id="craftBox"></div></div>
   <footer><span id="cfCount" class="muted"></span><span class="grow"></span><button id="craftClose">ปิด</button></footer></div></div>
+<!-- monster picker -->
+<div class="modal" id="mobModal" hidden><div class="mbox craftwin mobwin"><h2>เลือกมอนสเตอร์</h2>
+  <div class="cbody"><div class="cleft"><div id="mfFilters" class="cfil"></div><div id="mfList" class="results cflist"></div></div>
+  <div class="mobcard" id="mfCard"></div></div>
+  <footer><span id="mfCount" class="muted"></span><span class="grow"></span><button id="mfUse"><b>ใช้มอนสเตอร์นี้</b></button><button id="mfClose">ปิด</button></footer></div></div>
 <div class="modal" id="modal" hidden><div class="mbox"><h2 id="mTitle"></h2><div id="mBody"></div>
   <footer><span class="grow"></span><button id="mClose">ปิด</button></footer></div></div>
 

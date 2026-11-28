@@ -53,6 +53,10 @@ size = {}
 for e in load('db/re/size_fix.yml') + load('db/import/size_fix.yml'):
     size[e['Weapon']] = {'Small': e.get('Small', 100), 'Medium': e.get('Medium', 100), 'Large': e.get('Large', 100)}
 
+fill = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'mob_dp_fill.json'), encoding='utf-8'))
+for k, v in fill.items():          # stub or missing in the server mob_db: Divine Pride stats (tools/build_mob_dp_fill.py)
+    if int(k) not in out_mobs or out_mobs[int(k)]['hp'] <= 1:
+        out_mobs[int(k)] = {**{kk: vv for kk, vv in v.items() if kk != 'source'}, 'dp': True}
 json.dump({str(k): v for k, v in out_mobs.items()}, open(f'{out}/mobs.json', 'w', encoding='utf-8'),
           ensure_ascii=False, separators=(',', ':'))
 json.dump({'attr': attr, 'size': size}, open(f'{out}/battle.json', 'w', encoding='utf-8'), separators=(',', ':'))

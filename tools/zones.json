@@ -1,0 +1,735 @@
+{
+"_doc": "Map id -> zone shown in the monster picker (tools/build_mob_spawns.py). First matching prefix wins (longest first). type: field / dungeon / other. Draft by Claude, to be checked by the user.",
+"zones": [
+[
+"ant_d02_i",
+"Illusion of Underground (Anthell)",
+"dungeon"
+],
+[
+"gef_d01_i",
+"Illusion of Vampire (Geffen)",
+"dungeon"
+],
+[
+"ice_d03_i",
+"Illusion of Frozen (Ice Cave)",
+"dungeon"
+],
+[
+"iz_d04_i",
+"Illusion of Underwater (Byalan)",
+"dungeon"
+],
+[
+"iz_d05_i",
+"Illusion of Underwater (Byalan)",
+"dungeon"
+],
+[
+"pay_d03_i",
+"Illusion of Moonlight (Payon)",
+"dungeon"
+],
+[
+"tur_d03_i",
+"Illusion of Turtle Island",
+"dungeon"
+],
+[
+"tur_d04_i",
+"Illusion of Turtle Island",
+"dungeon"
+],
+[
+"amicitia",
+"Amicitia",
+"field"
+],
+[
+"bl_",
+"Varmundt's Biosphere",
+"dungeon"
+],
+[
+"ch1fild",
+"Chapter 1 Field",
+"field"
+],
+[
+"ch1zero",
+"Chapter 1 Zero",
+"dungeon"
+],
+[
+"cmd_bhole",
+"Comodo Beach Cave",
+"dungeon"
+],
+[
+"for_dun",
+"Forgotten Dungeon",
+"dungeon"
+],
+[
+"gw_fild",
+"Grey Wolf Forest",
+"field"
+],
+[
+"lasa_dun",
+"Lasagna Dungeon",
+"dungeon"
+],
+[
+"mjo_wst",
+"Mjolnir Underground Cave",
+"dungeon"
+],
+[
+"moc_akhet",
+"Akhet (Morocc)",
+"dungeon"
+],
+[
+"oz_dun",
+"Oz Dungeon",
+"dungeon"
+],
+[
+"ra_pol",
+"Rachel Field",
+"field"
+],
+[
+"slabw",
+"Werner Laboratory",
+"dungeon"
+],
+[
+"vis_h",
+"Vision House (Illusion bosses)",
+"dungeon"
+],
+[
+"prt_fild",
+"Prontera Field",
+"field"
+],
+[
+"pay_fild",
+"Payon Field",
+"field"
+],
+[
+"gef_fild",
+"Geffen Field",
+"field"
+],
+[
+"moc_fild",
+"Morocc Field (Sograt Desert)",
+"field"
+],
+[
+"cmd_fild",
+"Comodo Field",
+"field"
+],
+[
+"mjolnir_",
+"Mt. Mjolnir",
+"field"
+],
+[
+"yuno_fild",
+"Yuno Field",
+"field"
+],
+[
+"um_fild",
+"Umbala Field",
+"field"
+],
+[
+"nif_fild",
+"Niflheim Field",
+"field"
+],
+[
+"niflheim",
+"Niflheim",
+"field"
+],
+[
+"lou_fild",
+"Louyang Field",
+"field"
+],
+[
+"ama_fild",
+"Amatsu Field",
+"field"
+],
+[
+"gon_fild",
+"Kunlun Field",
+"field"
+],
+[
+"ayo_fild",
+"Ayothaya Field",
+"field"
+],
+[
+"ein_fild",
+"Einbroch Field",
+"field"
+],
+[
+"lhz_fild",
+"Lighthalzen Field",
+"field"
+],
+[
+"hu_fild",
+"Hugel Field",
+"field"
+],
+[
+"ra_fild",
+"Rachel Field",
+"field"
+],
+[
+"ve_fild",
+"Veins Field",
+"field"
+],
+[
+"mosk_fild",
+"Moscovia Field",
+"field"
+],
+[
+"bra_fild",
+"Brasilis Field",
+"field"
+],
+[
+"dew_fild",
+"Dewata Field",
+"field"
+],
+[
+"dic_fild",
+"El Dicastes Field",
+"field"
+],
+[
+"ecl_fild",
+"Eclage Field",
+"field"
+],
+[
+"spl_fild",
+"Splendide Field",
+"field"
+],
+[
+"man_fild",
+"Manuk Field",
+"field"
+],
+[
+"ma_fild",
+"Malaya Field",
+"field"
+],
+[
+"xmas_fild",
+"Lutie Field",
+"field"
+],
+[
+"bif_fild",
+"Bifrost Field",
+"field"
+],
+[
+"mu_fild",
+"Lasagna Field",
+"field"
+],
+[
+"lasa_fild",
+"Lasagna Field",
+"field"
+],
+[
+"hem_fild",
+"Hemmel Field",
+"field"
+],
+[
+"tra_fild",
+"Training Ground (Dummies)",
+"other"
+],
+[
+"rockrdg",
+"Rock Ridge",
+"field"
+],
+[
+"harboro",
+"Harboro",
+"field"
+],
+[
+"jawaii",
+"Jawaii",
+"field"
+],
+[
+"einbech",
+"Einbech",
+"field"
+],
+[
+"kh_kiehl",
+"Kiel Hyre's Academy",
+"dungeon"
+],
+[
+"prt_maze",
+"Labyrinth Forest (Prontera Maze)",
+"dungeon"
+],
+[
+"prt_sewb",
+"Prontera Culvert",
+"dungeon"
+],
+[
+"pay_dun",
+"Payon Cave",
+"dungeon"
+],
+[
+"pay_d03_i",
+"Payon Cave",
+"dungeon"
+],
+[
+"gef_dun",
+"Geffen Dungeon",
+"dungeon"
+],
+[
+"mag_dun",
+"Magma Dungeon",
+"dungeon"
+],
+[
+"moc_pryd",
+"Pyramid",
+"dungeon"
+],
+[
+"in_sphinx",
+"Sphinx",
+"dungeon"
+],
+[
+"anthell",
+"Ant Hell",
+"dungeon"
+],
+[
+"orcsdun",
+"Orc Dungeon",
+"dungeon"
+],
+[
+"alde_dun",
+"Clock Tower Dungeon",
+"dungeon"
+],
+[
+"c_tower",
+"Clock Tower",
+"dungeon"
+],
+[
+"clock_",
+"Clock Tower",
+"dungeon"
+],
+[
+"gl_",
+"Glast Heim",
+"dungeon"
+],
+[
+"glast_",
+"Glast Heim",
+"dungeon"
+],
+[
+"iz_dun",
+"Byalan Island",
+"dungeon"
+],
+[
+"iz_ac",
+"Izlude Academy (Dummies)",
+"other"
+],
+[
+"treasure",
+"Sunken Ship",
+"dungeon"
+],
+[
+"tur_dun",
+"Turtle Island",
+"dungeon"
+],
+[
+"gon_dun",
+"Kunlun Dungeon",
+"dungeon"
+],
+[
+"ama_dun",
+"Amatsu Dungeon",
+"dungeon"
+],
+[
+"lou_dun",
+"Royal Tomb (Louyang)",
+"dungeon"
+],
+[
+"um_dun",
+"Umbala Dungeon",
+"dungeon"
+],
+[
+"nif_dun",
+"Niflheim Dungeon",
+"dungeon"
+],
+[
+"yggdrasil",
+"Yggdrasil",
+"dungeon"
+],
+[
+"ygg_roots",
+"Yggdrasil Roots",
+"dungeon"
+],
+[
+"jupe_core",
+"Juperos",
+"dungeon"
+],
+[
+"juperos_",
+"Juperos",
+"dungeon"
+],
+[
+"kh_dun",
+"Kiel Dungeon",
+"dungeon"
+],
+[
+"lhz_dun_n",
+"Bio Lab (Nightmare)",
+"dungeon"
+],
+[
+"lhz_dun",
+"Bio Lab",
+"dungeon"
+],
+[
+"lhz_in",
+"Lighthalzen (inside)",
+"dungeon"
+],
+[
+"ein_dun",
+"Einbroch Mine",
+"dungeon"
+],
+[
+"abbey",
+"Cursed Abbey",
+"dungeon"
+],
+[
+"abyss_",
+"Abyss Lake",
+"dungeon"
+],
+[
+"thor_v",
+"Thor Volcano",
+"dungeon"
+],
+[
+"ra_san",
+"Rachel Sanctuary",
+"dungeon"
+],
+[
+"ice_dun",
+"Ice Cave",
+"dungeon"
+],
+[
+"tha_t",
+"Thanatos Tower",
+"dungeon"
+],
+[
+"odin_tem",
+"Odin Temple",
+"dungeon"
+],
+[
+"mosk_dun",
+"Moscovia Dungeon",
+"dungeon"
+],
+[
+"beach_dun",
+"Beach Dungeon",
+"dungeon"
+],
+[
+"gefenia",
+"Gefenia",
+"dungeon"
+],
+[
+"mjo_dun",
+"Mjolnir Coal Mine",
+"dungeon"
+],
+[
+"xmas_dun",
+"Toy Factory",
+"dungeon"
+],
+[
+"ayo_dun",
+"Ayothaya Dungeon",
+"dungeon"
+],
+[
+"nyd_dun",
+"Nidhoggr's Nest",
+"dungeon"
+],
+[
+"bra_dun",
+"Brasilis Dungeon",
+"dungeon"
+],
+[
+"dew_dun",
+"Krakatau (Dewata Dungeon)",
+"dungeon"
+],
+[
+"mal_dun",
+"Malangdo Dungeon",
+"dungeon"
+],
+[
+"ma_dun",
+"Malaya Hospital",
+"dungeon"
+],
+[
+"dic_dun",
+"Scaraba Hole",
+"dungeon"
+],
+[
+"ecl_tdun",
+"Bifrost Tower",
+"dungeon"
+],
+[
+"gld_dun",
+"Guild Dungeon",
+"dungeon"
+],
+[
+"gld2_",
+"Guild Dungeon 2",
+"dungeon"
+],
+[
+"arug_dun",
+"Arunafeltz Guild Dungeon",
+"dungeon"
+],
+[
+"schg_dun",
+"Schwarzwald Guild Dungeon",
+"dungeon"
+],
+[
+"hem_dun",
+"Hemmel Dungeon",
+"dungeon"
+],
+[
+"teg_dun",
+"Tegra Dungeon",
+"dungeon"
+],
+[
+"jor_",
+"Jormungandr",
+"dungeon"
+],
+[
+"bl_depth",
+"Biosphere Abyss Depth",
+"dungeon"
+],
+[
+"uknw_ruin",
+"Unknown Ruins",
+"dungeon"
+],
+[
+"un_bunker",
+"Varmundt's Bunker",
+"dungeon"
+],
+[
+"verus",
+"Verus",
+"dungeon"
+],
+[
+"ver_",
+"Verus",
+"dungeon"
+],
+[
+"sp_rudus",
+"Rudus",
+"dungeon"
+],
+[
+"sp_os",
+"Rudus (OS)",
+"dungeon"
+],
+[
+"rockmi",
+"Rock Ridge Mine",
+"dungeon"
+],
+[
+"ba_",
+"Varmundt's Mansion",
+"dungeon"
+],
+[
+"prt_prison",
+"Prontera Prison",
+"dungeon"
+],
+[
+"moro",
+"Morroc Volcano",
+"dungeon"
+],
+[
+"ch1_gfn",
+"Gefenia (Chapter 1)",
+"dungeon"
+],
+[
+"int_land",
+"Novice Island",
+"field"
+],
+[
+"new_1-",
+"Training Grounds",
+"field"
+],
+[
+"nameless_n",
+"Nameless Island",
+"dungeon"
+],
+[
+"alb_ship",
+"Alberta Ship",
+"other"
+],
+[
+"que_",
+"Quest maps",
+"other"
+],
+[
+"pvp_",
+"PvP maps",
+"other"
+],
+[
+"job",
+"Job quest maps",
+"other"
+],
+[
+"sec_in",
+"Prison",
+"other"
+],
+[
+"prt_cas",
+"Prontera Castle",
+"other"
+],
+[
+"prt_q",
+"Quest maps",
+"other"
+],
+[
+"1@",
+"Instance",
+"other"
+],
+[
+"mosk_que",
+"Quest maps",
+"other"
+],
+[
+"brasilis",
+"Brasilis",
+"field"
+],
+[
+"treasure_n",
+"Sunken Ship (Nightmare)",
+"dungeon"
+]
+]
+}
